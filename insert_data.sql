@@ -1,3 +1,37 @@
+
+DECLARE
+    TYPE Date_Table IS TABLE OF date_dim%ROWTYPE INDEX BY PLS_INTEGER;
+    v_dates Date_Table;
+    v_index NUMBER := 1;
+    v_start_date DATE := DATE '2020-01-01';  
+    v_end_date   DATE := DATE '2020-12-31';  
+    v_current_date DATE := v_start_date;
+    v_date_id NUMBER := 1;  
+BEGIN
+    WHILE v_current_date <= v_end_date LOOP
+        v_dates(v_index).date_id := v_date_id;
+        v_dates(v_index).year := EXTRACT(YEAR FROM v_current_date);
+        v_dates(v_index).quarter := CEIL(EXTRACT(MONTH FROM v_current_date) / 3);
+        v_dates(v_index).month := EXTRACT(MONTH FROM v_current_date);
+        v_dates(v_index).day_of_week := TO_NUMBER(TO_CHAR(v_current_date, 'D')) - 1;
+        v_dates(v_index).day_of_month := EXTRACT(DAY FROM v_current_date);
+        v_dates(v_index).day_of_year := TO_NUMBER(TO_CHAR(v_current_date, 'DDD'));
+        v_dates(v_index).week_of_year := TO_NUMBER(TO_CHAR(v_current_date, 'IW'));
+        v_dates(v_index).is_holiday := CASE WHEN TO_CHAR(v_current_date, 'MM-DD') IN ('01-01', '12-25') THEN 1 ELSE 0 END;
+
+        v_current_date := v_current_date + 1;
+        v_date_id := v_date_id + 1;
+        v_index := v_index + 1;
+    END LOOP;
+
+    FORALL i IN 1..v_dates.COUNT
+        INSERT INTO date_dim VALUES v_dates(i);
+
+    COMMIT;
+END;
+/
+
+
 INSERT INTO feedback_dim (feedback_id, type, description) VALUES (1, 'Negative', 'Staff ignored my request for assistance');
 INSERT INTO feedback_dim (feedback_id, type, description) VALUES (2, 'Neutral', 'it was ok');
 INSERT INTO feedback_dim (feedback_id, type, description) VALUES (3, 'Negative', 'The check-in process took too long, causing unnecessary stress.');
@@ -207,600 +241,6 @@ INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, empl
 VALUES (50, 'Tamer Mohsen', TO_DATE('1987-11-02', 'YYYY-MM-DD'), 'Female', 'Alexandria, Egypt', '01234567892', 6913);
 
 COMMIT;
-
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(1, 2020, 3, 8, 3, 6, 219, 32, 1);
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(2, 2024, 2, 5, 2, 22, 143, 21, 0);
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(3, 2022, 4, 10, 2, 26, 299, 43, 1);
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(4, 2022, 2, 6, 1, 28, 179, 26, 0);
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(5, 2024, 2, 6, 2, 26, 178, 26, 0);
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(6, 2023, 2, 5, 3, 25, 145, 21, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(7, 2022, 4, 11, 0, 21, 325, 47, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(8, 2021, 4, 10, 1, 19, 292, 42, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(9, 2024, 1, 1, 3, 4, 4, 1, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(10, 2024, 2, 5, 4, 10, 131, 19, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(11, 2024, 2, 4, 3, 4, 95, 14, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(12, 2020, 2, 6, 2, 10, 162, 24, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(13, 2020, 3, 9, 6, 20, 264, 38, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(14, 2020, 4, 12, 5, 5, 340, 49, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(15, 2020, 2, 4, 3, 2, 93, 14, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(16, 2023, 2, 4, 0, 10, 100, 15, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(17, 2022, 3, 9, 0, 5, 248, 36, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(18, 2023, 3, 8, 3, 10, 222, 32, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(19, 2024, 1, 1, 0, 1, 1, 1, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(20, 2023, 3, 9, 3, 14, 257, 37, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(21, 2023, 3, 8, 2, 23, 235, 34, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(22, 2021, 4, 12, 2, 22, 356, 51, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(23, 2024, 4, 11, 6, 24, 329, 47, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(24, 2021, 2, 4, 4, 9, 99, 14, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(25, 2024, 2, 6, 6, 16, 168, 24, 1);
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(26, 2020, 4, 11, 2, 4, 309, 45, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(27, 2024, 2, 6, 1, 11, 163, 24, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(28, 2020, 2, 4, 5, 25, 116, 17, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(29, 2020, 1, 2, 3, 6, 37, 6, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(30, 2020, 3, 7, 1, 21, 203, 30, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(31, 2021, 4, 10, 4, 22, 295, 42, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(32, 2023, 3, 7, 0, 10, 191, 28, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(33, 2023, 1, 3, 2, 1, 60, 9, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(34, 2023, 3, 7, 6, 2, 183, 26, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(35, 2020, 1, 3, 4, 20, 80, 12, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(36, 2020, 2, 6, 4, 26, 178, 26, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(37, 2023, 4, 11, 3, 30, 334, 48, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(38, 2020, 2, 5, 0, 25, 146, 22, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(39, 2022, 2, 4, 6, 24, 114, 16, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(40, 2024, 4, 11, 5, 9, 314, 45, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(41, 2023, 2, 4, 2, 19, 109, 16, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(42, 2023, 2, 4, 3, 27, 117, 17, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(43, 2021, 4, 12, 3, 2, 336, 48, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(44, 2022, 4, 10, 0, 17, 290, 42, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(45, 2022, 2, 4, 6, 24, 114, 16, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(46, 2020, 4, 10, 2, 28, 302, 44, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(47, 2023, 1, 1, 0, 9, 9, 2, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(48, 2023, 2, 4, 5, 22, 112, 16, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(49, 2020, 2, 5, 5, 9, 130, 19, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(50, 2022, 2, 6, 4, 24, 175, 25, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(51, 2022, 3, 8, 5, 20, 232, 33, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(52, 2024, 2, 5, 6, 26, 147, 21, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(53, 2021, 4, 12, 3, 2, 336, 48, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(54, 2020, 2, 4, 0, 27, 118, 18, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(55, 2022, 2, 6, 1, 21, 172, 25, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(56, 2024, 1, 2, 3, 22, 53, 8, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(57, 2022, 4, 12, 3, 29, 363, 52, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(58, 2020, 1, 1, 5, 4, 4, 1, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(59, 2021, 4, 10, 4, 8, 281, 40, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(60, 2020, 2, 5, 5, 16, 137, 20, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(61, 2024, 4, 11, 1, 19, 324, 47, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(62, 2024, 1, 1, 6, 21, 21, 3, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(63, 2024, 4, 12, 4, 6, 341, 49, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(64, 2024, 3, 9, 4, 20, 264, 38, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(65, 2022, 2, 5, 5, 21, 141, 20, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(66, 2021, 3, 9, 4, 3, 246, 35, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(67, 2024, 3, 9, 0, 2, 246, 36, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(68, 2024, 1, 2, 3, 22, 53, 8, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(69, 2020, 3, 7, 3, 30, 212, 31, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(70, 2024, 4, 12, 2, 11, 346, 50, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(71, 2023, 3, 8, 2, 2, 214, 31, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(72, 2021, 1, 1, 1, 26, 26, 4, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(73, 2023, 3, 9, 0, 4, 247, 36, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(74, 2020, 2, 4, 1, 21, 112, 17, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(75, 2021, 4, 11, 2, 17, 321, 46, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(76, 2023, 4, 12, 3, 21, 355, 51, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(77, 2021, 2, 4, 3, 22, 112, 16, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(78, 2024, 4, 10, 1, 22, 296, 43, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(79, 2024, 1, 1, 5, 20, 20, 3, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(80, 2022, 1, 1, 0, 31, 31, 5, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(81, 2022, 3, 7, 5, 9, 190, 27, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(82, 2022, 2, 5, 3, 19, 139, 20, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(83, 2024, 4, 10, 2, 2, 276, 40, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(84, 2023, 2, 5, 1, 30, 150, 22, 0);
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(85, 2020, 4, 11, 4, 13, 318, 46, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(86, 2022, 3, 8, 1, 30, 242, 35, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(87, 2022, 2, 5, 2, 18, 138, 20, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(88, 2024, 1, 1, 0, 15, 15, 3, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(89, 2020, 3, 8, 2, 26, 239, 35, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(90, 2022, 4, 12, 2, 21, 355, 51, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(91, 2022, 1, 1, 4, 7, 7, 1, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(92, 2020, 2, 5, 1, 12, 133, 20, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(93, 2022, 1, 2, 5, 26, 57, 8, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(94, 2022, 1, 3, 6, 27, 86, 12, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(95, 2024, 2, 6, 6, 16, 168, 24, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(96, 2023, 4, 11, 2, 29, 333, 48, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(97, 2023, 2, 6, 2, 28, 179, 26, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(98, 2023, 3, 7, 3, 6, 187, 27, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(99, 2023, 3, 7, 3, 20, 201, 29, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(100, 2024, 2, 4, 2, 24, 115, 17, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(101, 2023, 1, 2, 2, 1, 32, 5, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(102, 2024, 3, 7, 3, 4, 186, 27, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(103, 2021, 1, 3, 4, 19, 78, 11, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(104, 2024, 1, 3, 2, 6, 66, 10, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(105, 2023, 1, 2, 0, 6, 37, 6, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(106, 2023, 3, 9, 2, 20, 263, 38, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(107, 2023, 4, 12, 3, 7, 341, 49, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(108, 2020, 3, 7, 3, 9, 191, 28, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(109, 2022, 3, 7, 5, 30, 211, 30, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(110, 2022, 4, 11, 5, 12, 316, 45, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(111, 2022, 3, 9, 6, 25, 268, 38, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(112, 2024, 2, 5, 3, 2, 123, 18, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(113, 2024, 3, 8, 4, 30, 243, 35, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(114, 2022, 4, 11, 2, 9, 313, 45, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(115, 2023, 1, 1, 6, 8, 8, 1, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(116, 2024, 2, 5, 4, 3, 124, 18, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(117, 2020, 1, 2, 5, 15, 46, 7, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(118, 2024, 3, 9, 0, 16, 260, 38, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(119, 2021, 2, 4, 2, 21, 111, 16, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(120, 2023, 1, 3, 3, 16, 75, 11, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(121, 2021, 2, 4, 2, 21, 111, 16, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(122, 2024, 3, 7, 6, 28, 210, 30, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(123, 2024, 4, 10, 4, 11, 285, 41, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(124, 2024, 4, 10, 4, 18, 292, 42, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(125, 2023, 4, 11, 2, 1, 305, 44, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(126, 2022, 1, 2, 6, 6, 37, 5, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(127, 2023, 1, 2, 3, 23, 54, 8, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(128, 2022, 4, 10, 6, 23, 296, 42, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(129, 2022, 1, 3, 3, 31, 90, 13, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(130, 2022, 2, 4, 4, 1, 91, 13, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(131, 2024, 2, 4, 0, 15, 106, 16, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(132, 2021, 4, 10, 2, 6, 279, 40, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(133, 2020, 2, 5, 3, 7, 128, 19, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(134, 2021, 2, 6, 4, 11, 162, 23, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(135, 2022, 1, 2, 5, 26, 57, 8, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(136, 2022, 2, 5, 1, 31, 151, 22, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(137, 2022, 4, 10, 1, 11, 284, 41, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(138, 2023, 4, 10, 5, 21, 294, 42, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(139, 2020, 2, 4, 6, 5, 96, 14, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(140, 2022, 1, 1, 5, 29, 29, 4, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(141, 2021, 2, 6, 1, 1, 152, 22, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(142, 2021, 3, 9, 2, 15, 258, 37, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(143, 2023, 1, 1, 4, 13, 13, 2, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(144, 2023, 3, 8, 2, 9, 221, 32, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(145, 2020, 1, 3, 4, 13, 73, 11, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(146, 2021, 1, 1, 6, 3, 3, 53, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(147, 2020, 1, 3, 2, 25, 85, 13, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(148, 2021, 4, 11, 5, 13, 317, 45, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(149, 2023, 3, 9, 4, 8, 251, 36, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(150, 2023, 4, 11, 2, 15, 319, 46, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(151, 2020, 3, 8, 4, 7, 220, 32, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(152, 2020, 1, 2, 2, 26, 57, 9, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(153, 2024, 3, 7, 5, 20, 202, 29, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(154, 2023, 3, 7, 2, 12, 193, 28, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(155, 2024, 4, 12, 6, 1, 336, 48, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(156, 2020, 2, 4, 3, 16, 107, 16, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(157, 2021, 1, 3, 2, 10, 69, 10, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(158, 2021, 4, 10, 0, 18, 291, 42, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(159, 2020, 3, 8, 3, 13, 226, 33, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(160, 2022, 4, 10, 6, 23, 296, 42, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(161, 2023, 3, 7, 6, 2, 183, 26, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(162, 2021, 2, 5, 0, 17, 137, 20, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(163, 2023, 1, 3, 5, 18, 77, 11, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(164, 2024, 3, 8, 1, 13, 226, 33, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(165, 2024, 1, 2, 0, 19, 50, 8, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(166, 2024, 1, 3, 1, 19, 79, 12, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(167, 2021, 3, 7, 3, 1, 182, 26, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(168, 2022, 1, 3, 3, 24, 83, 12, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(169, 2024, 2, 5, 5, 11, 132, 19, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(170, 2023, 1, 1, 6, 29, 29, 4, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(171, 2023, 4, 12, 1, 5, 339, 49, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(172, 2023, 3, 7, 0, 17, 198, 29, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(173, 2024, 2, 4, 0, 22, 113, 17, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(174, 2023, 4, 10, 1, 24, 297, 43, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(175, 2023, 2, 6, 4, 9, 160, 23, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(176, 2024, 2, 6, 3, 27, 179, 26, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(177, 2020, 4, 12, 4, 4, 339, 49, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(178, 2022, 3, 9, 5, 24, 267, 38, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(179, 2021, 1, 1, 5, 16, 16, 2, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(180, 2024, 2, 5, 3, 30, 151, 22, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(181, 2021, 1, 1, 1, 26, 26, 4, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(182, 2020, 3, 8, 4, 21, 234, 34, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(183, 2023, 2, 5, 4, 19, 139, 20, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(184, 2021, 3, 7, 3, 15, 196, 28, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(185, 2024, 1, 3, 1, 5, 65, 10, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(186, 2024, 4, 12, 6, 1, 336, 48, 0);
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(187, 2022, 3, 9, 2, 7, 250, 36, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(188, 2023, 4, 12, 0, 25, 359, 52, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(189, 2023, 4, 12, 4, 1, 335, 48, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(190, 2023, 1, 2, 0, 20, 51, 8, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(191, 2024, 4, 10, 3, 3, 277, 40, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(192, 2022, 4, 12, 2, 14, 348, 50, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(193, 2021, 1, 2, 2, 10, 41, 6, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(194, 2023, 1, 1, 4, 13, 13, 2, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(195, 2020, 2, 5, 6, 24, 145, 21, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(196, 2024, 3, 9, 2, 4, 248, 36, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(197, 2020, 2, 5, 0, 4, 125, 19, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(198, 2024, 4, 11, 2, 20, 325, 47, 1);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(199, 2021, 2, 6, 2, 23, 174, 25, 0);
-
-INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(200, 2024, 2, 6, 0, 3, 155, 23, 1);
-commit ;
 
 INSERT INTO CustomerCareFact (customer_id, date_id, feedback_id, employee_id, interaction_type, satisfaction_rate, duration)
 VALUES (1, 24, 5, 40, 'Chat', 4.51, 27);
@@ -1029,436 +469,434 @@ VALUES (75, 29, 10, 44, 'Email', 4.51, 31);
 
 INSERT INTO CustomerCareFact (customer_id, date_id, feedback_id, employee_id, interaction_type, satisfaction_rate, duration) 
 VALUES (76, 13, 5, 12, 'Call', 3.12, 24);
-
-INSERT INTO CustomerCareFact VALUES (77, 26, 5, 44, 'In-Person', 2.41, 45);
-INSERT INTO CustomerCareFact VALUES (78, 16, 9, 28, 'Chat', 1.21, 16);
-INSERT INTO CustomerCareFact VALUES (79, 16, 1, 4, 'In-Person', 4.61, 29);
-INSERT INTO CustomerCareFact VALUES (80, 3, 9, 31, 'In-Person', 1.00, 42);
-INSERT INTO CustomerCareFact VALUES (81, 7, 1, 26, 'Email', 1.64, 4);
-INSERT INTO CustomerCareFact VALUES (82, 25, 2, 43, 'Chat', 2.30, 35);
-INSERT INTO CustomerCareFact VALUES (83, 18, 8, 26, 'Call', 2.95, 45);
-INSERT INTO CustomerCareFact VALUES (84, 30, 3, 46, 'Chat', 4.20, 39);
-INSERT INTO CustomerCareFact VALUES (85, 18, 6, 42, 'Call', 1.57, 60);
-INSERT INTO CustomerCareFact VALUES (86, 26, 2, 25, 'In-Person', 2.76, 42);
-INSERT INTO CustomerCareFact VALUES (87, 3, 4, 26, 'Email', 3.33, 9);
-INSERT INTO CustomerCareFact VALUES (88, 14, 3, 27, 'In-Person', 4.99, 26);
-INSERT INTO CustomerCareFact VALUES (89, 18, 4, 13, 'Call', 3.92, 24);
-INSERT INTO CustomerCareFact VALUES (90, 27, 3, 12, 'In-Person', 1.90, 49);
-INSERT INTO CustomerCareFact VALUES (91, 19, 4, 29, 'Email', 2.60, 38);
-INSERT INTO CustomerCareFact VALUES (92, 26, 6, 20, 'In-Person', 3.40, 48);
-INSERT INTO CustomerCareFact VALUES (93, 30, 8, 38, 'Call', 2.77, 47);
-INSERT INTO CustomerCareFact VALUES (94, 28, 7, 23, 'In-Person', 4.03, 2);
-INSERT INTO CustomerCareFact VALUES (95, 9, 8, 20, 'Call', 2.42, 57);
-INSERT INTO CustomerCareFact VALUES (96, 25, 3, 41, 'In-Person', 4.59, 32);
-INSERT INTO CustomerCareFact VALUES (97, 3, 8, 22, 'Call', 2.98, 32);
-INSERT INTO CustomerCareFact VALUES (98, 30, 6, 35, 'Call', 4.51, 33);
-INSERT INTO CustomerCareFact VALUES (99, 12, 7, 21, 'Chat', 2.29, 20);
-INSERT INTO CustomerCareFact VALUES (100, 16, 2, 39, 'Call', 4.29, 14);
-INSERT INTO CustomerCareFact VALUES (101, 27, 6, 26, 'Chat', 3.27, 16);
-INSERT INTO CustomerCareFact VALUES (102, 23, 6, 15, 'Chat', 3.32, 2);
-INSERT INTO CustomerCareFact VALUES (103, 24, 3, 19, 'Call', 2.04, 41);
-INSERT INTO CustomerCareFact VALUES (104, 25, 1, 3, 'In-Person', 4.49, 45);
-INSERT INTO CustomerCareFact VALUES (105, 7, 3, 48, 'In-Person', 2.14, 1);
-INSERT INTO CustomerCareFact VALUES (106, 11, 3, 23, 'Email', 3.81, 32);
-INSERT INTO CustomerCareFact VALUES (107, 4, 6, 12, 'Email', 2.26, 18);
-INSERT INTO CustomerCareFact VALUES (108, 25, 10, 5, 'Email', 4.08, 16);
-INSERT INTO CustomerCareFact VALUES (109, 26, 10, 2, 'Call', 4.10, 3);
-INSERT INTO CustomerCareFact VALUES (110, 13, 1, 10, 'Call', 1.76, 39);
-INSERT INTO CustomerCareFact VALUES (111, 6, 8, 26, 'Call', 4.94, 58);
-INSERT INTO CustomerCareFact VALUES (112, 14, 7, 31, 'In-Person', 3.02, 12);
-INSERT INTO CustomerCareFact VALUES (113, 20, 2, 21, 'Chat', 4.19, 7);
-INSERT INTO CustomerCareFact VALUES (114, 4, 10, 35, 'Call', 1.84, 34);
-INSERT INTO CustomerCareFact VALUES (115, 14, 10, 17, 'Call', 1.58, 34);
-INSERT INTO CustomerCareFact VALUES (116, 23, 8, 8, 'Email', 3.10, 27);
-INSERT INTO CustomerCareFact VALUES (117, 8, 5, 41, 'Email', 2.95, 15);
-INSERT INTO CustomerCareFact VALUES (118, 3, 5, 7, 'Call', 4.07, 44);
-INSERT INTO CustomerCareFact VALUES (119, 28, 6, 36, 'In-Person', 4.55, 33);
-INSERT INTO CustomerCareFact VALUES (120, 16, 6, 13, 'In-Person', 3.12, 48);
-INSERT INTO CustomerCareFact VALUES (121, 29, 5, 23, 'Call', 1.42, 6);
-INSERT INTO CustomerCareFact VALUES (122, 18, 2, 14, 'Chat', 3.18, 1);
-INSERT INTO CustomerCareFact VALUES (123, 28, 4, 45, 'Email', 3.78, 43);
-INSERT INTO CustomerCareFact VALUES (124, 27, 2, 10, 'Email', 1.97, 50);
-INSERT INTO CustomerCareFact VALUES (125, 2, 10, 49, 'In-Person', 1.89, 35);
-INSERT INTO CustomerCareFact VALUES (126, 7, 9, 32, 'Call', 1.43, 16);
-INSERT INTO CustomerCareFact VALUES (127, 20, 8, 20, 'Call', 2.06, 19);
-INSERT INTO CustomerCareFact VALUES (128, 11, 7, 43, 'Chat', 4.56, 15);
-INSERT INTO CustomerCareFact VALUES (129, 27, 3, 49, 'Chat', 1.69, 41);
-INSERT INTO CustomerCareFact VALUES (130, 1, 2, 47, 'In-Person', 4.41, 38);
+INSERT INTO CustomerCareFact VALUES (77, 48, 5, 44, 'In-Person', 2.41, 45);
+INSERT INTO CustomerCareFact VALUES (78, 234, 9, 28, 'Chat', 1.21, 16);
+INSERT INTO CustomerCareFact VALUES (79, 162, 1, 4, 'In-Person', 4.61, 29);
+INSERT INTO CustomerCareFact VALUES (80, 98, 9, 31, 'In-Person', 1.00, 42);
+INSERT INTO CustomerCareFact VALUES (81, 8, 1, 26, 'Email', 1.64, 4);
+INSERT INTO CustomerCareFact VALUES (82, 176, 2, 43, 'Chat', 2.30, 35);
+INSERT INTO CustomerCareFact VALUES (83, 122, 8, 26, 'Call', 2.95, 45);
+INSERT INTO CustomerCareFact VALUES (84, 37, 3, 46, 'Chat', 4.20, 39);
+INSERT INTO CustomerCareFact VALUES (85, 317, 6, 42, 'Call', 1.57, 60);
+INSERT INTO CustomerCareFact VALUES (86, 216, 2, 25, 'In-Person', 2.76, 42);
+INSERT INTO CustomerCareFact VALUES (87, 104, 4, 26, 'Email', 3.33, 9);
+INSERT INTO CustomerCareFact VALUES (88, 280, 3, 27, 'In-Person', 4.99, 26);
+INSERT INTO CustomerCareFact VALUES (89, 109, 4, 13, 'Call', 3.92, 24);
+INSERT INTO CustomerCareFact VALUES (90, 326, 3, 12, 'In-Person', 1.90, 49);
+INSERT INTO CustomerCareFact VALUES (91, 112, 4, 29, 'Email', 2.60, 38);
+INSERT INTO CustomerCareFact VALUES (92, 78, 6, 20, 'In-Person', 3.40, 48);
+INSERT INTO CustomerCareFact VALUES (93, 51, 8, 38, 'Call', 2.77, 47);
+INSERT INTO CustomerCareFact VALUES (94, 310, 7, 23, 'In-Person', 4.03, 2);
+INSERT INTO CustomerCareFact VALUES (95, 33, 8, 20, 'Call', 2.42, 57);
+INSERT INTO CustomerCareFact VALUES (96, 57, 3, 41, 'In-Person', 4.59, 32);
+INSERT INTO CustomerCareFact VALUES (97, 291, 8, 22, 'Call', 2.98, 32);
+INSERT INTO CustomerCareFact VALUES (98, 132, 6, 35, 'Call', 4.51, 33);
+INSERT INTO CustomerCareFact VALUES (99, 135, 7, 21, 'Chat', 2.29, 20);
+INSERT INTO CustomerCareFact VALUES (100, 139, 2, 39, 'Call', 4.29, 14);
+INSERT INTO CustomerCareFact VALUES (101, 160, 6, 26, 'Chat', 3.27, 16);
+INSERT INTO CustomerCareFact VALUES (102, 190, 6, 15, 'Chat', 3.32, 2);
+INSERT INTO CustomerCareFact VALUES (103, 91, 3, 19, 'Call', 2.04, 41);
+INSERT INTO CustomerCareFact VALUES (104, 205, 1, 3, 'In-Person', 4.49, 45);
+INSERT INTO CustomerCareFact VALUES (105, 270, 3, 48, 'In-Person', 2.14, 1);
+INSERT INTO CustomerCareFact VALUES (106, 229, 3, 23, 'Email', 3.81, 32);
+INSERT INTO CustomerCareFact VALUES (107, 276, 6, 12, 'Email', 2.26, 18);
+INSERT INTO CustomerCareFact VALUES (108, 141, 10, 5, 'Email', 4.08, 16);
+INSERT INTO CustomerCareFact VALUES (109, 75, 10, 2, 'Call', 4.10, 3);
+INSERT INTO CustomerCareFact VALUES (110, 163, 1, 10, 'Call', 1.76, 39);
+INSERT INTO CustomerCareFact VALUES (111, 5, 8, 26, 'Call', 4.94, 58);
+INSERT INTO CustomerCareFact VALUES (112, 207, 7, 31, 'In-Person', 3.02, 12);
+INSERT INTO CustomerCareFact VALUES (113, 349, 2, 21, 'Chat', 4.19, 7);
+INSERT INTO CustomerCareFact VALUES (114, 104, 10, 35, 'Call', 1.84, 34);
+INSERT INTO CustomerCareFact VALUES (115, 97, 10, 17, 'Call', 1.58, 34);
+INSERT INTO CustomerCareFact VALUES (116, 88, 8, 8, 'Email', 3.10, 27);
+INSERT INTO CustomerCareFact VALUES (117, 154, 5, 41, 'Email', 2.95, 15);
+INSERT INTO CustomerCareFact VALUES (118, 163, 5, 7, 'Call', 4.07, 44);
+INSERT INTO CustomerCareFact VALUES (119, 84, 6, 36, 'In-Person', 4.55, 33);
+INSERT INTO CustomerCareFact VALUES (120, 327, 6, 13, 'In-Person', 3.12, 48);
+INSERT INTO CustomerCareFact VALUES (121, 4, 5, 23, 'Call', 1.42, 6);
+INSERT INTO CustomerCareFact VALUES (122, 89, 2, 14, 'Chat', 3.18, 1);
+INSERT INTO CustomerCareFact VALUES (123, 357, 4, 45, 'Email', 3.78, 43);
+INSERT INTO CustomerCareFact VALUES (124, 55, 2, 10, 'Email', 1.97, 50);
+INSERT INTO CustomerCareFact VALUES (125, 124, 10, 49, 'In-Person', 1.89, 35);
+INSERT INTO CustomerCareFact VALUES (126, 30, 9, 32, 'Call', 1.43, 16);
+INSERT INTO CustomerCareFact VALUES (127, 347, 8, 20, 'Call', 2.06, 19);
+INSERT INTO CustomerCareFact VALUES (128, 179, 7, 43, 'Chat', 4.56, 15);
+INSERT INTO CustomerCareFact VALUES (129, 197, 3, 49, 'Chat', 1.69, 41);
+INSERT INTO CustomerCareFact VALUES (130, 218, 2, 47, 'In-Person', 4.41, 38);
 
 commit;
-INSERT INTO CustomerCareFact VALUES (131, 1, 7, 33, 'Call', 1.16, 52);
-INSERT INTO CustomerCareFact VALUES (132, 7, 2, 24, 'Call', 4.63, 59);
-INSERT INTO CustomerCareFact VALUES (133, 10, 8, 10, 'Email', 3.22, 1);
-INSERT INTO CustomerCareFact VALUES (134, 27, 7, 24, 'Chat', 2.01, 53);
-INSERT INTO CustomerCareFact VALUES (135, 6, 3, 8, 'Email', 1.03, 32);
-INSERT INTO CustomerCareFact VALUES (136, 16, 10, 38, 'In-Person', 2.56, 16);
-INSERT INTO CustomerCareFact VALUES (137, 2, 3, 38, 'Chat', 1.34, 13);
-INSERT INTO CustomerCareFact VALUES (138, 6, 8, 30, 'In-Person', 4.46, 52);
-INSERT INTO CustomerCareFact VALUES (139, 24, 2, 25, 'Call', 2.49, 59);
-INSERT INTO CustomerCareFact VALUES (140, 22, 7, 47, 'Call', 4.92, 35);
-INSERT INTO CustomerCareFact VALUES (141, 28, 7, 17, 'Email', 2.44, 21);
-INSERT INTO CustomerCareFact VALUES (142, 6, 10, 4, 'Chat', 2.10, 32);
-INSERT INTO CustomerCareFact VALUES (143, 18, 5, 13, 'Email', 3.67, 31);
-INSERT INTO CustomerCareFact VALUES (144, 6, 9, 1, 'Chat', 2.44, 3);
-INSERT INTO CustomerCareFact VALUES (145, 19, 9, 38, 'In-Person', 4.32, 22);
-INSERT INTO CustomerCareFact VALUES (146, 7, 7, 17, 'Call', 4.34, 35);
-INSERT INTO CustomerCareFact VALUES (147, 8, 6, 13, 'Call', 2.26, 60);
-INSERT INTO CustomerCareFact VALUES (148, 18, 9, 41, 'Email', 2.21, 58);
-INSERT INTO CustomerCareFact VALUES (149, 13, 4, 2, 'In-Person', 3.96, 3);
-INSERT INTO CustomerCareFact VALUES (150, 9, 3, 14, 'In-Person', 4.55, 13);
-INSERT INTO CustomerCareFact VALUES (151, 5, 7, 50, 'Call', 4.20, 39);
-INSERT INTO CustomerCareFact VALUES (152, 8, 8, 1, 'In-Person', 2.94, 31);
-INSERT INTO CustomerCareFact VALUES (153, 25, 8, 34, 'Call', 1.49, 44);
-INSERT INTO CustomerCareFact VALUES (154, 10, 7, 38, 'Chat', 2.26, 44);
-INSERT INTO CustomerCareFact VALUES (155, 8, 10, 10, 'In-Person', 2.61, 1);
-INSERT INTO CustomerCareFact VALUES (156, 10, 2, 35, 'In-Person', 2.75, 47);
-INSERT INTO CustomerCareFact VALUES (157, 7, 9, 19, 'Chat', 4.74, 44);
-INSERT INTO CustomerCareFact VALUES (158, 16, 4, 26, 'In-Person', 3.81, 24);
-INSERT INTO CustomerCareFact VALUES (159, 24, 1, 20, 'In-Person', 3.39, 34);
-INSERT INTO CustomerCareFact VALUES (160, 19, 7, 40, 'Chat', 3.42, 41);
-INSERT INTO CustomerCareFact VALUES (161, 6, 2, 33, 'In-Person', 2.99, 58);
-INSERT INTO CustomerCareFact VALUES (162, 26, 6, 36, 'Email', 4.31, 25);
-INSERT INTO CustomerCareFact VALUES (163, 21, 3, 39, 'Chat', 3.95, 60);
-INSERT INTO CustomerCareFact VALUES (164, 17, 2, 19, 'Email', 4.40, 40);
-INSERT INTO CustomerCareFact VALUES (165, 19, 7, 11, 'Chat', 4.96, 37);
-INSERT INTO CustomerCareFact VALUES (166, 8, 3, 8, 'Call', 2.13, 12);
-INSERT INTO CustomerCareFact VALUES (167, 26, 1, 31, 'Call', 2.68, 38);
-INSERT INTO CustomerCareFact VALUES (168, 16, 10, 48, 'Email', 3.88, 60);
-INSERT INTO CustomerCareFact VALUES (169, 2, 10, 26, 'Chat', 2.45, 7);
-INSERT INTO CustomerCareFact VALUES (170, 23, 9, 18, 'Chat', 1.48, 55);
-INSERT INTO CustomerCareFact VALUES (171, 5, 3, 5, 'In-Person', 2.80, 31);
-INSERT INTO CustomerCareFact VALUES (172, 25, 7, 42, 'In-Person', 2.86, 20);
-INSERT INTO CustomerCareFact VALUES (173, 16, 6, 23, 'Call', 3.54, 52);
-INSERT INTO CustomerCareFact VALUES (174, 20, 4, 46, 'Email', 2.03, 35);
-INSERT INTO CustomerCareFact VALUES (175, 14, 9, 43, 'Email', 4.82, 51);
-INSERT INTO CustomerCareFact VALUES (176, 19, 5, 41, 'Email', 2.16, 25);
-INSERT INTO CustomerCareFact VALUES (177, 26, 8, 32, 'Email', 2.12, 54);
-INSERT INTO CustomerCareFact VALUES (178, 1, 7, 40, 'Call', 4.70, 35);
-INSERT INTO CustomerCareFact VALUES (179, 15, 5, 25, 'Call', 2.02, 36);
-INSERT INTO CustomerCareFact VALUES (180, 20, 6, 49, 'Email', 2.45, 21);
-INSERT INTO CustomerCareFact VALUES (181, 14, 6, 34, 'Call', 4.53, 4);
-INSERT INTO CustomerCareFact VALUES (182, 3, 6, 46, 'Email', 3.26, 39);
-INSERT INTO CustomerCareFact VALUES (183, 24, 8, 40, 'In-Person', 3.35, 12);
-INSERT INTO CustomerCareFact VALUES (184, 7, 1, 27, 'Chat', 1.58, 17);
-INSERT INTO CustomerCareFact VALUES (185, 7, 8, 9, 'In-Person', 3.85, 47);
-INSERT INTO CustomerCareFact VALUES (186, 13, 7, 11, 'In-Person', 3.35, 2);
-INSERT INTO CustomerCareFact VALUES (187, 24, 5, 24, 'Email', 4.40, 52);
-INSERT INTO CustomerCareFact VALUES (188, 21, 1, 9, 'Email', 1.49, 58);
-INSERT INTO CustomerCareFact VALUES (189, 11, 7, 39, 'Email', 1.07, 6);
-INSERT INTO CustomerCareFact VALUES (190, 1, 1, 15, 'Chat', 1.04, 34);
-INSERT INTO CustomerCareFact VALUES (191, 2, 9, 11, 'In-Person', 3.61, 7);
-INSERT INTO CustomerCareFact VALUES (192, 2, 8, 30, 'In-Person', 3.01, 2);
-INSERT INTO CustomerCareFact VALUES (193, 11, 2, 2, 'Email', 3.96, 22);
-INSERT INTO CustomerCareFact VALUES (194, 12, 5, 19, 'Email', 3.67, 45);
-INSERT INTO CustomerCareFact VALUES (195, 15, 5, 25, 'Email', 2.47, 2);
-INSERT INTO CustomerCareFact VALUES (196, 28, 9, 1, 'Email', 4.19, 36);
-INSERT INTO CustomerCareFact VALUES (197, 7, 7, 8, 'Chat', 3.06, 48);
-INSERT INTO CustomerCareFact VALUES (198, 9, 10, 14, 'Chat', 1.87, 55);
-INSERT INTO CustomerCareFact VALUES (199, 19, 5, 9, 'In-Person', 3.02, 47);
-INSERT INTO CustomerCareFact VALUES (200, 25, 9, 39, 'In-Person', 3.24, 9);
-INSERT INTO CustomerCareFact VALUES (201, 16, 3, 16, 'In-Person', 4.25, 7);
-INSERT INTO CustomerCareFact VALUES (202, 4, 2, 4, 'Call', 3.41, 37);
-INSERT INTO CustomerCareFact VALUES (203, 27, 1, 43, 'Chat', 3.64, 5);
-INSERT INTO CustomerCareFact VALUES (204, 1, 6, 13, 'Call', 3.08, 22);
-INSERT INTO CustomerCareFact VALUES (205, 28, 4, 36, 'Call', 3.08, 22);
-INSERT INTO CustomerCareFact VALUES (206, 6, 2, 5, 'Email', 4.84, 42);
-INSERT INTO CustomerCareFact VALUES (207, 25, 3, 18, 'In-Person', 1.73, 57);
-INSERT INTO CustomerCareFact VALUES (208, 30, 6, 43, 'In-Person', 4.73, 27);
-INSERT INTO CustomerCareFact VALUES (209, 24, 5, 41, 'In-Person', 4.30, 18);
-INSERT INTO CustomerCareFact VALUES (210, 4, 2, 10, 'Chat', 3.32, 42);
-INSERT INTO CustomerCareFact VALUES (211, 27, 10, 33, 'In-Person', 1.92, 8);
-INSERT INTO CustomerCareFact VALUES (212, 8, 6, 45, 'In-Person', 1.48, 58);
-INSERT INTO CustomerCareFact VALUES (213, 23, 4, 36, 'Chat', 4.62, 42);
-INSERT INTO CustomerCareFact VALUES (214, 29, 7, 38, 'Chat', 2.79, 7);
-INSERT INTO CustomerCareFact VALUES (215, 1, 2, 38, 'Call', 3.69, 35);
-INSERT INTO CustomerCareFact VALUES (216, 21, 4, 33, 'Call', 4.98, 15);
-INSERT INTO CustomerCareFact VALUES (217, 24, 7, 15, 'Chat', 2.90, 35);
-INSERT INTO CustomerCareFact VALUES (218, 23, 6, 9, 'In-Person', 1.12, 15);
-INSERT INTO CustomerCareFact VALUES (219, 29, 10, 47, 'In-Person', 2.27, 26);
-INSERT INTO CustomerCareFact VALUES (220, 11, 5, 38, 'Chat', 3.74, 4);
-INSERT INTO CustomerCareFact VALUES (221, 6, 2, 34, 'Call', 1.88, 24);
-INSERT INTO CustomerCareFact VALUES (222, 14, 5, 23, 'Chat', 3.80, 7);
-INSERT INTO CustomerCareFact VALUES (223, 2, 9, 30, 'Call', 2.12, 3);
-INSERT INTO CustomerCareFact VALUES (224, 5, 5, 36, 'Email', 4.12, 11);
-INSERT INTO CustomerCareFact VALUES (225, 29, 8, 6, 'Call', 1.26, 43);
-INSERT INTO CustomerCareFact VALUES (226, 27, 8, 17, 'Call', 3.68, 51);
-INSERT INTO CustomerCareFact VALUES (227, 29, 10, 8, 'Call', 1.70, 20);
-INSERT INTO CustomerCareFact VALUES (228, 4, 7, 9, 'Call', 1.29, 40);
-INSERT INTO CustomerCareFact VALUES (229, 4, 4, 42, 'Call', 3.97, 1);
-INSERT INTO CustomerCareFact VALUES (230, 16, 2, 33, 'Chat', 1.04, 35);
-INSERT INTO CustomerCareFact VALUES (231, 8, 8, 40, 'In-Person', 4.74, 53);
-INSERT INTO CustomerCareFact VALUES (232, 14, 5, 23, 'Email', 1.15, 40);
-INSERT INTO CustomerCareFact VALUES (233, 1, 2, 48, 'Chat', 3.24, 7);
-INSERT INTO CustomerCareFact VALUES (234, 27, 6, 4, 'Chat', 2.19, 8);
-INSERT INTO CustomerCareFact VALUES (235, 11, 2, 27, 'Chat', 2.35, 29);
-INSERT INTO CustomerCareFact VALUES (236, 12, 1, 33, 'In-Person', 1.13, 49);
-INSERT INTO CustomerCareFact VALUES (237, 5, 2, 34, 'In-Person', 4.81, 54);
-INSERT INTO CustomerCareFact VALUES (238, 1, 4, 15, 'Chat', 1.89, 30);
-INSERT INTO CustomerCareFact VALUES (239, 20, 10, 10, 'Email', 4.41, 29);
-INSERT INTO CustomerCareFact VALUES (240, 2, 5, 44, 'Chat', 3.88, 31);
-INSERT INTO CustomerCareFact VALUES (241, 13, 4, 22, 'Email', 2.89, 9);
-INSERT INTO CustomerCareFact VALUES (242, 29, 10, 22, 'In-Person', 3.73, 28);
-INSERT INTO CustomerCareFact VALUES (243, 14, 6, 39, 'Email', 2.05, 9);
-INSERT INTO CustomerCareFact VALUES (244, 13, 8, 18, 'Call', 1.77, 40);
-INSERT INTO CustomerCareFact VALUES (245, 21, 9, 35, 'Chat', 4.33, 8);
-INSERT INTO CustomerCareFact VALUES (246, 10, 5, 29, 'Chat', 1.95, 16);
-INSERT INTO CustomerCareFact VALUES (247, 12, 9, 27, 'In-Person', 3.30, 37);
-INSERT INTO CustomerCareFact VALUES (248, 20, 1, 24, 'Email', 3.66, 55);
-INSERT INTO CustomerCareFact VALUES (249, 10, 8, 36, 'Email', 4.67, 21);
-INSERT INTO CustomerCareFact VALUES (250, 29, 8, 35, 'Email', 4.04, 31);
-INSERT INTO CustomerCareFact VALUES (251, 20, 8, 22, 'Chat', 3.99, 50);
-INSERT INTO CustomerCareFact VALUES (252, 29, 6, 17, 'In-Person', 1.36, 60);
-INSERT INTO CustomerCareFact VALUES (253, 25, 7, 22, 'Email', 3.73, 25);
-INSERT INTO CustomerCareFact VALUES (254, 23, 8, 15, 'Email', 1.95, 49);
-INSERT INTO CustomerCareFact VALUES (255, 18, 1, 15, 'Email', 3.45, 21);
-INSERT INTO CustomerCareFact VALUES (256, 1, 10, 2, 'In-Person', 2.73, 36);
-INSERT INTO CustomerCareFact VALUES (257, 7, 2, 40, 'Call', 3.56, 8);
-INSERT INTO CustomerCareFact VALUES (258, 5, 2, 7, 'Call', 4.29, 58);
-INSERT INTO CustomerCareFact VALUES (259, 14, 5, 30, 'Email', 2.71, 20);
-INSERT INTO CustomerCareFact VALUES (260, 12, 8, 18, 'Chat', 4.19, 29);
-INSERT INTO CustomerCareFact VALUES (261, 30, 6, 33, 'Email', 3.43, 9);
-INSERT INTO CustomerCareFact VALUES (262, 21, 8, 25, 'Email', 3.67, 46);
-INSERT INTO CustomerCareFact VALUES (263, 18, 9, 34, 'In-Person', 1.86, 43);
-INSERT INTO CustomerCareFact VALUES (264, 1, 1, 13, 'Chat', 2.73, 14);
+INSERT INTO CustomerCareFact VALUES (131, 17, 7, 33, 'Call', 1.16, 52);
+INSERT INTO CustomerCareFact VALUES (132, 262, 2, 24, 'Call', 4.63, 59);
+INSERT INTO CustomerCareFact VALUES (133, 263, 8, 10, 'Email', 3.22, 1);
+INSERT INTO CustomerCareFact VALUES (134, 194, 7, 24, 'Chat', 2.01, 53);
+INSERT INTO CustomerCareFact VALUES (135, 55, 3, 8, 'Email', 1.03, 32);
+INSERT INTO CustomerCareFact VALUES (136, 293, 10, 38, 'In-Person', 2.56, 16);
+INSERT INTO CustomerCareFact VALUES (137, 183, 3, 38, 'Chat', 1.34, 13);
+INSERT INTO CustomerCareFact VALUES (138, 206, 8, 30, 'In-Person', 4.46, 52);
+INSERT INTO CustomerCareFact VALUES (139, 163, 2, 25, 'Call', 2.49, 59);
+INSERT INTO CustomerCareFact VALUES (140, 129, 7, 47, 'Call', 4.92, 35);
+INSERT INTO CustomerCareFact VALUES (141, 193, 7, 17, 'Email', 2.44, 21);
+INSERT INTO CustomerCareFact VALUES (142, 357, 10, 4, 'Chat', 2.10, 32);
+INSERT INTO CustomerCareFact VALUES (143, 104, 5, 13, 'Email', 3.67, 31);
+INSERT INTO CustomerCareFact VALUES (144, 181, 9, 1, 'Chat', 2.44, 3);
+INSERT INTO CustomerCareFact VALUES (145, 210, 9, 38, 'In-Person', 4.32, 22);
+INSERT INTO CustomerCareFact VALUES (146, 191, 7, 17, 'Call', 4.34, 35);
+INSERT INTO CustomerCareFact VALUES (147, 3, 6, 13, 'Call', 2.26, 60);
+INSERT INTO CustomerCareFact VALUES (148, 79, 9, 41, 'Email', 2.21, 58);
+INSERT INTO CustomerCareFact VALUES (149, 346, 4, 2, 'In-Person', 3.96, 3);
+INSERT INTO CustomerCareFact VALUES (150, 254, 3, 14, 'In-Person', 4.55, 13);
+INSERT INTO CustomerCareFact VALUES (151, 273, 7, 50, 'Call', 4.20, 39);
+INSERT INTO CustomerCareFact VALUES (152, 277, 8, 1, 'In-Person', 2.94, 31);
+INSERT INTO CustomerCareFact VALUES (153, 363, 8, 34, 'Call', 1.49, 44);
+INSERT INTO CustomerCareFact VALUES (154, 182, 7, 38, 'Chat', 2.26, 44);
+INSERT INTO CustomerCareFact VALUES (155, 62, 10, 10, 'In-Person', 2.61, 1);
+INSERT INTO CustomerCareFact VALUES (156, 330, 2, 35, 'In-Person', 2.75, 47);
+INSERT INTO CustomerCareFact VALUES (157, 69, 9, 19, 'Chat', 4.74, 44);
+INSERT INTO CustomerCareFact VALUES (158, 80, 4, 26, 'In-Person', 3.81, 24);
+INSERT INTO CustomerCareFact VALUES (159, 184, 1, 20, 'In-Person', 3.39, 34);
+INSERT INTO CustomerCareFact VALUES (160, 293, 7, 40, 'Chat', 3.42, 41);
+INSERT INTO CustomerCareFact VALUES (161, 153, 2, 33, 'In-Person', 2.99, 58);
+INSERT INTO CustomerCareFact VALUES (162, 319, 6, 36, 'Email', 4.31, 25);
+INSERT INTO CustomerCareFact VALUES (163, 182, 3, 39, 'Chat', 3.95, 60);
+INSERT INTO CustomerCareFact VALUES (164, 352, 2, 19, 'Email', 4.40, 40);
+INSERT INTO CustomerCareFact VALUES (165, 80, 7, 11, 'Chat', 4.96, 37);
+INSERT INTO CustomerCareFact VALUES (166, 40, 3, 8, 'Call', 2.13, 12);
+INSERT INTO CustomerCareFact VALUES (167, 365, 1, 31, 'Call', 2.68, 38);
+INSERT INTO CustomerCareFact VALUES (168, 144, 10, 48, 'Email', 3.88, 60);
+INSERT INTO CustomerCareFact VALUES (169, 221, 10, 26, 'Chat', 2.45, 7);
+INSERT INTO CustomerCareFact VALUES (170, 272, 9, 18, 'Chat', 1.48, 55);
+INSERT INTO CustomerCareFact VALUES (171, 229, 3, 5, 'In-Person', 2.80, 31);
+INSERT INTO CustomerCareFact VALUES (172, 234, 7, 42, 'In-Person', 2.86, 20);
+INSERT INTO CustomerCareFact VALUES (173, 334, 6, 23, 'Call', 3.54, 52);
+INSERT INTO CustomerCareFact VALUES (174, 277, 4, 46, 'Email', 2.03, 35);
+INSERT INTO CustomerCareFact VALUES (175, 169, 9, 43, 'Email', 4.82, 51);
+INSERT INTO CustomerCareFact VALUES (176, 16, 5, 41, 'Email', 2.16, 25);
+INSERT INTO CustomerCareFact VALUES (177, 167, 8, 32, 'Email', 2.12, 54);
+INSERT INTO CustomerCareFact VALUES (178, 257, 7, 40, 'Call', 4.70, 35);
+INSERT INTO CustomerCareFact VALUES (179, 84, 5, 25, 'Call', 2.02, 36);
+INSERT INTO CustomerCareFact VALUES (180, 303, 6, 49, 'Email', 2.45, 21);
+INSERT INTO CustomerCareFact VALUES (181, 261, 6, 34, 'Call', 4.53, 4);
+INSERT INTO CustomerCareFact VALUES (182, 130, 6, 46, 'Email', 3.26, 39);
+INSERT INTO CustomerCareFact VALUES (183, 185, 8, 40, 'In-Person', 3.35, 12);
+INSERT INTO CustomerCareFact VALUES (184, 269, 1, 27, 'Chat', 1.58, 17);
+INSERT INTO CustomerCareFact VALUES (185, 10, 8, 9, 'In-Person', 3.85, 47);
+INSERT INTO CustomerCareFact VALUES (186, 143, 7, 11, 'In-Person', 3.35, 2);
+INSERT INTO CustomerCareFact VALUES (187, 70, 5, 24, 'Email', 4.40, 52);
+INSERT INTO CustomerCareFact VALUES (188, 331, 1, 9, 'Email', 1.49, 58);
+INSERT INTO CustomerCareFact VALUES (189, 40, 7, 39, 'Email', 1.07, 6);
+INSERT INTO CustomerCareFact VALUES (190, 32, 1, 15, 'Chat', 1.04, 34);
+INSERT INTO CustomerCareFact VALUES (191, 11, 9, 11, 'In-Person', 3.61, 7);
+INSERT INTO CustomerCareFact VALUES (192, 75, 8, 30, 'In-Person', 3.01, 2);
+INSERT INTO CustomerCareFact VALUES (193, 197, 2, 2, 'Email', 3.96, 22);
+INSERT INTO CustomerCareFact VALUES (194, 240, 5, 19, 'Email', 3.67, 45);
+INSERT INTO CustomerCareFact VALUES (195, 32, 5, 25, 'Email', 2.47, 2);
+INSERT INTO CustomerCareFact VALUES (196, 100, 9, 1, 'Email', 4.19, 36);
+INSERT INTO CustomerCareFact VALUES (197, 267, 7, 8, 'Chat', 3.06, 48);
+INSERT INTO CustomerCareFact VALUES (198, 183, 10, 14, 'Chat', 1.87, 55);
+INSERT INTO CustomerCareFact VALUES (199, 81, 5, 9, 'In-Person', 3.02, 47);
+INSERT INTO CustomerCareFact VALUES (200, 183, 9, 39, 'In-Person', 3.24, 9);
+INSERT INTO CustomerCareFact VALUES (201, 143, 3, 16, 'In-Person', 4.25, 7);
+INSERT INTO CustomerCareFact VALUES (202, 319, 2, 4, 'Call', 3.41, 37);
+INSERT INTO CustomerCareFact VALUES (203, 114, 1, 43, 'Chat', 3.64, 5);
+INSERT INTO CustomerCareFact VALUES (204, 304, 6, 13, 'Call', 3.08, 22);
+INSERT INTO CustomerCareFact VALUES (205, 109, 4, 36, 'Call', 3.08, 22);
+INSERT INTO CustomerCareFact VALUES (206, 280, 2, 5, 'Email', 4.84, 42);
+INSERT INTO CustomerCareFact VALUES (207, 334, 3, 18, 'In-Person', 1.73, 57);
+INSERT INTO CustomerCareFact VALUES (208, 352, 6, 43, 'In-Person', 4.73, 27);
+INSERT INTO CustomerCareFact VALUES (209, 257, 5, 41, 'In-Person', 4.30, 18);
+INSERT INTO CustomerCareFact VALUES (210, 355, 2, 10, 'Chat', 3.32, 42);
+INSERT INTO CustomerCareFact VALUES (211, 365, 10, 33, 'In-Person', 1.92, 8);
+INSERT INTO CustomerCareFact VALUES (212, 232, 6, 45, 'In-Person', 1.48, 58);
+INSERT INTO CustomerCareFact VALUES (213, 304, 4, 36, 'Chat', 4.62, 42);
+INSERT INTO CustomerCareFact VALUES (214, 53, 7, 38, 'Chat', 2.79, 7);
+INSERT INTO CustomerCareFact VALUES (215, 324, 2, 38, 'Call', 3.69, 35);
+INSERT INTO CustomerCareFact VALUES (216, 106, 4, 33, 'Call', 4.98, 15);
+INSERT INTO CustomerCareFact VALUES (217, 196, 7, 15, 'Chat', 2.90, 35);
+INSERT INTO CustomerCareFact VALUES (218, 27, 6, 9, 'In-Person', 1.12, 15);
+INSERT INTO CustomerCareFact VALUES (219, 277, 10, 47, 'In-Person', 2.27, 26);
+INSERT INTO CustomerCareFact VALUES (220, 355, 5, 38, 'Chat', 3.74, 4);
+INSERT INTO CustomerCareFact VALUES (221, 110, 2, 34, 'Call', 1.88, 24);
+INSERT INTO CustomerCareFact VALUES (222, 148, 5, 23, 'Chat', 3.80, 7);
+INSERT INTO CustomerCareFact VALUES (223, 257, 9, 30, 'Call', 2.12, 3);
+INSERT INTO CustomerCareFact VALUES (224, 128, 5, 36, 'Email', 4.12, 11);
+INSERT INTO CustomerCareFact VALUES (225, 19, 8, 6, 'Call', 1.26, 43);
+INSERT INTO CustomerCareFact VALUES (226, 139, 8, 17, 'Call', 3.68, 51);
+INSERT INTO CustomerCareFact VALUES (227, 115, 10, 8, 'Call', 1.70, 20);
+INSERT INTO CustomerCareFact VALUES (228, 48, 7, 9, 'Call', 1.29, 40);
+INSERT INTO CustomerCareFact VALUES (229, 354, 4, 42, 'Call', 3.97, 1);
+INSERT INTO CustomerCareFact VALUES (230, 82, 2, 33, 'Chat', 1.04, 35);
+INSERT INTO CustomerCareFact VALUES (231, 273, 8, 40, 'In-Person', 4.74, 53);
+INSERT INTO CustomerCareFact VALUES (232, 23, 5, 23, 'Email', 1.15, 40);
+INSERT INTO CustomerCareFact VALUES (233, 176, 2, 48, 'Chat', 3.24, 7);
+INSERT INTO CustomerCareFact VALUES (234, 38, 6, 4, 'Chat', 2.19, 8);
+INSERT INTO CustomerCareFact VALUES (235, 49, 2, 27, 'Chat', 2.35, 29);
+INSERT INTO CustomerCareFact VALUES (236, 147, 1, 33, 'In-Person', 1.13, 49);
+INSERT INTO CustomerCareFact VALUES (237, 172, 2, 34, 'In-Person', 4.81, 54);
+INSERT INTO CustomerCareFact VALUES (238, 71, 4, 15, 'Chat', 1.89, 30);
+INSERT INTO CustomerCareFact VALUES (239, 205, 10, 10, 'Email', 4.41, 29);
+INSERT INTO CustomerCareFact VALUES (240, 170, 5, 44, 'Chat', 3.88, 31);
+INSERT INTO CustomerCareFact VALUES (241, 221, 4, 22, 'Email', 2.89, 9);
+INSERT INTO CustomerCareFact VALUES (242, 23, 10, 22, 'In-Person', 3.73, 28);
+INSERT INTO CustomerCareFact VALUES (243, 184, 6, 39, 'Email', 2.05, 9);
+INSERT INTO CustomerCareFact VALUES (244, 350, 8, 18, 'Call', 1.77, 40);
+INSERT INTO CustomerCareFact VALUES (245, 229, 9, 35, 'Chat', 4.33, 8);
+INSERT INTO CustomerCareFact VALUES (246, 131, 5, 29, 'Chat', 1.95, 16);
+INSERT INTO CustomerCareFact VALUES (247, 295, 9, 27, 'In-Person', 3.30, 37);
+INSERT INTO CustomerCareFact VALUES (248, 161, 1, 24, 'Email', 3.66, 55);
+INSERT INTO CustomerCareFact VALUES (249, 97, 8, 36, 'Email', 4.67, 21);
+INSERT INTO CustomerCareFact VALUES (250, 44, 8, 35, 'Email', 4.04, 31);
+INSERT INTO CustomerCareFact VALUES (251, 85, 8, 22, 'Chat', 3.99, 50);
+INSERT INTO CustomerCareFact VALUES (252, 295, 6, 17, 'In-Person', 1.36, 60);
+INSERT INTO CustomerCareFact VALUES (253, 156, 7, 22, 'Email', 3.73, 25);
+INSERT INTO CustomerCareFact VALUES (254, 45, 8, 15, 'Email', 1.95, 49);
+INSERT INTO CustomerCareFact VALUES (255, 357, 1, 15, 'Email', 3.45, 21);
+INSERT INTO CustomerCareFact VALUES (256, 56, 10, 2, 'In-Person', 2.73, 36);
+INSERT INTO CustomerCareFact VALUES (257, 156, 2, 40, 'Call', 3.56, 8);
+INSERT INTO CustomerCareFact VALUES (258, 136, 2, 7, 'Call', 4.29, 58);
+INSERT INTO CustomerCareFact VALUES (259, 19, 5, 30, 'Email', 2.71, 20);
+INSERT INTO CustomerCareFact VALUES (260, 285, 8, 18, 'Chat', 4.19, 29);
+INSERT INTO CustomerCareFact VALUES (261, 242, 6, 33, 'Email', 3.43, 9);
+INSERT INTO CustomerCareFact VALUES (262, 306, 8, 25, 'Email', 3.67, 46);
+INSERT INTO CustomerCareFact VALUES (263, 217, 9, 34, 'In-Person', 1.86, 43);
+INSERT INTO CustomerCareFact VALUES (264, 137, 1, 13, 'Chat', 2.73, 14);
+
+INSERT INTO CustomerCareFact VALUES (265, 173, 9, 11, 'Chat', 2.14, 41);
+INSERT INTO CustomerCareFact VALUES (266, 9, 5, 5, 'Email', 4.89, 46);
+INSERT INTO CustomerCareFact VALUES (267, 233, 5, 30, 'In-Person', 3.89, 19);
+INSERT INTO CustomerCareFact VALUES (268, 197, 1, 2, 'In-Person', 2.95, 35);
+INSERT INTO CustomerCareFact VALUES (269, 97, 2, 21, 'Call', 3.36, 9);
+INSERT INTO CustomerCareFact VALUES (270, 31, 5, 25, 'Chat', 3.91, 52);
+INSERT INTO CustomerCareFact VALUES (271, 162, 2, 34, 'In-Person', 1.99, 60);
+INSERT INTO CustomerCareFact VALUES (272, 310, 9, 41, 'Chat', 2.85, 9);
+INSERT INTO CustomerCareFact VALUES (273, 268, 10, 30, 'In-Person', 3.62, 2);
+INSERT INTO CustomerCareFact VALUES (274, 341, 1, 45, 'Chat', 2.90, 9);
+INSERT INTO CustomerCareFact VALUES (275, 81, 6, 32, 'In-Person', 1.63, 15);
+INSERT INTO CustomerCareFact VALUES (276, 296, 9, 33, 'Chat', 3.49, 59);
+INSERT INTO CustomerCareFact VALUES (277, 182, 6, 16, 'In-Person', 2.71, 48);
+INSERT INTO CustomerCareFact VALUES (278, 142, 4, 30, 'In-Person', 2.41, 22);
+INSERT INTO CustomerCareFact VALUES (279, 122, 5, 39, 'Call', 4.63, 38);
+INSERT INTO CustomerCareFact VALUES (280, 159, 7, 38, 'Chat', 1.05, 44);
+INSERT INTO CustomerCareFact VALUES (281, 328, 1, 9, 'Call', 1.14, 21);
+INSERT INTO CustomerCareFact VALUES (282, 3, 2, 2, 'Chat', 4.50, 2);
+INSERT INTO CustomerCareFact VALUES (283, 86, 9, 32, 'Email', 1.09, 52);
+INSERT INTO CustomerCareFact VALUES (284, 1, 4, 23, 'Email', 3.07, 11);
+INSERT INTO CustomerCareFact VALUES (285, 356, 6, 1, 'In-Person', 3.55, 31);
+INSERT INTO CustomerCareFact VALUES (286, 345, 9, 33, 'In-Person', 3.10, 43);
+INSERT INTO CustomerCareFact VALUES (287, 362, 7, 40, 'Chat', 2.28, 52);
+INSERT INTO CustomerCareFact VALUES (288, 142, 10, 15, 'Email', 4.88, 21);
+INSERT INTO CustomerCareFact VALUES (289, 110, 9, 17, 'In-Person', 3.45, 15);
+INSERT INTO CustomerCareFact VALUES (290, 40, 1, 23, 'Call', 1.65, 15);
+INSERT INTO CustomerCareFact VALUES (291, 329, 8, 31, 'Call', 1.58, 17);
+INSERT INTO CustomerCareFact VALUES (292, 150, 9, 6, 'Chat', 3.12, 48);
+INSERT INTO CustomerCareFact VALUES (293, 150, 2, 21, 'Chat', 1.98, 6);
+INSERT INTO CustomerCareFact VALUES (294, 118, 10, 8, 'Call', 3.01, 45);
+INSERT INTO CustomerCareFact VALUES (295, 58, 2, 30, 'Call', 1.95, 1);
+INSERT INTO CustomerCareFact VALUES (296, 151, 5, 20, 'Call', 3.99, 28);
+INSERT INTO CustomerCareFact VALUES (297, 70, 3, 45, 'In-Person', 4.09, 12);
+INSERT INTO CustomerCareFact VALUES (298, 52, 4, 26, 'Call', 2.19, 19);
+INSERT INTO CustomerCareFact VALUES (299, 152, 9, 35, 'Call', 3.25, 18);
+INSERT INTO CustomerCareFact VALUES (300, 150, 3, 11, 'Call', 1.87, 2);
+INSERT INTO CustomerCareFact VALUES (301, 171, 2, 33, 'Chat', 3.72, 16);
+INSERT INTO CustomerCareFact VALUES (302, 27, 8, 4, 'Call', 4.13, 53);
+INSERT INTO CustomerCareFact VALUES (303, 188, 4, 22, 'Email', 2.74, 42);
+INSERT INTO CustomerCareFact VALUES (304, 48, 3, 39, 'Call', 1.13, 20);
+INSERT INTO CustomerCareFact VALUES (305, 235, 9, 40, 'Email', 1.50, 49);
+INSERT INTO CustomerCareFact VALUES (306, 279, 6, 8, 'Email', 1.32, 12);
+INSERT INTO CustomerCareFact VALUES (307, 181, 4, 26, 'Call', 4.10, 46);
+INSERT INTO CustomerCareFact VALUES (308, 104, 1, 4, 'Chat', 4.63, 56);
+INSERT INTO CustomerCareFact VALUES (309, 81, 3, 5, 'In-Person', 3.52, 58);
+INSERT INTO CustomerCareFact VALUES (310, 227, 3, 34, 'Call', 4.56, 9);
+INSERT INTO CustomerCareFact VALUES (311, 167, 3, 40, 'Call', 1.98, 28);
+INSERT INTO CustomerCareFact VALUES (312, 28, 2, 21, 'Call', 2.02, 39);
+INSERT INTO CustomerCareFact VALUES (313, 254, 4, 18, 'In-Person', 4.76, 39);
+INSERT INTO CustomerCareFact VALUES (314, 245, 1, 30, 'In-Person', 3.92, 45);
+INSERT INTO CustomerCareFact VALUES (315, 251, 9, 5, 'In-Person', 2.53, 53);
+INSERT INTO CustomerCareFact VALUES (316, 104, 8, 29, 'Chat', 3.80, 1);
+INSERT INTO CustomerCareFact VALUES (317, 79, 10, 8, 'Call', 3.80, 15);
+INSERT INTO CustomerCareFact VALUES (318, 155, 7, 26, 'Email', 4.43, 6);
+INSERT INTO CustomerCareFact VALUES (319, 235, 6, 19, 'Chat', 3.10, 54);
+INSERT INTO CustomerCareFact VALUES (320, 200, 10, 16, 'Email', 3.28, 34);
+INSERT INTO CustomerCareFact VALUES (321, 324, 3, 37, 'Chat', 1.90, 58);
+INSERT INTO CustomerCareFact VALUES (322, 153, 8, 10, 'Email', 1.02, 19);
+INSERT INTO CustomerCareFact VALUES (323, 227, 7, 18, 'Chat', 2.84, 38);
+INSERT INTO CustomerCareFact VALUES (324, 353, 10, 42, 'Chat', 3.50, 19);
+INSERT INTO CustomerCareFact VALUES (325, 180, 10, 42, 'Chat', 2.74, 27);
+INSERT INTO CustomerCareFact VALUES (326, 327, 6, 42, 'In-Person', 1.30, 17);
+INSERT INTO CustomerCareFact VALUES (327, 223, 3, 1, 'Email', 1.58, 14);
+INSERT INTO CustomerCareFact VALUES (328, 224, 8, 39, 'In-Person', 2.26, 57);
+INSERT INTO CustomerCareFact VALUES (329, 227, 4, 50, 'Chat', 2.86, 28);
+INSERT INTO CustomerCareFact VALUES (330, 39, 8, 12, 'Chat', 1.47, 33);
+INSERT INTO CustomerCareFact VALUES (331, 314, 7, 38, 'Call', 4.58, 6);
+INSERT INTO CustomerCareFact VALUES (332, 8, 10, 26, 'In-Person', 3.98, 54);
+INSERT INTO CustomerCareFact VALUES (333, 44, 6, 3, 'Chat', 1.05, 2);
+INSERT INTO CustomerCareFact VALUES (334, 85, 6, 44, 'Call', 2.51, 34);
+INSERT INTO CustomerCareFact VALUES (335, 149, 10, 5, 'Call', 4.58, 11);
+INSERT INTO CustomerCareFact VALUES (336, 200, 3, 43, 'Call', 4.99, 45);
+INSERT INTO CustomerCareFact VALUES (337, 67, 6, 7, 'Chat', 3.48, 26);
+INSERT INTO CustomerCareFact VALUES (338, 194, 7, 6, 'Email', 3.29, 6);
+INSERT INTO CustomerCareFact VALUES (339, 68, 1, 32, 'Chat', 2.88, 55);
+INSERT INTO CustomerCareFact VALUES (340, 357, 5, 6, 'Email', 4.64, 2);
+INSERT INTO CustomerCareFact VALUES (341, 298, 1, 19, 'Call', 2.51, 28);
+INSERT INTO CustomerCareFact VALUES (342, 55, 8, 11, 'Call', 3.33, 4);
+INSERT INTO CustomerCareFact VALUES (343, 258, 7, 14, 'Chat', 3.40, 48);
+INSERT INTO CustomerCareFact VALUES (344, 218, 6, 23, 'Email', 1.77, 39);
+INSERT INTO CustomerCareFact VALUES (345, 196, 3, 43, 'In-Person', 3.26, 39);
+INSERT INTO CustomerCareFact VALUES (346, 338, 8, 16, 'Email', 2.99, 59);
+INSERT INTO CustomerCareFact VALUES (347, 86, 3, 24, 'Email', 3.93, 25);
+INSERT INTO CustomerCareFact VALUES (348, 152, 8, 22, 'Email', 4.79, 21);
+INSERT INTO CustomerCareFact VALUES (349, 131, 1, 19, 'Call', 3.69, 48);
+INSERT INTO CustomerCareFact VALUES (350, 215, 7, 26, 'Call', 1.01, 20);
+INSERT INTO CustomerCareFact VALUES (351, 117, 5, 10, 'Call', 4.65, 40);
+INSERT INTO CustomerCareFact VALUES (352, 123, 3, 17, 'Email', 1.62, 52);
+INSERT INTO CustomerCareFact VALUES (353, 286, 1, 12, 'Chat', 4.86, 39);
+INSERT INTO CustomerCareFact VALUES (354, 154, 5, 41, 'Call', 2.89, 8);
+INSERT INTO CustomerCareFact VALUES (355, 234, 9, 18, 'Chat', 2.00, 35);
+INSERT INTO CustomerCareFact VALUES (356, 263, 4, 28, 'Chat', 4.27, 53);
+INSERT INTO CustomerCareFact VALUES (357, 361, 3, 45, 'Email', 4.95, 17);
+INSERT INTO CustomerCareFact VALUES (358, 235, 5, 49, 'Call', 2.26, 7);
+INSERT INTO CustomerCareFact VALUES (359, 274, 2, 32, 'Email', 4.03, 12);
+INSERT INTO CustomerCareFact VALUES (360, 363, 1, 35, 'Call', 1.88, 1);
+INSERT INTO CustomerCareFact VALUES (361, 11, 9, 5, 'In-Person', 1.72, 18);
+INSERT INTO CustomerCareFact VALUES (362, 330, 4, 40, 'Call', 1.61, 33);
+INSERT INTO CustomerCareFact VALUES (363, 65, 6, 50, 'Chat', 2.35, 56);
+INSERT INTO CustomerCareFact VALUES (364, 282, 4, 27, 'Email', 3.53, 2);
+INSERT INTO CustomerCareFact VALUES (365, 68, 3, 5, 'In-Person', 1.61, 54);
+INSERT INTO CustomerCareFact VALUES (366, 228, 10, 35, 'Call', 3.18, 15);
+INSERT INTO CustomerCareFact VALUES (367, 101, 6, 6, 'Email', 1.31, 57);
+INSERT INTO CustomerCareFact VALUES (368, 343, 5, 13, 'Call', 2.01, 42);
+INSERT INTO CustomerCareFact VALUES (369, 356, 3, 31, 'Chat', 2.49, 54);
+INSERT INTO CustomerCareFact VALUES (370, 132, 1, 41, 'Chat', 1.45, 51);
+INSERT INTO CustomerCareFact VALUES (371, 36, 3, 25, 'Call', 2.41, 11);
+INSERT INTO CustomerCareFact VALUES (372, 158, 10, 20, 'Call', 4.96, 51);
+INSERT INTO CustomerCareFact VALUES (373, 122, 9, 20, 'Email', 3.25, 36);
+INSERT INTO CustomerCareFact VALUES (374, 323, 2, 10, 'Chat', 2.99, 36);
+INSERT INTO CustomerCareFact VALUES (375, 135, 2, 6, 'In-Person', 1.46, 27);
+INSERT INTO CustomerCareFact VALUES (376, 218, 10, 16, 'Call', 4.21, 39);
+INSERT INTO CustomerCareFact VALUES (377, 319, 9, 35, 'Call', 3.39, 14);
+INSERT INTO CustomerCareFact VALUES (378, 313, 3, 22, 'Chat', 1.24, 39);
+INSERT INTO CustomerCareFact VALUES (379, 353, 7, 23, 'In-Person', 3.53, 42);
+INSERT INTO CustomerCareFact VALUES (380, 14, 4, 27, 'Call', 4.31, 20);
+INSERT INTO CustomerCareFact VALUES (381, 46, 7, 48, 'In-Person', 2.42, 36);
+INSERT INTO CustomerCareFact VALUES (382, 278, 10, 26, 'Call', 2.47, 32);
+INSERT INTO CustomerCareFact VALUES (383, 130, 8, 47, 'Email', 3.91, 52);
+INSERT INTO CustomerCareFact VALUES (384, 343, 1, 28, 'In-Person', 3.75, 43);
+INSERT INTO CustomerCareFact VALUES (385, 18, 2, 19, 'Email', 4.13, 17);
+INSERT INTO CustomerCareFact VALUES (386, 153, 4, 49, 'Call', 3.79, 56);
+INSERT INTO CustomerCareFact VALUES (387, 311, 6, 2, 'Chat', 1.42, 13);
+INSERT INTO CustomerCareFact VALUES (388, 226, 1, 8, 'In-Person', 1.76, 49);
+INSERT INTO CustomerCareFact VALUES (389, 14, 1, 35, 'Email', 1.88, 59);
+INSERT INTO CustomerCareFact VALUES (390, 331, 10, 28, 'In-Person', 4.57, 19);
+INSERT INTO CustomerCareFact VALUES (391, 324, 2, 34, 'In-Person', 2.30, 13);
+INSERT INTO CustomerCareFact VALUES (392, 117, 2, 30, 'Call', 1.25, 18);
+INSERT INTO CustomerCareFact VALUES (393, 339, 9, 40, 'Chat', 4.49, 29);
+INSERT INTO CustomerCareFact VALUES (394, 103, 3, 18, 'Call', 1.07, 13);
+INSERT INTO CustomerCareFact VALUES (395, 187, 2, 40, 'Call', 1.80, 8);
+INSERT INTO CustomerCareFact VALUES (396, 187, 6, 45, 'Chat', 4.41, 52);
+INSERT INTO CustomerCareFact VALUES (397, 168, 3, 17, 'Chat', 3.48, 38);
+INSERT INTO CustomerCareFact VALUES (398, 330, 7, 8, 'Call', 1.66, 51);
+INSERT INTO CustomerCareFact VALUES (399, 41, 5, 48, 'Email', 3.63, 6);
+INSERT INTO CustomerCareFact VALUES (400, 231, 5, 35, 'Chat', 1.27, 30);
 
 
-INSERT INTO CustomerCareFact VALUES (265, 12, 9, 11, 'Chat', 2.14, 41);
-INSERT INTO CustomerCareFact VALUES (266, 24, 5, 5, 'Email', 4.89, 46);
-INSERT INTO CustomerCareFact VALUES (267, 18, 5, 30, 'In-Person', 3.89, 19);
-INSERT INTO CustomerCareFact VALUES (268, 29, 1, 2, 'In-Person', 2.95, 35);
-INSERT INTO CustomerCareFact VALUES (269, 26, 2, 21, 'Call', 3.36, 9);
-INSERT INTO CustomerCareFact VALUES (270, 11, 5, 25, 'Chat', 3.91, 52);
-INSERT INTO CustomerCareFact VALUES (271, 4, 2, 34, 'In-Person', 1.99, 60);
-INSERT INTO CustomerCareFact VALUES (272, 17, 9, 41, 'Chat', 2.85, 9);
-INSERT INTO CustomerCareFact VALUES (273, 27, 10, 30, 'In-Person', 3.62, 2);
-INSERT INTO CustomerCareFact VALUES (274, 29, 1, 45, 'Chat', 2.90, 9);
-INSERT INTO CustomerCareFact VALUES (275, 29, 6, 32, 'In-Person', 1.63, 15);
-INSERT INTO CustomerCareFact VALUES (276, 22, 9, 33, 'Chat', 3.49, 59);
-INSERT INTO CustomerCareFact VALUES (277, 26, 6, 16, 'In-Person', 2.71, 48);
-INSERT INTO CustomerCareFact VALUES (278, 26, 4, 30, 'In-Person', 2.41, 22);
-INSERT INTO CustomerCareFact VALUES (279, 20, 5, 39, 'Call', 4.63, 38);
-INSERT INTO CustomerCareFact VALUES (280, 29, 7, 38, 'Chat', 1.05, 44);
-INSERT INTO CustomerCareFact VALUES (281, 13, 1, 9, 'Call', 1.14, 21);
-INSERT INTO CustomerCareFact VALUES (282, 9, 2, 2, 'Chat', 4.50, 2);
-INSERT INTO CustomerCareFact VALUES (283, 4, 9, 32, 'Email', 1.09, 52);
-INSERT INTO CustomerCareFact VALUES (284, 6, 4, 23, 'Email', 3.07, 11);
-INSERT INTO CustomerCareFact VALUES (285, 3, 6, 1, 'In-Person', 3.55, 31);
-INSERT INTO CustomerCareFact VALUES (286, 10, 9, 33, 'In-Person', 3.10, 43);
-INSERT INTO CustomerCareFact VALUES (287, 23, 7, 40, 'Chat', 2.28, 52);
-INSERT INTO CustomerCareFact VALUES (288, 12, 10, 15, 'Email', 4.88, 21);
-INSERT INTO CustomerCareFact VALUES (289, 11, 9, 17, 'In-Person', 3.45, 15);
-INSERT INTO CustomerCareFact VALUES (290, 27, 1, 23, 'Call', 1.65, 15);
-INSERT INTO CustomerCareFact VALUES (291, 30, 8, 31, 'Call', 1.58, 17);
-INSERT INTO CustomerCareFact VALUES (292, 22, 9, 6, 'Chat', 3.12, 48);
-INSERT INTO CustomerCareFact VALUES (293, 24, 2, 21, 'Chat', 1.98, 6);
-INSERT INTO CustomerCareFact VALUES (294, 10, 10, 8, 'Call', 3.01, 45);
-INSERT INTO CustomerCareFact VALUES (295, 28, 2, 30, 'Call', 1.95, 1);
-INSERT INTO CustomerCareFact VALUES (296, 4, 5, 20, 'Call', 3.99, 28);
-INSERT INTO CustomerCareFact VALUES (297, 11, 3, 45, 'In-Person', 4.09, 12);
-INSERT INTO CustomerCareFact VALUES (298, 28, 4, 26, 'Call', 2.19, 19);
-INSERT INTO CustomerCareFact VALUES (299, 11, 9, 35, 'Call', 3.25, 18);
-INSERT INTO CustomerCareFact VALUES (300, 2, 3, 11, 'Call', 1.87, 2);
-INSERT INTO CustomerCareFact VALUES (301, 13, 2, 33, 'Chat', 3.72, 16);
-INSERT INTO CustomerCareFact VALUES (302, 1, 8, 4, 'Call', 4.13, 53);
-INSERT INTO CustomerCareFact VALUES (303, 12, 4, 22, 'Email', 2.74, 42);
-INSERT INTO CustomerCareFact VALUES (304, 21, 3, 39, 'Call', 1.13, 20);
-INSERT INTO CustomerCareFact VALUES (305, 27, 9, 40, 'Email', 1.50, 49);
-INSERT INTO CustomerCareFact VALUES (306, 19, 6, 8, 'Email', 1.32, 12);
-INSERT INTO CustomerCareFact VALUES (307, 13, 4, 26, 'Call', 4.10, 46);
-INSERT INTO CustomerCareFact VALUES (308, 15, 1, 4, 'Chat', 4.63, 56);
-INSERT INTO CustomerCareFact VALUES (309, 1, 3, 5, 'In-Person', 3.52, 58);
-INSERT INTO CustomerCareFact VALUES (310, 20, 3, 34, 'Call', 4.56, 9);
-INSERT INTO CustomerCareFact VALUES (311, 25, 3, 40, 'Call', 1.98, 28);
-INSERT INTO CustomerCareFact VALUES (312, 12, 2, 21, 'Call', 2.02, 39);
-INSERT INTO CustomerCareFact VALUES (313, 25, 4, 18, 'In-Person', 4.76, 39);
-INSERT INTO CustomerCareFact VALUES (314, 26, 1, 30, 'In-Person', 3.92, 45);
-INSERT INTO CustomerCareFact VALUES (315, 5, 9, 5, 'In-Person', 2.53, 53);
-INSERT INTO CustomerCareFact VALUES (316, 3, 8, 29, 'Chat', 3.80, 1);
-INSERT INTO CustomerCareFact VALUES (317, 8, 10, 8, 'Call', 3.80, 15);
-INSERT INTO CustomerCareFact VALUES (318, 16, 7, 26, 'Email', 4.43, 6);
-INSERT INTO CustomerCareFact VALUES (319, 28, 6, 19, 'Chat', 3.10, 54);
-INSERT INTO CustomerCareFact VALUES (320, 14, 10, 16, 'Email', 3.28, 34);
-INSERT INTO CustomerCareFact VALUES (321, 6, 3, 37, 'Chat', 1.90, 58);
-INSERT INTO CustomerCareFact VALUES (322, 3, 8, 10, 'Email', 1.02, 19);
-INSERT INTO CustomerCareFact VALUES (323, 20, 7, 18, 'Chat', 2.84, 38);
-INSERT INTO CustomerCareFact VALUES (324, 17, 10, 42, 'Chat', 3.50, 19);
-INSERT INTO CustomerCareFact VALUES (325, 1, 10, 42, 'Chat', 2.74, 27);
-INSERT INTO CustomerCareFact VALUES (326, 21, 6, 42, 'In-Person', 1.30, 17);
-INSERT INTO CustomerCareFact VALUES (327, 10, 3, 1, 'Email', 1.58, 14);
-INSERT INTO CustomerCareFact VALUES (328, 17, 8, 39, 'In-Person', 2.26, 57);
-INSERT INTO CustomerCareFact VALUES (329, 4, 4, 50, 'Chat', 2.86, 28);
-INSERT INTO CustomerCareFact VALUES (330, 7, 8, 12, 'Chat', 1.47, 33);
-INSERT INTO CustomerCareFact VALUES (331, 24, 7, 38, 'Call', 4.58, 6);
-INSERT INTO CustomerCareFact VALUES (332, 9, 10, 26, 'In-Person', 3.98, 54);
-INSERT INTO CustomerCareFact VALUES (333, 20, 6, 3, 'Chat', 1.05, 2);
-INSERT INTO CustomerCareFact VALUES (334, 6, 6, 44, 'Call', 2.51, 34);
-INSERT INTO CustomerCareFact VALUES (335, 12, 10, 5, 'Call', 4.58, 11);
-INSERT INTO CustomerCareFact VALUES (336, 27, 3, 43, 'Call', 4.99, 45);
-INSERT INTO CustomerCareFact VALUES (337, 6, 6, 7, 'Chat', 3.48, 26);
-INSERT INTO CustomerCareFact VALUES (338, 8, 7, 6, 'Email', 3.29, 6);
-INSERT INTO CustomerCareFact VALUES (339, 24, 1, 32, 'Chat', 2.88, 55);
-INSERT INTO CustomerCareFact VALUES (340, 18, 5, 6, 'Email', 4.64, 2);
-INSERT INTO CustomerCareFact VALUES (341, 2, 1, 19, 'Call', 2.51, 28);
-INSERT INTO CustomerCareFact VALUES (342, 20, 8, 11, 'Call', 3.33, 4);
-INSERT INTO CustomerCareFact VALUES (343, 14, 7, 14, 'Chat', 3.40, 48);
-INSERT INTO CustomerCareFact VALUES (344, 16, 6, 23, 'Email', 1.77, 39);
-INSERT INTO CustomerCareFact VALUES (345, 17, 3, 43, 'In-Person', 3.26, 39);
-INSERT INTO CustomerCareFact VALUES (346, 25, 8, 16, 'Email', 2.99, 59);
-INSERT INTO CustomerCareFact VALUES (347, 13, 3, 24, 'Email', 3.93, 25);
-INSERT INTO CustomerCareFact VALUES (348, 28, 8, 22, 'Email', 4.79, 21);
-INSERT INTO CustomerCareFact VALUES (349, 10, 1, 19, 'Call', 3.69, 48);
-INSERT INTO CustomerCareFact VALUES (350, 6, 7, 26, 'Call', 1.01, 20);
-INSERT INTO CustomerCareFact VALUES (351, 25, 5, 10, 'Call', 4.65, 40);
-INSERT INTO CustomerCareFact VALUES (352, 9, 3, 17, 'Email', 1.62, 52);
-INSERT INTO CustomerCareFact VALUES (353, 2, 1, 12, 'Chat', 4.86, 39);
-INSERT INTO CustomerCareFact VALUES (354, 21, 5, 41, 'Call', 2.89, 8);
-INSERT INTO CustomerCareFact VALUES (355, 9, 9, 18, 'Chat', 2.00, 35);
-INSERT INTO CustomerCareFact VALUES (356, 22, 4, 28, 'Chat', 4.27, 53);
-INSERT INTO CustomerCareFact VALUES (357, 6, 3, 45, 'Email', 4.95, 17);
-INSERT INTO CustomerCareFact VALUES (358, 4, 5, 49, 'Call', 2.26, 7);
-INSERT INTO CustomerCareFact VALUES (359, 29, 2, 32, 'Email', 4.03, 12);
-INSERT INTO CustomerCareFact VALUES (360, 26, 1, 35, 'Call', 1.88, 1);
-INSERT INTO CustomerCareFact VALUES (361, 30, 9, 5, 'In-Person', 1.72, 18);
-INSERT INTO CustomerCareFact VALUES (362, 7, 4, 40, 'Call', 1.61, 33);
-INSERT INTO CustomerCareFact VALUES (363, 26, 6, 50, 'Chat', 2.35, 56);
-INSERT INTO CustomerCareFact VALUES (364, 16, 4, 27, 'Email', 3.53, 2);
-INSERT INTO CustomerCareFact VALUES (365, 17, 3, 5, 'In-Person', 1.61, 54);
-INSERT INTO CustomerCareFact VALUES (366, 3, 10, 35, 'Call', 3.18, 15);
-INSERT INTO CustomerCareFact VALUES (367, 7, 6, 6, 'Email', 1.31, 57);
-INSERT INTO CustomerCareFact VALUES (368, 14, 5, 13, 'Call', 2.01, 42);
-INSERT INTO CustomerCareFact VALUES (369, 19, 3, 31, 'Chat', 2.49, 54);
-INSERT INTO CustomerCareFact VALUES (370, 21, 1, 41, 'Chat', 1.45, 51);
-INSERT INTO CustomerCareFact VALUES (371, 29, 3, 25, 'Call', 2.41, 11);
-INSERT INTO CustomerCareFact VALUES (372, 24, 10, 20, 'Call', 4.96, 51);
-INSERT INTO CustomerCareFact VALUES (373, 6, 9, 20, 'Email', 3.25, 36);
-INSERT INTO CustomerCareFact VALUES (374, 9, 2, 10, 'Chat', 2.99, 36);
-INSERT INTO CustomerCareFact VALUES (375, 5, 2, 6, 'In-Person', 1.46, 27);
-INSERT INTO CustomerCareFact VALUES (376, 16, 10, 16, 'Call', 4.21, 39);
-INSERT INTO CustomerCareFact VALUES (377, 30, 9, 35, 'Call', 3.39, 14);
-INSERT INTO CustomerCareFact VALUES (378, 20, 3, 22, 'Chat', 1.24, 39);
-INSERT INTO CustomerCareFact VALUES (379, 29, 7, 23, 'In-Person', 3.53, 42);
-INSERT INTO CustomerCareFact VALUES (380, 7, 4, 27, 'Call', 4.31, 20);
-INSERT INTO CustomerCareFact VALUES (381, 17, 7, 48, 'In-Person', 2.42, 36);
-INSERT INTO CustomerCareFact VALUES (382, 16, 10, 26, 'Call', 2.47, 32);
-INSERT INTO CustomerCareFact VALUES (383, 7, 8, 47, 'Email', 3.91, 52);
-INSERT INTO CustomerCareFact VALUES (384, 12, 1, 28, 'In-Person', 3.75, 43);
-INSERT INTO CustomerCareFact VALUES (385, 8, 2, 19, 'Email', 4.13, 17);
-INSERT INTO CustomerCareFact VALUES (386, 20, 4, 49, 'Call', 3.79, 56);
-INSERT INTO CustomerCareFact VALUES (387, 17, 6, 2, 'Chat', 1.42, 13);
-INSERT INTO CustomerCareFact VALUES (388, 22, 1, 8, 'In-Person', 1.76, 49);
-INSERT INTO CustomerCareFact VALUES (389, 1, 1, 35, 'Email', 1.88, 59);
-INSERT INTO CustomerCareFact VALUES (390, 23, 10, 28, 'In-Person', 4.57, 19);
-INSERT INTO CustomerCareFact VALUES (391, 16, 2, 34, 'In-Person', 2.30, 13);
-INSERT INTO CustomerCareFact VALUES (392, 21, 2, 30, 'Call', 1.25, 18);
-INSERT INTO CustomerCareFact VALUES (393, 3, 9, 40, 'Chat', 4.49, 29);
-INSERT INTO CustomerCareFact VALUES (394, 27, 3, 18, 'Call', 1.07, 13);
-INSERT INTO CustomerCareFact VALUES (395, 14, 2, 40, 'Call', 1.80, 8);
-INSERT INTO CustomerCareFact VALUES (396, 11, 6, 45, 'Chat', 4.41, 52);
-INSERT INTO CustomerCareFact VALUES (397, 16, 3, 17, 'Chat', 3.48, 38);
-INSERT INTO CustomerCareFact VALUES (398, 20, 7, 8, 'Call', 1.66, 51);
-INSERT INTO CustomerCareFact VALUES (399, 11, 5, 48, 'Email', 3.63, 6);
-INSERT INTO CustomerCareFact VALUES (400, 27, 5, 35, 'Chat', 1.27, 30);
 
+INSERT INTO CustomerCareFact VALUES (401, 319, 5, 22, 'Call', 3.80, 8);
+INSERT INTO CustomerCareFact VALUES (402, 261, 3, 44, 'Email', 3.49, 4);
+INSERT INTO CustomerCareFact VALUES (403, 305, 2, 32, 'Chat', 3.32, 32);
+INSERT INTO CustomerCareFact VALUES (404, 131, 10, 45, 'Call', 2.37, 46);
+INSERT INTO CustomerCareFact VALUES (405, 253, 7, 4, 'In-Person', 1.27, 3);
+INSERT INTO CustomerCareFact VALUES (406, 94, 7, 29, 'Chat', 2.98, 60);
+INSERT INTO CustomerCareFact VALUES (407, 293, 2, 31, 'In-Person', 3.65, 35);
+INSERT INTO CustomerCareFact VALUES (408, 338, 3, 18, 'Call', 4.61, 56);
+INSERT INTO CustomerCareFact VALUES (409, 69, 7, 45, 'Chat', 2.98, 15);
+INSERT INTO CustomerCareFact VALUES (410, 128, 7, 25, 'In-Person', 2.14, 14);
+INSERT INTO CustomerCareFact VALUES (411, 323, 10, 1, 'Chat', 1.63, 33);
+INSERT INTO CustomerCareFact VALUES (412, 352, 2, 42, 'Email', 3.80, 4);
+INSERT INTO CustomerCareFact VALUES (413, 105, 7, 45, 'Email', 4.31, 29);
+INSERT INTO CustomerCareFact VALUES (414, 28, 10, 43, 'In-Person', 1.54, 21);
+INSERT INTO CustomerCareFact VALUES (415, 292, 2, 4, 'Chat', 3.95, 53);
+INSERT INTO CustomerCareFact VALUES (416, 349, 6, 43, 'Chat', 4.96, 54);
+INSERT INTO CustomerCareFact VALUES (417, 243, 6, 49, 'In-Person', 4.29, 28);
+INSERT INTO CustomerCareFact VALUES (418, 188, 4, 34, 'Call', 1.51, 3);
+INSERT INTO CustomerCareFact VALUES (419, 250, 3, 29, 'In-Person', 4.30, 49);
+INSERT INTO CustomerCareFact VALUES (420, 94, 2, 47, 'Chat', 2.00, 52);
+INSERT INTO CustomerCareFact VALUES (421, 89, 5, 28, 'Email', 2.88, 26);
+INSERT INTO CustomerCareFact VALUES (422, 322, 8, 13, 'Chat', 4.53, 17);
+INSERT INTO CustomerCareFact VALUES (423, 45, 1, 15, 'Call', 3.24, 55);
+INSERT INTO CustomerCareFact VALUES (424, 48, 5, 18, 'Email', 4.77, 10);
+INSERT INTO CustomerCareFact VALUES (425, 300, 5, 29, 'Call', 4.50, 19);
+INSERT INTO CustomerCareFact VALUES (426, 78, 7, 6, 'In-Person', 3.85, 54);
+INSERT INTO CustomerCareFact VALUES (427, 350, 10, 45, 'Call', 2.47, 43);
+INSERT INTO CustomerCareFact VALUES (428, 294, 8, 49, 'Call', 2.20, 56);
+INSERT INTO CustomerCareFact VALUES (429, 265, 4, 17, 'In-Person', 1.33, 30);
+INSERT INTO CustomerCareFact VALUES (430, 8, 5, 7, 'In-Person', 1.71, 29);
+INSERT INTO CustomerCareFact VALUES (431, 136, 7, 38, 'Email', 2.22, 17);
+INSERT INTO CustomerCareFact VALUES (432, 53, 2, 7, 'Call', 4.71, 42);
+INSERT INTO CustomerCareFact VALUES (433, 332, 9, 31, 'In-Person', 4.37, 55);
+INSERT INTO CustomerCareFact VALUES (434, 52, 7, 14, 'Email', 2.55, 10);
+INSERT INTO CustomerCareFact VALUES (435, 71, 8, 50, 'Chat', 2.37, 55);
+INSERT INTO CustomerCareFact VALUES (436, 123, 4, 42, 'Call', 3.67, 17);
+INSERT INTO CustomerCareFact VALUES (437, 154, 5, 39, 'Email', 3.35, 7);
+INSERT INTO CustomerCareFact VALUES (438, 161, 4, 16, 'Call', 3.81, 21);
+INSERT INTO CustomerCareFact VALUES (439, 60, 5, 9, 'Chat', 4.53, 23);
+INSERT INTO CustomerCareFact VALUES (440, 240, 3, 6, 'Call', 4.56, 58);
+INSERT INTO CustomerCareFact VALUES (441, 86, 2, 18, 'Email', 2.43, 12);
+INSERT INTO CustomerCareFact VALUES (442, 224, 4, 17, 'Email', 1.12, 56);
+INSERT INTO CustomerCareFact VALUES (443, 48, 5, 31, 'Email', 4.60, 16);
+INSERT INTO CustomerCareFact VALUES (444, 224, 10, 14, 'In-Person', 1.35, 51);
+INSERT INTO CustomerCareFact VALUES (445, 123, 9, 9, 'In-Person', 1.18, 33);
+INSERT INTO CustomerCareFact VALUES (446, 145, 1, 44, 'In-Person', 4.58, 37);
+INSERT INTO CustomerCareFact VALUES (447, 291, 7, 26, 'Email', 3.15, 20);
+INSERT INTO CustomerCareFact VALUES (448, 203, 7, 14, 'Call', 2.57, 10);
+INSERT INTO CustomerCareFact VALUES (449, 339, 4, 8, 'In-Person', 3.41, 17);
+INSERT INTO CustomerCareFact VALUES (450, 327, 10, 7, 'Chat', 3.53, 14);
+INSERT INTO CustomerCareFact VALUES (451, 219, 4, 2, 'Call', 4.34, 5);
+INSERT INTO CustomerCareFact VALUES (452, 201, 5, 30, 'Call', 4.23, 10);
+INSERT INTO CustomerCareFact VALUES (453, 260, 8, 36, 'In-Person', 2.55, 30);
+INSERT INTO CustomerCareFact VALUES (454, 350, 3, 2, 'Email', 2.28, 10);
+INSERT INTO CustomerCareFact VALUES (455, 277, 8, 34, 'Call', 3.88, 13);
+INSERT INTO CustomerCareFact VALUES (456, 267, 9, 38, 'In-Person', 2.64, 18);
+INSERT INTO CustomerCareFact VALUES (457, 90, 7, 35, 'In-Person', 3.81, 8);
+INSERT INTO CustomerCareFact VALUES (458, 302, 4, 9, 'Email', 4.06, 15);
+INSERT INTO CustomerCareFact VALUES (459, 312, 4, 8, 'Email', 4.92, 52);
+INSERT INTO CustomerCareFact VALUES (460, 356, 7, 25, 'Call', 4.32, 12);
+INSERT INTO CustomerCareFact VALUES (461, 328, 2, 47, 'Chat', 1.81, 2);
+INSERT INTO CustomerCareFact VALUES (462, 308, 10, 38, 'Email', 1.07, 7);
+INSERT INTO CustomerCareFact VALUES (463, 32, 5, 40, 'Email', 4.66, 43);
+INSERT INTO CustomerCareFact VALUES (464, 160, 7, 42, 'Chat', 1.68, 60);
+INSERT INTO CustomerCareFact VALUES (465, 40, 5, 22, 'Email', 4.26, 2);
+INSERT INTO CustomerCareFact VALUES (466, 164, 8, 37, 'In-Person', 2.46, 56);
+INSERT INTO CustomerCareFact VALUES (467, 32, 1, 39, 'Email', 2.82, 37);
+INSERT INTO CustomerCareFact VALUES (468, 237, 9, 37, 'Call', 1.38, 39);
+INSERT INTO CustomerCareFact VALUES (469, 355, 3, 43, 'In-Person', 4.90, 49);
+INSERT INTO CustomerCareFact VALUES (470, 311, 10, 37, 'In-Person', 2.69, 59);
+INSERT INTO CustomerCareFact VALUES (471, 24, 7, 7, 'Call', 3.34, 11);
+INSERT INTO CustomerCareFact VALUES (472, 132, 2, 43, 'In-Person', 2.96, 42);
+INSERT INTO CustomerCareFact VALUES (473, 316, 9, 40, 'In-Person', 1.80, 34);
+INSERT INTO CustomerCareFact VALUES (474, 134, 2, 28, 'Call', 2.87, 7);
+INSERT INTO CustomerCareFact VALUES (475, 34, 2, 14, 'In-Person', 2.27, 22);
+INSERT INTO CustomerCareFact VALUES (476, 286, 4, 25, 'Chat', 3.17, 49);
+INSERT INTO CustomerCareFact VALUES (477, 5, 7, 22, 'Call', 1.32, 22);
+INSERT INTO CustomerCareFact VALUES (478, 73, 8, 22, 'Email', 1.22, 15);
+INSERT INTO CustomerCareFact VALUES (479, 166, 7, 21, 'Email', 2.58, 9);
 
-
-INSERT INTO CustomerCareFact VALUES (401, 1, 5, 22, 'Call', 3.80, 8);
-INSERT INTO CustomerCareFact VALUES (402, 18, 3, 44, 'Email', 3.49, 4);
-INSERT INTO CustomerCareFact VALUES (403, 24, 2, 32, 'Chat', 3.32, 32);
-INSERT INTO CustomerCareFact VALUES (404, 18, 10, 45, 'Call', 2.37, 46);
-INSERT INTO CustomerCareFact VALUES (405, 19, 7, 4, 'In-Person', 1.27, 3);
-INSERT INTO CustomerCareFact VALUES (406, 1, 7, 29, 'Chat', 2.98, 60);
-INSERT INTO CustomerCareFact VALUES (407, 1, 2, 31, 'In-Person', 3.65, 35);
-INSERT INTO CustomerCareFact VALUES (408, 21, 3, 18, 'Call', 4.61, 56);
-INSERT INTO CustomerCareFact VALUES (409, 24, 7, 45, 'Chat', 2.98, 15);
-INSERT INTO CustomerCareFact VALUES (410, 24, 7, 25, 'In-Person', 2.14, 14);
-INSERT INTO CustomerCareFact VALUES (411, 25, 10, 1, 'Chat', 1.63, 33);
-INSERT INTO CustomerCareFact VALUES (412, 11, 2, 42, 'Email', 3.80, 4);
-INSERT INTO CustomerCareFact VALUES (413, 4, 7, 45, 'Email', 4.31, 29);
-INSERT INTO CustomerCareFact VALUES (414, 29, 10, 43, 'In-Person', 1.54, 21);
-INSERT INTO CustomerCareFact VALUES (415, 12, 2, 4, 'Chat', 3.95, 53);
-INSERT INTO CustomerCareFact VALUES (416, 1, 6, 43, 'Chat', 4.96, 54);
-INSERT INTO CustomerCareFact VALUES (417, 17, 6, 49, 'In-Person', 4.29, 28);
-INSERT INTO CustomerCareFact VALUES (418, 27, 4, 34, 'Call', 1.51, 3);
-INSERT INTO CustomerCareFact VALUES (419, 24, 3, 29, 'In-Person', 4.30, 49);
-INSERT INTO CustomerCareFact VALUES (420, 19, 2, 47, 'Chat', 2.00, 52);
-INSERT INTO CustomerCareFact VALUES (421, 25, 5, 28, 'Email', 2.88, 26);
-INSERT INTO CustomerCareFact VALUES (422, 16, 8, 13, 'Chat', 4.53, 17);
-INSERT INTO CustomerCareFact VALUES (423, 30, 1, 15, 'Call', 3.24, 55);
-INSERT INTO CustomerCareFact VALUES (424, 11, 5, 18, 'Email', 4.77, 10);
-INSERT INTO CustomerCareFact VALUES (425, 23, 5, 29, 'Call', 4.50, 19);
-INSERT INTO CustomerCareFact VALUES (426, 7, 7, 6, 'In-Person', 3.85, 54);
-INSERT INTO CustomerCareFact VALUES (427, 18, 10, 45, 'Call', 2.47, 43);
-INSERT INTO CustomerCareFact VALUES (428, 19, 8, 49, 'Call', 2.20, 56);
-INSERT INTO CustomerCareFact VALUES (429, 27, 4, 17, 'In-Person', 1.33, 30);
-INSERT INTO CustomerCareFact VALUES (430, 30, 5, 7, 'In-Person', 1.71, 29);
-INSERT INTO CustomerCareFact VALUES (431, 7, 7, 38, 'Email', 2.22, 17);
-INSERT INTO CustomerCareFact VALUES (432, 8, 2, 7, 'Call', 4.71, 42);
-INSERT INTO CustomerCareFact VALUES (433, 26, 9, 31, 'In-Person', 4.37, 55);
-INSERT INTO CustomerCareFact VALUES (434, 9, 7, 14, 'Email', 2.55, 10);
-INSERT INTO CustomerCareFact VALUES (435, 1, 8, 50, 'Chat', 2.37, 55);
-INSERT INTO CustomerCareFact VALUES (436, 8, 4, 42, 'Call', 3.67, 17);
-INSERT INTO CustomerCareFact VALUES (437, 11, 5, 39, 'Email', 3.35, 7);
-INSERT INTO CustomerCareFact VALUES (438, 12, 4, 16, 'Call', 3.81, 21);
-INSERT INTO CustomerCareFact VALUES (439, 17, 5, 9, 'Chat', 4.53, 23);
-INSERT INTO CustomerCareFact VALUES (440, 17, 3, 6, 'Call', 4.56, 58);
-INSERT INTO CustomerCareFact VALUES (441, 13, 2, 18, 'Email', 2.43, 12);
-INSERT INTO CustomerCareFact VALUES (442, 12, 4, 17, 'Email', 1.12, 56);
-INSERT INTO CustomerCareFact VALUES (443, 3, 5, 31, 'Email', 4.60, 16);
-INSERT INTO CustomerCareFact VALUES (444, 14, 10, 14, 'In-Person', 1.35, 51);
-INSERT INTO CustomerCareFact VALUES (445, 13, 9, 9, 'In-Person', 1.18, 33);
-INSERT INTO CustomerCareFact VALUES (446, 3, 1, 44, 'In-Person', 4.58, 37);
-INSERT INTO CustomerCareFact VALUES (447, 22, 7, 26, 'Email', 3.15, 20);
-INSERT INTO CustomerCareFact VALUES (448, 2, 7, 14, 'Call', 2.57, 10);
-INSERT INTO CustomerCareFact VALUES (449, 4, 4, 8, 'In-Person', 3.41, 17);
-INSERT INTO CustomerCareFact VALUES (450, 23, 10, 7, 'Chat', 3.53, 14);
-INSERT INTO CustomerCareFact VALUES (451, 23, 4, 2, 'Call', 4.34, 5);
-INSERT INTO CustomerCareFact VALUES (452, 28, 5, 30, 'Call', 4.23, 10);
-INSERT INTO CustomerCareFact VALUES (453, 7, 8, 36, 'In-Person', 2.55, 30);
-INSERT INTO CustomerCareFact VALUES (454, 11, 3, 2, 'Email', 2.28, 10);
-INSERT INTO CustomerCareFact VALUES (455, 13, 8, 34, 'Call', 3.88, 13);
-INSERT INTO CustomerCareFact VALUES (456, 1, 9, 38, 'In-Person', 2.64, 18);
-INSERT INTO CustomerCareFact VALUES (457, 3, 7, 35, 'In-Person', 3.81, 8);
-INSERT INTO CustomerCareFact VALUES (458, 26, 4, 9, 'Email', 4.06, 15);
-INSERT INTO CustomerCareFact VALUES (459, 18, 4, 8, 'Email', 4.92, 52);
-INSERT INTO CustomerCareFact VALUES (460, 29, 7, 25, 'Call', 4.32, 12);
-INSERT INTO CustomerCareFact VALUES (461, 3, 2, 47, 'Chat', 1.81, 2);
-INSERT INTO CustomerCareFact VALUES (462, 8, 10, 38, 'Email', 1.07, 7);
-INSERT INTO CustomerCareFact VALUES (463, 29, 5, 40, 'Email', 4.66, 43);
-INSERT INTO CustomerCareFact VALUES (464, 5, 7, 42, 'Chat', 1.68, 60);
-INSERT INTO CustomerCareFact VALUES (465, 11, 5, 22, 'Email', 4.26, 2);
-INSERT INTO CustomerCareFact VALUES (466, 16, 8, 37, 'In-Person', 2.46, 56);
-INSERT INTO CustomerCareFact VALUES (467, 11, 1, 39, 'Email', 2.82, 37);
-INSERT INTO CustomerCareFact VALUES (468, 27, 9, 37, 'Call', 1.38, 39);
-INSERT INTO CustomerCareFact VALUES (469, 18, 3, 43, 'In-Person', 4.90, 49);
-INSERT INTO CustomerCareFact VALUES (470, 17, 10, 37, 'In-Person', 2.69, 59);
-INSERT INTO CustomerCareFact VALUES (471, 10, 7, 7, 'Call', 3.34, 11);
-INSERT INTO CustomerCareFact VALUES (472, 4, 2, 43, 'In-Person', 2.96, 42);
-INSERT INTO CustomerCareFact VALUES (473, 9, 9, 40, 'In-Person', 1.80, 34);
-INSERT INTO CustomerCareFact VALUES (474, 29, 2, 28, 'Call', 2.87, 7);
-INSERT INTO CustomerCareFact VALUES (475, 28, 2, 14, 'In-Person', 2.27, 22);
-INSERT INTO CustomerCareFact VALUES (476, 18, 4, 25, 'Chat', 3.17, 49);
-INSERT INTO CustomerCareFact VALUES (477, 1, 7, 22, 'Call', 1.32, 22);
-INSERT INTO CustomerCareFact VALUES (478, 28, 8, 22, 'Email', 1.22, 15);
-INSERT INTO CustomerCareFact VALUES (479, 23, 7, 21, 'Email', 2.58, 9);
-
-INSERT INTO CustomerCareFact VALUES (480, 13, 9, 4, 'Email', 4.79, 42);
-INSERT INTO CustomerCareFact VALUES (481, 11, 1, 39, 'Call', 4.70, 21);
-INSERT INTO CustomerCareFact VALUES (482, 1, 3, 15, 'In-Person', 3.58, 16);
-INSERT INTO CustomerCareFact VALUES (483, 26, 4, 31, 'In-Person', 2.83, 36);
-INSERT INTO CustomerCareFact VALUES (484, 14, 6, 28, 'Chat', 1.06, 30);
+INSERT INTO CustomerCareFact VALUES (480, 348, 9, 4, 'Email', 4.79, 42);
+INSERT INTO CustomerCareFact VALUES (481, 283, 1, 39, 'Call', 4.70, 21);
+INSERT INTO CustomerCareFact VALUES (482, 206, 3, 15, 'In-Person', 3.58, 16);
+INSERT INTO CustomerCareFact VALUES (483, 174, 4, 31, 'In-Person', 2.83, 36);
+INSERT INTO CustomerCareFact VALUES (484, 133, 6, 28, 'Chat', 1.06, 30);
 INSERT INTO CustomerCareFact VALUES (485, 19, 8, 22, 'In-Person', 2.77, 58);
-INSERT INTO CustomerCareFact VALUES (486, 1, 9, 3, 'Email', 2.81, 35);
-INSERT INTO CustomerCareFact VALUES (487, 19, 5, 14, 'Call', 4.49, 39);
-INSERT INTO CustomerCareFact VALUES (488, 28, 1, 38, 'Chat', 4.01, 20);
-INSERT INTO CustomerCareFact VALUES (489, 9, 8, 22, 'Chat', 4.07, 41);
-INSERT INTO CustomerCareFact VALUES (490, 20, 10, 22, 'Call', 1.90, 9);
-INSERT INTO CustomerCareFact VALUES (491, 1, 10, 5, 'In-Person', 2.26, 47);
-INSERT INTO CustomerCareFact VALUES (492, 7, 8, 8, 'Email', 2.28, 55);
-INSERT INTO CustomerCareFact VALUES (493, 8, 6, 25, 'Call', 4.11, 7);
-INSERT INTO CustomerCareFact VALUES (494, 3, 3, 39, 'Email', 4.20, 25);
-INSERT INTO CustomerCareFact VALUES (495, 20, 6, 6, 'Chat', 1.08, 13);
-INSERT INTO CustomerCareFact VALUES (496, 17, 6, 22, 'Chat', 1.71, 20);
-INSERT INTO CustomerCareFact VALUES (497, 21, 2, 10, 'Call', 1.61, 21);
-INSERT INTO CustomerCareFact VALUES (498, 6, 6, 22, 'In-Person', 1.76, 35);
-INSERT INTO CustomerCareFact VALUES (499, 4, 5, 39, 'Chat', 4.99, 41);
-INSERT INTO CustomerCareFact VALUES (500, 9, 2, 5, 'Call', 4.55, 16);
+INSERT INTO CustomerCareFact VALUES (486, 262, 9, 3, 'Email', 2.81, 35);
+INSERT INTO CustomerCareFact VALUES (487, 31, 5, 14, 'Call', 4.49, 39);
+INSERT INTO CustomerCareFact VALUES (488, 222, 1, 38, 'Chat', 4.01, 20);
+INSERT INTO CustomerCareFact VALUES (489, 332, 8, 22, 'Chat', 4.07, 41);
+INSERT INTO CustomerCareFact VALUES (490, 99, 10, 22, 'Call', 1.90, 9);
+INSERT INTO CustomerCareFact VALUES (491, 210, 10, 5, 'In-Person', 2.26, 47);
+INSERT INTO CustomerCareFact VALUES (492, 250, 8, 8, 'Email', 2.28, 55);
+INSERT INTO CustomerCareFact VALUES (493, 3, 6, 25, 'Call', 4.11, 7);
+INSERT INTO CustomerCareFact VALUES (494, 193, 3, 39, 'Email', 4.20, 25);
+INSERT INTO CustomerCareFact VALUES (495, 325, 6, 6, 'Chat', 1.08, 13);
+INSERT INTO CustomerCareFact VALUES (496, 361, 6, 22, 'Chat', 1.71, 20);
+INSERT INTO CustomerCareFact VALUES (497, 301, 2, 10, 'Call', 1.61, 21);
+INSERT INTO CustomerCareFact VALUES (498, 73, 6, 22, 'In-Person', 1.76, 35);
+INSERT INTO CustomerCareFact VALUES (499, 250, 5, 39, 'Chat', 4.99, 41);
+INSERT INTO CustomerCareFact VALUES (500, 342, 2, 5, 'Call', 4.55, 16);
