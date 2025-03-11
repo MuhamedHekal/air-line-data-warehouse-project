@@ -15,8 +15,3 @@ GRANT CREATE MATERIALIZED VIEW,
 ALTER USER airline QUOTA UNLIMITED ON USERS;
 
 --drop user airline CASCADE;
-
-
-
-
--- select * from USER$ where name = 'airline';
