@@ -801,6 +801,7 @@ INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, 
 INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
 (200, 2024, 2, 6, 0, 3, 155, 23, 1);
 commit ;
+
 INSERT INTO CustomerCareFact (customer_id, date_id, feedback_id, employee_id, interaction_type, satisfaction_rate, duration)
 VALUES (1, 24, 5, 40, 'Chat', 4.51, 27);
 
@@ -1085,7 +1086,6 @@ INSERT INTO CustomerCareFact VALUES (129, 27, 3, 49, 'Chat', 1.69, 41);
 INSERT INTO CustomerCareFact VALUES (130, 1, 2, 47, 'In-Person', 4.41, 38);
 
 commit;
-INSERT INTO CustomerCareFact VALUES (130, 1, 2, 47, 'In-Person', 4.41, 38);
 INSERT INTO CustomerCareFact VALUES (131, 1, 7, 33, 'Call', 1.16, 52);
 INSERT INTO CustomerCareFact VALUES (132, 7, 2, 24, 'Call', 4.63, 59);
 INSERT INTO CustomerCareFact VALUES (133, 10, 8, 10, 'Email', 3.22, 1);
@@ -1462,4 +1462,3 @@ INSERT INTO CustomerCareFact VALUES (497, 21, 2, 10, 'Call', 1.61, 21);
 INSERT INTO CustomerCareFact VALUES (498, 6, 6, 22, 'In-Person', 1.76, 35);
 INSERT INTO CustomerCareFact VALUES (499, 4, 5, 39, 'Chat', 4.99, 41);
 INSERT INTO CustomerCareFact VALUES (500, 9, 2, 5, 'Call', 4.55, 16);
-

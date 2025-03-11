@@ -34,7 +34,10 @@ CREATE TABLE CustomerCareFact (
     interaction_type VARCHAR2(50),
     satisfaction_rate NUMBER(5,2),
     duration NUMBER,
+    PRIMARY KEY (customer_id, date_id, feedback_id, employee_id), 
     FOREIGN KEY (date_id) REFERENCES date_dim(date_id),
     FOREIGN KEY (feedback_id) REFERENCES feedback_dim(feedback_id),
     FOREIGN KEY (employee_id) REFERENCES employee_dim(employee_id)
 );
+
+drop table CustomerCareFact
