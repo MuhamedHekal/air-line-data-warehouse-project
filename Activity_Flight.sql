@@ -174,51 +174,48 @@ INSERT ALL
 SELECT * FROM dual;
 
 COMMIT;
-
 --------------------------------------------------------------------------
 
--- Create class_services_dim table
+-- Create class_services_dim table with updated class_change_indicator values
 CREATE TABLE class_services_dim (
     class_of_services_id NUMBER PRIMARY KEY,
     class_purchased VARCHAR2(50),
     class_flown VARCHAR2(50),
-    passenger_gender VARCHAR2(10),
-    class_change_indicator VARCHAR2(1)
+    class_change_indicator VARCHAR2(20)
 );
 
-
-
+-- Insert data with "Upgrade", "Downgrade", or "No Change"
 INSERT ALL
-    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, passenger_gender, class_change_indicator) VALUES (1, 'Economy', 'Economy', 'Male', 'N')
-    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, passenger_gender, class_change_indicator) VALUES (2, 'Business', 'Business', 'Female', 'N')
-    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, passenger_gender, class_change_indicator) VALUES (3, 'First Class', 'First Class', 'Male', 'N')
-    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, passenger_gender, class_change_indicator) VALUES (4, 'Economy', 'Business', 'Female', 'Y')
-    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, passenger_gender, class_change_indicator) VALUES (5, 'Business', 'First Class', 'Male', 'Y')
-    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, passenger_gender, class_change_indicator) VALUES (6, 'Economy', 'Economy', 'Female', 'N')
-    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, passenger_gender, class_change_indicator) VALUES (7, 'Economy', 'Economy', 'Male', 'N')
-    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, passenger_gender, class_change_indicator) VALUES (8, 'Business', 'Business', 'Female', 'N')
-    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, passenger_gender, class_change_indicator) VALUES (9, 'First Class', 'First Class', 'Male', 'N')
-    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, passenger_gender, class_change_indicator) VALUES (10, 'Economy', 'Business', 'Female', 'Y')
-    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, passenger_gender, class_change_indicator) VALUES (11, 'Business', 'First Class', 'Male', 'Y')
-    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, passenger_gender, class_change_indicator) VALUES (12, 'Economy', 'Economy', 'Female', 'N')
-    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, passenger_gender, class_change_indicator) VALUES (13, 'Economy', 'Economy', 'Male', 'N')
-    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, passenger_gender, class_change_indicator) VALUES (14, 'Business', 'Business', 'Female', 'N')
-    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, passenger_gender, class_change_indicator) VALUES (15, 'First Class', 'First Class', 'Male', 'N')
-    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, passenger_gender, class_change_indicator) VALUES (16, 'Economy', 'Business', 'Female', 'Y')
-    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, passenger_gender, class_change_indicator) VALUES (17, 'Business', 'First Class', 'Male', 'Y')
-    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, passenger_gender, class_change_indicator) VALUES (18, 'Economy', 'Economy', 'Female', 'N')
-    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, passenger_gender, class_change_indicator) VALUES (19, 'Economy', 'Economy', 'Male', 'N')
-    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, passenger_gender, class_change_indicator) VALUES (20, 'Business', 'Business', 'Female', 'N')
-    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, passenger_gender, class_change_indicator) VALUES (21, 'First Class', 'First Class', 'Male', 'N')
-    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, passenger_gender, class_change_indicator) VALUES (22, 'Economy', 'Business', 'Female', 'Y')
-    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, passenger_gender, class_change_indicator) VALUES (23, 'Business', 'First Class', 'Male', 'Y')
-    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, passenger_gender, class_change_indicator) VALUES (24, 'Economy', 'Economy', 'Female', 'N')
-    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, passenger_gender, class_change_indicator) VALUES (25, 'Economy', 'Economy', 'Male', 'N')
-    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, passenger_gender, class_change_indicator) VALUES (26, 'Business', 'Business', 'Female', 'N')
-    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, passenger_gender, class_change_indicator) VALUES (27, 'First Class', 'First Class', 'Male', 'N')
-    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, passenger_gender, class_change_indicator) VALUES (28, 'Economy', 'Business', 'Female', 'Y')
-    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, passenger_gender, class_change_indicator) VALUES (29, 'Business', 'First Class', 'Male', 'Y')
-    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, passenger_gender, class_change_indicator) VALUES (30, 'Economy', 'Economy', 'Female', 'N')
+    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (1, 'Economy', 'Economy', 'No Change')
+    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (2, 'Business', 'Business', 'No Change')
+    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (3, 'First Class', 'First Class', 'No Change')
+    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (4, 'Economy', 'Business', 'Upgrade')
+    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (5, 'Business', 'First Class', 'Upgrade')
+    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (6, 'Business', 'Economy', 'Downgrade')
+    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (7, 'First Class', 'Business', 'Downgrade')
+    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (8, 'Economy', 'Economy', 'No Change')
+    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (9, 'Business', 'Business', 'No Change')
+    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (10, 'Economy', 'Business', 'Upgrade')
+    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (11, 'Business', 'First Class', 'Upgrade')
+    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (12, 'Economy', 'Economy', 'No Change')
+    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (13, 'Economy', 'Economy', 'No Change')
+    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (14, 'Business', 'Business', 'No Change')
+    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (15, 'First Class', 'First Class', 'No Change')
+    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (16, 'Economy', 'Business', 'Upgrade')
+    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (17, 'Business', 'First Class', 'Upgrade')
+    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (18, 'Economy', 'Economy', 'No Change')
+    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (19, 'Business', 'Economy', 'Downgrade')
+    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (20, 'First Class', 'Business', 'Downgrade')
+    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (21, 'Economy', 'Business', 'Upgrade')
+    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (22, 'Business', 'First Class', 'Upgrade')
+    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (23, 'Economy', 'Economy', 'No Change')
+    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (24, 'Economy', 'Economy', 'No Change')
+    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (25, 'Business', 'Business', 'No Change')
+    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (26, 'First Class', 'First Class', 'No Change')
+    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (27, 'Economy', 'Business', 'Upgrade')
+    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (28, 'Business', 'First Class', 'Upgrade')
+    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (29, 'Economy', 'Economy', 'No Change')
+    INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (30, 'First Class', 'Business', 'Downgrade')
 SELECT * FROM dual;
 
 COMMIT;
