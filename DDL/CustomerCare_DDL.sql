@@ -6,7 +6,8 @@ CREATE TABLE feedback_dim (
 
 
 CREATE TABLE employee_dim (
-    employee_id NUMBER PRIMARY KEY, 
+    sk_employee_id NUMBER PRIMARY KEY,
+    employee_id NUMBER,           
     employee_name VARCHAR2(35),
     employee_dateOfBirth DATE,
     employee_gender VARCHAR2(10),

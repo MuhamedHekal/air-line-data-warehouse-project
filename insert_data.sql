@@ -134,111 +134,30 @@ INSERT INTO feedback_dim (feedback_id, type, description) VALUES (99, 'Negative'
 INSERT INTO feedback_dim (feedback_id, type, description) VALUES (100, 'Positive', 'The airline made up for the delay by offering a meal voucher.');
 
 commit;
-select * from feedback_dim;
 
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (16, 'Yasmin Salah', TO_DATE('1989-02-07', 'YYYY-MM-DD'), 'Male', 'Mansoura, Egypt', '01234567895', 5116);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (17, 'Ali Reda', TO_DATE('1980-06-07', 'YYYY-MM-DD'), 'Male', 'Tanta, Egypt', '01234567896', 13796);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (18, 'Salma Hany', TO_DATE('1985-09-07', 'YYYY-MM-DD'), 'Female', 'Suez, Egypt', '01234567897', 6773);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (19, 'Sherif Atef', TO_DATE('1981-01-25', 'YYYY-MM-DD'), 'Male', 'Ismailia, Egypt', '01234567898', 18754);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (20, 'Nada Hamdy', TO_DATE('1984-11-15', 'YYYY-MM-DD'), 'Male', 'Port Said, Egypt', '01234567899', 14103);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (21, 'Khaled Osama', TO_DATE('1982-02-27', 'YYYY-MM-DD'), 'Female', 'Cairo, Egypt', '01234567890', 15385);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (22, 'Marwa Anwar', TO_DATE('1987-07-07', 'YYYY-MM-DD'), 'Male', 'Giza, Egypt', '01234567891', 17652);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (23, 'Ramy Bassem', TO_DATE('1984-10-01', 'YYYY-MM-DD'), 'Male', 'Alexandria, Egypt', '01234567892', 7836);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (24, 'Samar Adel', TO_DATE('1987-01-28', 'YYYY-MM-DD'), 'Male', 'Aswan, Egypt', '01234567893', 12383);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (25, 'Mohamed Tarek', TO_DATE('1985-07-11', 'YYYY-MM-DD'), 'Female', 'Luxor, Egypt', '01234567894', 11290);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (26, 'Farida Khalil', TO_DATE('1986-11-25', 'YYYY-MM-DD'), 'Female', 'Mansoura, Egypt', '01234567895', 9630);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (27, 'Mostafa Ahmed', TO_DATE('1986-12-11', 'YYYY-MM-DD'), 'Male', 'Tanta, Egypt', '01234567896', 10154);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (28, 'Hana Sameh', TO_DATE('1985-01-03', 'YYYY-MM-DD'), 'Male', 'Suez, Egypt', '01234567897', 17578);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (29, 'Amr Medhat', TO_DATE('1985-02-15', 'YYYY-MM-DD'), 'Male', 'Ismailia, Egypt', '01234567898', 15649);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (30, 'Lina Sherif', TO_DATE('1982-06-26', 'YYYY-MM-DD'), 'Male', 'Port Said, Egypt', '01234567899', 5098);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (31, 'Ayman Hossam', TO_DATE('1981-05-01', 'YYYY-MM-DD'), 'Female', 'Cairo, Egypt', '01234567890', 12124);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (32, 'Lamis Younis', TO_DATE('1987-09-25', 'YYYY-MM-DD'), 'Male', 'Giza, Egypt', '01234567891', 5440);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (33, 'Ehab Adel', TO_DATE('1983-04-15', 'YYYY-MM-DD'), 'Male', 'Alexandria, Egypt', '01234567892', 19879);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (34, 'Nadine Tamer', TO_DATE('1987-01-19', 'YYYY-MM-DD'), 'Female', 'Aswan, Egypt', '01234567893', 5288);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (35, 'Hany Emad', TO_DATE('1980-11-08', 'YYYY-MM-DD'), 'Female', 'Luxor, Egypt', '01234567894', 13624);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (36, 'Doaa Mohamed', TO_DATE('1988-06-12', 'YYYY-MM-DD'), 'Male', 'Mansoura, Egypt', '01234567895', 7918);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (37, 'Bassem Fady', TO_DATE('1988-10-22', 'YYYY-MM-DD'), 'Male', 'Tanta, Egypt', '01234567896', 14479);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (38, 'Sahar Mostafa', TO_DATE('1980-09-04', 'YYYY-MM-DD'), 'Male', 'Suez, Egypt', '01234567897', 15960);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (39, 'Walid Magdy', TO_DATE('1982-06-07', 'YYYY-MM-DD'), 'Female', 'Ismailia, Egypt', '01234567898', 8705);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (40, 'Rasha Nabil', TO_DATE('1988-10-23', 'YYYY-MM-DD'), 'Female', 'Port Said, Egypt', '01234567899', 7966);
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (41, 'Fady Saeed', TO_DATE('1987-11-06', 'YYYY-MM-DD'), 'Female', 'Cairo, Egypt', '01234567890', 9576);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (42, 'Rania Salah', TO_DATE('1982-02-10', 'YYYY-MM-DD'), 'Female', 'Giza, Egypt', '01234567891', 14097);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (43, 'Tamer Mohsen', TO_DATE('1987-11-02', 'YYYY-MM-DD'), 'Female', 'Alexandria, Egypt', '01234567892', 6913);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (44, 'Bassem Fady', TO_DATE('1988-10-22', 'YYYY-MM-DD'), 'Male', 'Tanta, Egypt', '01234567896', 14479);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (45, 'Sahar Mostafa', TO_DATE('1980-09-04', 'YYYY-MM-DD'), 'Male', 'Suez, Egypt', '01234567897', 15960);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (46, 'Walid Magdy', TO_DATE('1982-06-07', 'YYYY-MM-DD'), 'Female', 'Ismailia, Egypt', '01234567898', 8705);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (47, 'Rasha Nabil', TO_DATE('1988-10-23', 'YYYY-MM-DD'), 'Female', 'Port Said, Egypt', '01234567899', 7966);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (48, 'Fady Saeed', TO_DATE('1987-11-06', 'YYYY-MM-DD'), 'Female', 'Cairo, Egypt', '01234567890', 9576);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (49, 'Rania Salah', TO_DATE('1982-02-10', 'YYYY-MM-DD'), 'Female', 'Giza, Egypt', '01234567891', 14097);
-
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
-VALUES (50, 'Tamer Mohsen', TO_DATE('1987-11-02', 'YYYY-MM-DD'), 'Female', 'Alexandria, Egypt', '01234567892', 6913);
+INSERT INTO employee_dim VALUES (1, 1, 'Ahmed Hassan', TO_DATE('1986-04-28', 'YYYY-MM-DD'), 'Male', 'Cairo, Egypt', '01234567890', 12105, TO_DATE('2023-01-01', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (2, 2, 'Mona Ali', TO_DATE('1984-06-04', 'YYYY-MM-DD'), 'Female', 'Giza, Egypt', '01234567891', 12521, TO_DATE('2023-01-01', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (3, 3, 'Youssef Mohamed', TO_DATE('1987-05-17', 'YYYY-MM-DD'), 'Male', 'Alexandria, Egypt', '01234567892', 15550, TO_DATE('2023-01-01', 'YYYY-MM-DD'), TO_DATE('2024-03-15', 'YYYY-MM-DD'), 'N');
+INSERT INTO employee_dim VALUES (4, 3, 'Youssef Mohamed', TO_DATE('1987-05-17', 'YYYY-MM-DD'), 'Male', 'New Cairo, Egypt', '01234567892', 15550, TO_DATE('2024-03-16', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (5, 4, 'Sara Ibrahim', TO_DATE('1987-06-12', 'YYYY-MM-DD'), 'Female', 'Aswan, Egypt', '01234567893', 17595, TO_DATE('2023-01-01', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (6, 5, 'Omar Khaled', TO_DATE('1987-11-16', 'YYYY-MM-DD'), 'Male', 'Luxor, Egypt', '01234567894', 9824, TO_DATE('2023-01-01', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (7, 6, 'Fatma Adel', TO_DATE('1990-08-24', 'YYYY-MM-DD'), 'Female', 'Mansoura, Egypt', '01234567895', 11030, TO_DATE('2023-01-01', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (8, 7, 'Tarek Mostafa', TO_DATE('1986-06-10', 'YYYY-MM-DD'), 'Male', 'Suez, Egypt', '01234567896', 10800, TO_DATE('2023-01-01', 'YYYY-MM-DD'), TO_DATE('2024-02-10', 'YYYY-MM-DD'), 'N');
+INSERT INTO employee_dim VALUES (9, 7, 'Tarek Mostafa', TO_DATE('1986-06-10', 'YYYY-MM-DD'), 'Male', 'Port Said, Egypt', '01234567896', 10800, TO_DATE('2024-02-11', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (10, 8, 'Nada Hossam', TO_DATE('1993-02-14', 'YYYY-MM-DD'), 'Female', 'Tanta, Egypt', '01234567897', 11800, TO_DATE('2023-01-01', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (11, 9, 'Ali Mahmoud', TO_DATE('1991-10-22', 'YYYY-MM-DD'), 'Male', 'Ismailia, Egypt', '01234567898', 9700, TO_DATE('2023-01-01', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (12, 10, 'Yasmin Salah', TO_DATE('1992-07-01', 'YYYY-MM-DD'), 'Female', 'Sharm El-Sheikh, Egypt', '01234567899', 13000, TO_DATE('2023-01-01', 'YYYY-MM-DD'), NULL, 'Y');
+UPDATE employee_dim SET end_date = TO_DATE('2024-01-05', 'YYYY-MM-DD'), is_current = 'N' WHERE employee_id = 15 AND is_current = 'Y';
+INSERT INTO employee_dim VALUES (13, 15, 'Mohamed Salah', TO_DATE('1984-09-10', 'YYYY-MM-DD'), 'Male', 'New Damietta, Egypt', '01234567904', 14000, TO_DATE('2024-01-06', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (14, 16, 'Ramy Saad', TO_DATE('1985-03-25', 'YYYY-MM-DD'), 'Male', 'Alexandria, Egypt', '01234567905', 10500, TO_DATE('2023-01-01', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (15, 17, 'Lina Ehab', TO_DATE('1990-12-30', 'YYYY-MM-DD'), 'Female', 'Fayoum, Egypt', '01234567906', 11200, TO_DATE('2023-01-01', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (16, 51, 'Amira Zaki', TO_DATE('1994-06-08', 'YYYY-MM-DD'), 'Female', 'Dahab, Egypt', '01234567951', 12500, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (17, 52, 'Hassan Ehab', TO_DATE('1992-01-20', 'YYYY-MM-DD'), 'Male', 'Cairo, Egypt', '01234567952', 13550, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (18, 53, 'Mariam Khaled', TO_DATE('1993-09-30', 'YYYY-MM-DD'), 'Female', 'Alexandria, Egypt', '01234567953', 12000, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (19, 54, 'Yousef Samir', TO_DATE('1991-03-25', 'YYYY-MM-DD'), 'Male', 'Giza, Egypt', '01234567954', 11000, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (20, 55, 'Khaled Tamer', TO_DATE('1989-07-18', 'YYYY-MM-DD'), 'Male', 'Tanta, Egypt', '01234567955', 13000, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (21, 56, 'Nour Hany', TO_DATE('1990-11-02', 'YYYY-MM-DD'), 'Female', 'Luxor, Egypt', '01234567956', 11850, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (22, 57, 'Sameh Adel', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
 
 COMMIT;
 
