@@ -18,7 +18,8 @@ CREATE TABLE airport_dim (
 
 -- Create customer_dim table
 CREATE TABLE customer_dim (
-    passenger_id NUMBER PRIMARY KEY,
+    sk_passenger_id NUMBER PRIMARY key,
+    passenger_id NUMBER ,
     passenger_name VARCHAR2(100),
     passenger_dateOfBirth DATE,
     passenger_gender VARCHAR2(10),
@@ -141,13 +142,13 @@ CREATE TABLE SegmentActivityFact (
     refund_amount NUMBER,
     date_id DATE,
     time_id TIMESTAMP,
-    CONSTRAINT fk_passenger FOREIGN KEY (passenger_id) REFERENCES customer_dim(passenger_id),
+    CONSTRAINT fk_passenger FOREIGN KEY (passenger_id) REFERENCES customer_dim(sk_passenger_id),
     CONSTRAINT fk_class_services FOREIGN KEY (class_services_id) REFERENCES class_services_dim(class_of_services_id),
-    CONSTRAINT fk_promotion1 FOREIGN KEY (promotion_id) REFERENCES promotion_dim(promotion_id),
+    CONSTRAINT fk_promotion_sgement FOREIGN KEY (promotion_id) REFERENCES promotion_dim(promotion_id),
     CONSTRAINT fk_status FOREIGN KEY (status_id) REFERENCES trip_status_dim(status_id),
     CONSTRAINT fk_flight FOREIGN KEY (flight_id) REFERENCES flight_dim(flight_id),
-    CONSTRAINT fk_origin_date2 FOREIGN KEY (date_id) REFERENCES date_dim(date_id),
-    CONSTRAINT fk_origin_time2 FOREIGN KEY (time_id) REFERENCES time_dim(time_id)
+    CONSTRAINT fk_origin_date_seg FOREIGN KEY (date_id) REFERENCES date_dim(date_id),
+    CONSTRAINT fk_origin_time_seg FOREIGN KEY (time_id) REFERENCES time_dim(time_id)
 );
 
 -- Create RevenueFact table
@@ -160,9 +161,9 @@ CREATE TABLE RevenueFact (
     revenue_type VARCHAR2(255),
     revenue_amount NUMBER(15,2),
     CONSTRAINT pk_revenue PRIMARY KEY (passenger_id, date_id, flight_id, revenue_type),
-    CONSTRAINT fk_promotion2 FOREIGN KEY (promotion_id) REFERENCES promotion_dim(promotion_id),
-    CONSTRAINT fk_booking_channel FOREIGN KEY (booking_channel_id) REFERENCES booking_channel_dim(channel_id),
-    CONSTRAINT fk_rev_passenger FOREIGN KEY (passenger_id) REFERENCES customer_dim(passenger_id),
+    CONSTRAINT fk_promotion_rev FOREIGN KEY (promotion_id) REFERENCES promotion_dim(promotion_id),
+    CONSTRAINT fk_booking_channel_rev FOREIGN KEY (booking_channel_id) REFERENCES booking_channel_dim(channel_id),
+    CONSTRAINT fk_rev_passenger FOREIGN KEY (passenger_id) REFERENCES customer_dim(sk_passenger_id),
     CONSTRAINT fk_rev_date FOREIGN KEY (date_id) REFERENCES date_dim(date_id),
     CONSTRAINT fk_rev_flight FOREIGN KEY (flight_id) REFERENCES flight_dim(flight_id)
 );
@@ -188,8 +189,8 @@ CREATE TABLE ProfitFact (
     expense_amount NUMBER(15,2),
     profit_amount NUMBER(15,2),
     CONSTRAINT pk_profit PRIMARY KEY (flight_id, date_id),
-    CONSTRAINT fk_promotion3 FOREIGN KEY (promotion_id) REFERENCES promotion_dim(promotion_id),
-    CONSTRAINT fk_booking_channel2 FOREIGN KEY (booking_channel_id) REFERENCES booking_channel_dim(channel_id),
+    CONSTRAINT fk_promotion FOREIGN KEY (promotion_id) REFERENCES promotion_dim(promotion_id),
+    CONSTRAINT fk_booking_channel FOREIGN KEY (booking_channel_id) REFERENCES booking_channel_dim(channel_id),
     CONSTRAINT fk_profit_flight FOREIGN KEY (flight_id) REFERENCES flight_dim(flight_id),
     CONSTRAINT fk_profit_date FOREIGN KEY (date_id) REFERENCES date_dim(date_id)
 );
@@ -204,7 +205,8 @@ CREATE TABLE CustomerCareFact (
     satisfaction_rate NUMBER(5,2),
     duration NUMBER,
     CONSTRAINT pk_customer_care PRIMARY KEY (customer_id, date_id, feedback_id, employee_id),
+    cONSTRAINT fk_customer_id FOREIGN KEY (customer_id) REFERENCES customer_dim(sk_passenger_id),
     CONSTRAINT fk_care_date FOREIGN KEY (date_id) REFERENCES date_dim(date_id),
     CONSTRAINT fk_care_feedback FOREIGN KEY (feedback_id) REFERENCES feedback_dim(feedback_id),
-    CONSTRAINT fk_care_employee FOREIGN KEY (employee_id) REFERENCES employee_dim(employee_id)
+    CONSTRAINT fk_care_employee FOREIGN KEY (employee_id) REFERENCES employee_dim(sk_employee_id)
 );
