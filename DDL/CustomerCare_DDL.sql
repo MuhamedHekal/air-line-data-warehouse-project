@@ -4,6 +4,7 @@ CREATE TABLE feedback_dim (
     description VARCHAR2(500)
 );
 
+
 CREATE TABLE employee_dim (
     sk_employee_id NUMBER PRIMARY KEY,
     employee_id NUMBER,           
@@ -17,7 +18,6 @@ CREATE TABLE employee_dim (
     end_date DATE,  
     is_current CHAR(1) DEFAULT 'Y' CHECK (is_current IN ('Y', 'N'))
 );
-
 
 CREATE TABLE date_dim (
     date_id NUMBER PRIMARY KEY,
@@ -42,7 +42,7 @@ CREATE TABLE CustomerCareFact (
     PRIMARY KEY (customer_id, date_id, feedback_id, employee_id), 
     FOREIGN KEY (date_id) REFERENCES date_dim(date_id),
     FOREIGN KEY (feedback_id) REFERENCES feedback_dim(feedback_id),
-    FOREIGN KEY (employee_id) REFERENCES employee_dim(sk_employee_id)
+    FOREIGN KEY (employee_id) REFERENCES employee_dim(employee_id)
 );
 
-
+drop table CustomerCareFact
