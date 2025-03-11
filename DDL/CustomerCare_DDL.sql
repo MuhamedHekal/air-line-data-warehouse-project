@@ -4,14 +4,18 @@ CREATE TABLE feedback_dim (
     description VARCHAR2(500)
 );
 
+
 CREATE TABLE employee_dim (
-    employee_id NUMBER PRIMARY KEY,
+    employee_id NUMBER PRIMARY KEY, 
     employee_name VARCHAR2(35),
     employee_dateOfBirth DATE,
     employee_gender VARCHAR2(10),
     employee_address VARCHAR2(100),
     employee_phone VARCHAR2(20),
-    salary NUMBER(10,2)
+    salary NUMBER(10,2),
+    start_date DATE DEFAULT SYSDATE,
+    end_date DATE,  
+    is_current CHAR(1) DEFAULT 'Y' CHECK (is_current IN ('Y', 'N'))
 );
 
 CREATE TABLE date_dim (
