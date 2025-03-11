@@ -50,8 +50,8 @@ CREATE TABLE ExpensesFact (
 CREATE TABLE ProfitFact (
     flight_id INT NOT NULL,
     date_id INT NOT NULL,
-    expenses_amount DECIMAL(15,2),
-    expense_amount DECIMAL(15,2), -- It seems like a duplicate field; please clarify if it's needed
+    revenue_amount DECIMAL(15,2),
+    expense_amount DECIMAL(15,2), 
     profit_amount DECIMAL(15,2),
     FOREIGN KEY (flight_id) REFERENCES flight_dim(flight_id),
     FOREIGN KEY (date_id) REFERENCES date_dim(date_id)
