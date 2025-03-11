@@ -1,367 +1,806 @@
-INSERT INTO feedback_dim (feedback_id, type, description) VALUES
-(1, 'Negative', 'Staff ignored my request for assistance'),
-(2, 'Neutral',  'it was ok'),
-(3, 'Negative', 'The check-in process took too long, causing unnecessary stress.'),
-(4, 'Negative', 'Flight attendants were not friendly at all'),
-(5, 'Neutral',  'I didnt feel anything special'),
-(6, 'Positive', 'I loved the hot towels and complimentary drinks in business class'),
-(7, 'Positive', 'The airline handled my special meal request perfectly.'),
-(8, 'Positive', 'Everything was smooth from check-in to landing'),
-(9, 'Positive', 'I can not compalin about anything'),
-(10, 'Positive', 'Nice experment'),
-(11, 'Negative', 'My flight was delayed for over 3 hours without any clear explanation.'),
-(12, 'Positive', 'The flight attendants were extremely polite and made the journey comfortable.'),
-(13, 'Negative', 'Lost my baggage, and customer service took too long to respond.'),
-(14, 'Positive', 'Smooth check-in process, and the flight was on time.'),
-(15, 'Negative', 'Seats were too cramped, making the long-haul flight very uncomfortable.'),
-(16, 'Positive', 'The in-flight entertainment had a great selection of movies and music.'),
-(17, 'Negative', 'The food quality was terrible and not worth the extra charge.'),
-(18, 'Positive', 'The pilot kept us informed throughout the flight, making us feel at ease.'),
-(19, 'Negative', 'Boarding was chaotic, with no clear instructions from the staff.'),
-(20, 'Positive', 'Fast and hassle-free baggage claim, which I really appreciated.'),
-(21, 'Negative', 'My flight was canceled last minute, and I struggled to get a refund.'),
-(22, 'Positive', 'Friendly staff and very comfortable seating. Will fly again!'),
-(23, 'Negative', 'Customer service was rude when I asked about my delayed flight.'),
-(24, 'Positive', 'I was upgraded to business class for free, which made my day!'),
-(25, 'Negative', 'There was no legroom at all; my knees were constantly pressed against the seat.'),
-(26, 'Positive', 'The check-in staff was helpful and assisted me with my overweight baggage.'),
-(27, 'Negative', 'The Wi-Fi on board was expensive and didn’t work properly.'),
-(28, 'Positive', 'Smooth takeoff and landing; the pilot did a great job.'),
-(29, 'Negative', 'No vegetarian meal option available on an international flight.'),
-(30, 'Positive', 'Loved the cleanliness of the aircraft and the modern interior.'),
-(31, 'Negative', 'I was charged an unexpected baggage fee at the last minute.'),
-(32, 'Positive', 'The airline app made it easy to check in and manage my flight details.'),
-(33, 'Negative', 'Staff ignored my request for assistance multiple times.'),
-(34, 'Positive', 'The business class experience was outstanding—worth the price.'),
-(35, 'Negative', 'Uncomfortable seats with barely any recline for a long-haul flight.'),
-(36, 'Positive', 'Boarding was organized and stress-free.'),
-(37, 'Negative', 'The air conditioning was too cold, and I couldn’t adjust it.'),
-(38, 'Positive', 'The crew made my child feel special with a small toy and extra attention.'),
-(39, 'Negative', 'Security check at the airline’s gate was unnecessarily slow.'),
-(40, 'Positive', 'The airline lounge was comfortable and had great food options.'),
-(41, 'Negative', 'My flight was overbooked, and I had to wait for the next one.'),
-(42, 'Positive', 'The airline provided compensation for my delayed flight.'),
-(43, 'Negative', 'There was a lack of communication about our flight delay.'),
-(44, 'Positive', 'The boarding process was quick, and my flight left on time.'),
-(45, 'Negative', 'The flight was extremely noisy, and the crew didn’t do anything about it.'),
-(46, 'Positive', 'The seats in economy were surprisingly spacious and comfortable.'),
-(47, 'Negative', 'The check-in counter was understaffed, causing long wait times.'),
-(48, 'Positive', 'Flight arrived 20 minutes ahead of schedule!'),
-(49, 'Negative', 'The pilot did not inform us about the turbulence in advance.'),
-(50, 'Positive', 'I loved the hot towels and complimentary drinks in business class.'),
-(51, 'Negative', 'No charging ports in economy class, making it hard to work.'),
-(52, 'Positive', 'Cabin crew was professional and attentive to all passengers.'),
-(53, 'Negative', 'The in-flight meal was stale and not worth the price.'),
-(54, 'Positive', 'Flight attendants were always smiling and willing to help.'),
-(55, 'Negative', 'The airline lost my baggage, and I had to wait days to get it back.'),
-(56, 'Positive', 'Seats were very clean and comfortable, even in economy class.'),
-(57, 'Negative', 'The check-in process took too long, causing unnecessary stress.'),
-(58, 'Positive', 'The free snacks and drinks were a nice touch.'),
-(59, 'Negative', 'Crew members seemed uninterested in helping passengers.'),
-(60, 'Positive', 'I was given extra legroom without asking—great service!'),
-(61, 'Negative', 'The flight was delayed multiple times with no updates.'),
-(62, 'Positive', 'Everything was smooth from check-in to landing!'),
-(63, 'Negative', 'The lavatories were unclean and had a bad odor.'),
-(64, 'Positive', 'Great value for money; I got more than I expected.'),
-(65, 'Negative', 'The boarding gate changed at the last minute, causing confusion.'),
-(66, 'Positive', 'I enjoyed the free in-flight Wi-Fi service.'),
-(67, 'Negative', 'They ran out of my preferred meal option before they reached my seat.'),
-(68, 'Positive', 'The flight had plenty of storage space for carry-on bags.'),
-(69, 'Negative', 'The baggage claim process took way too long.'),
-(70, 'Positive', 'The airline handled my special meal request perfectly.'),
-(71, 'Negative', 'My seat was broken, and I had to sit uncomfortably the entire flight.'),
-(72, 'Positive', 'The customer support team was quick to respond to my queries.'),
-(73, 'Negative', 'The plane was old and looked poorly maintained.'),
-(74, 'Positive', 'A very smooth journey with excellent customer service.'),
-(75, 'Negative', 'The airport lounge was overcrowded and lacked seating.'),
-(76, 'Positive', 'The free upgrade to premium economy was a pleasant surprise.'),
-(77, 'Negative', 'Flight attendants were not friendly at all.'),
-(78, 'Positive', 'The airline offered great last-minute deals.'),
-(79, 'Negative', 'The flight kept getting delayed due to "technical issues."'),
-(80, 'Positive', 'I felt safe and comfortable throughout the entire flight.'),
-(81, 'Negative', 'Extra charges for choosing a seat were unreasonable.'),
-(82, 'Positive', 'The coffee served on board was actually quite good!'),
-(83, 'Negative', 'The plane was too noisy, making it hard to rest.'),
-(84, 'Positive', 'I received priority boarding as a frequent flyer—great perk!'),
-(85, 'Negative', 'They didn’t allow enough time for passengers to board.'),
-(86, 'Positive', 'The flight attendants made the journey enjoyable with their friendly attitude.'),
-(87, 'Negative', 'I was charged an unexpected fee at the check-in counter.'),
-(88, 'Positive', 'My flight experience was stress-free from start to finish.'),
-(89, 'Negative', 'Limited meal options for long-haul flights.'),
-(90, 'Positive', 'The aircraft was modern and well-maintained.'),
-(91, 'Negative', 'The crew forgot my meal order and didn’t apologize.'),
-(92, 'Positive', 'I appreciated the spacious legroom in premium economy.'),
-(93, 'Negative', 'Too many announcements throughout the flight.'),
-(94, 'Positive', 'I had a great flying experience with this airline.'),
-(95, 'Negative', 'I had to pay for water, which was ridiculous.'),
-(96, 'Positive', 'The staff went above and beyond to assist me.'),
-(97, 'Negative', 'No blankets were available on a cold overnight flight.'),
-(98, 'Positive', 'They surprised me with a birthday cake on my flight!'),
-(99, 'Negative', 'Overpriced tickets for the service provided.'),
-(100, 'Positive', 'The airline made up for the delay by offering a meal voucher.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (1, 'Negative', 'Staff ignored my request for assistance');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (2, 'Neutral', 'it was ok');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (3, 'Negative', 'The check-in process took too long, causing unnecessary stress.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (4, 'Negative', 'Flight attendants were not friendly at all');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (5, 'Neutral', 'I didnt feel anything special');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (6, 'Positive', 'I loved the hot towels and complimentary drinks in business class');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (7, 'Positive', 'The airline handled my special meal request perfectly.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (8, 'Positive', 'Everything was smooth from check-in to landing');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (9, 'Positive', 'I can not complain about anything');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (10, 'Positive', 'Nice experiment');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (11, 'Negative', 'My flight was delayed for over 3 hours without any clear explanation.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (12, 'Positive', 'The flight attendants were extremely polite and made the journey comfortable.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (13, 'Negative', 'Lost my baggage, and customer service took too long to respond.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (14, 'Positive', 'Smooth check-in process, and the flight was on time.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (15, 'Negative', 'Seats were too cramped, making the long-haul flight very uncomfortable.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (16, 'Positive', 'The in-flight entertainment had a great selection of movies and music.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (17, 'Negative', 'The food quality was terrible and not worth the extra charge.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (18, 'Positive', 'The pilot kept us informed throughout the flight, making us feel at ease.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (19, 'Negative', 'Boarding was chaotic, with no clear instructions from the staff.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (20, 'Positive', 'Fast and hassle-free baggage claim, which I really appreciated.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (21, 'Negative', 'My flight was canceled last minute, and I struggled to get a refund.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (22, 'Positive', 'Friendly staff and very comfortable seating. Will fly again!');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (23, 'Negative', 'Customer service was rude when I asked about my delayed flight.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (24, 'Positive', 'I was upgraded to business class for free, which made my day!');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (25, 'Negative', 'There was no legroom at all; my knees were constantly pressed against the seat.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (26, 'Positive', 'The check-in staff was helpful and assisted me with my overweight baggage.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (27, 'Negative', 'The Wi-Fi on board was expensive and didnt work properly.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (28, 'Positive', 'Smooth takeoff and landing; the pilot did a great job.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (29, 'Negative', 'No vegetarian meal option available on an international flight.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (30, 'Positive', 'Loved the cleanliness of the aircraft and the modern interior.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (31, 'Negative', 'I was charged an unexpected baggage fee at the last minute.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (32, 'Positive', 'The airline app made it easy to check in and manage my flight details.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (33, 'Negative', 'Staff ignored my request for assistance multiple times.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (34, 'Positive', 'The business class experience was outstanding—worth the price.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (35, 'Negative', 'Uncomfortable seats with barely any recline for a long-haul flight.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (36, 'Positive', 'Boarding was organized and stress-free.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (37, 'Negative', 'The air conditioning was too cold, and I couldnt adjust it.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (38, 'Positive', 'The crew made my child feel special with a small toy and extra attention.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (39, 'Negative', 'Security check at the airlines gate was unnecessarily slow.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (40, 'Positive', 'The airline lounge was comfortable and had great food options.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (41, 'Negative', 'My flight was overbooked, and I had to wait for the next one.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (42, 'Positive', 'The airline provided compensation for my delayed flight.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (43, 'Negative', 'There was a lack of communication about our flight delay.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (44, 'Positive', 'The boarding process was quick, and my flight left on time.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (45, 'Negative', 'The flight was extremely noisy, and the crew didnt do anything about it.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (46, 'Positive', 'The seats in economy were surprisingly spacious and comfortable.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (47, 'Negative', 'The check-in counter was understaffed, causing long wait times.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (48, 'Positive', 'Flight arrived 20 minutes ahead of schedule!');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (49, 'Negative', 'The pilot did not inform us about the turbulence in advance.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (50, 'Positive', 'I loved the hot towels and complimentary drinks in business class.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (51, 'Negative', 'No charging ports in economy class, making it hard to work.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (52, 'Positive', 'Cabin crew was professional and attentive to all passengers.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (53, 'Negative', 'The in-flight meal was stale and not worth the price.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (54, 'Positive', 'Flight attendants were always smiling and willing to help.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (55, 'Negative', 'The airline lost my baggage, and I had to wait days to get it back.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (56, 'Positive', 'Seats were very clean and comfortable, even in economy class.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (57, 'Negative', 'The check-in process took too long, causing unnecessary stress.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (58, 'Positive', 'The free snacks and drinks were a nice touch.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (59, 'Negative', 'Crew members seemed uninterested in helping passengers.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (60, 'Positive', 'I was given extra legroom without asking—great service!');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (61, 'Negative', 'The flight was delayed multiple times with no updates.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (62, 'Positive', 'Everything was smooth from check-in to landing!');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (63, 'Negative', 'The lavatories were unclean and had a bad odor.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (64, 'Positive', 'Great value for money; I got more than I expected.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (65, 'Negative', 'The boarding gate changed at the last minute, causing confusion.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (66, 'Positive', 'I enjoyed the free in-flight Wi-Fi service.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (67, 'Negative', 'They ran out of my preferred meal option before they reached my seat.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (68, 'Positive', 'The flight had plenty of storage space for carry-on bags.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (69, 'Negative', 'The baggage claim process took way too long.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (70, 'Positive', 'The airline handled my special meal request perfectly.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (71, 'Negative', 'My seat was broken, and I had to sit uncomfortably the entire flight.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (72, 'Positive', 'The customer support team was quick to respond to my queries.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (73, 'Negative', 'The plane was old and looked poorly maintained.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (74, 'Positive', 'A very smooth journey with excellent customer service.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (75, 'Negative', 'The airport lounge was overcrowded and lacked seating.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (76, 'Positive', 'The free upgrade to premium economy was a pleasant surprise.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (77, 'Negative', 'Flight attendants were not friendly at all.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (78, 'Positive', 'The airline offered great last-minute deals.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (79, 'Negative', 'The flight kept getting delayed due to "technical issues."');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (80, 'Positive', 'I felt safe and comfortable throughout the entire flight.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (81, 'Negative', 'Extra charges for choosing a seat were unreasonable.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (82, 'Positive', 'The coffee served on board was actually quite good!');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (83, 'Negative', 'The plane was too noisy, making it hard to rest.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (84, 'Positive', 'I received priority boarding as a frequent flyer—great perk!');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (85, 'Negative', 'They didnt allow enough time for passengers to board.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (86, 'Positive', 'The flight attendants made the journey enjoyable with their friendly attitude.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (87, 'Negative', 'I was charged an unexpected fee at the check-in counter.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (88, 'Positive', 'My flight experience was stress-free from start to finish.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (89, 'Negative', 'Limited meal options for long-haul flights.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (90, 'Positive', 'The aircraft was modern and well-maintained.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (91, 'Negative', 'The crew forgot my meal order and didnt apologize.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (92, 'Positive', 'I appreciated the spacious legroom in premium economy.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (93, 'Negative', 'Too many announcements throughout the flight.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (94, 'Positive', 'I had a great flying experience with this airline.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (95, 'Negative', 'I had to pay for water, which was ridiculous.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (96, 'Positive', 'The staff went above and beyond to assist me.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (97, 'Negative', 'No blankets were available on a cold overnight flight.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (98, 'Positive', 'They surprised me with a birthday cake on my flight!');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (99, 'Negative', 'Overpriced tickets for the service provided.');
+INSERT INTO feedback_dim (feedback_id, type, description) VALUES (100, 'Positive', 'The airline made up for the delay by offering a meal voucher.');
 
+commit;
+select * from feedback_dim;
 
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (16, 'Yasmin Salah', TO_DATE('1989-02-07', 'YYYY-MM-DD'), 'Male', 'Mansoura, Egypt', '01234567895', 5116);
 
-INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth,
-employee_gender, employee_address, employee_phone, salary) 
-VALUES
-(1, 'Ahmed Hassan', TO_DATE('1986-04-28', 'YYYY-MM-DD'), 'Male', 'Cairo, Egypt', '01234567890', 12105),
-(2, 'Mona Ali', TO_DATE('1984-06-04', 'YYYY-MM-DD'), 'Male', 'Giza, Egypt', '01234567891', 12521),
-(3, 'Youssef Mohamed', TO_DATE('1987-05-17', 'YYYY-MM-DD'), 'Male', 'Alexandria, Egypt', '01234567892', 15550),
-(4, 'Sara Ibrahim', TO_DATE('1987-06-12', 'YYYY-MM-DD'), 'Male', 'Aswan, Egypt', '01234567893', 17595),
-(5, 'Omar Khaled', TO_DATE('1987-11-16', 'YYYY-MM-DD'), 'Male', 'Luxor, Egypt', '01234567894', 9824),
-(6, 'Nour Amr', TO_DATE('1986-03-26', 'YYYY-MM-DD'), 'Female', 'Mansoura, Egypt', '01234567895', 14640),
-(7, 'Tarek Mostafa', TO_DATE('1986-06-10', 'YYYY-MM-DD'), 'Male', 'Tanta, Egypt', '01234567896', 10095),
-(8, 'Heba Adel', TO_DATE('1983-05-27', 'YYYY-MM-DD'), 'Female', 'Suez, Egypt', '01234567897', 16870),
-(9, 'Karim Samir', TO_DATE('1982-09-07', 'YYYY-MM-DD'), 'Female', 'Ismailia, Egypt', '01234567898', 10093),
-(10, 'Laila Tamer', TO_DATE('1985-12-16', 'YYYY-MM-DD'), 'Female', 'Port Said, Egypt', '01234567899', 9699),
-(11, 'Mahmoud Fathy', TO_DATE('1989-09-13', 'YYYY-MM-DD'), 'Male', 'Cairo, Egypt', '01234567890', 10487),
-(12, 'Reem Wael', TO_DATE('1981-03-28', 'YYYY-MM-DD'), 'Female', 'Giza, Egypt', '01234567891', 5081),
-(13, 'Hossam Nabil', TO_DATE('1984-06-17', 'YYYY-MM-DD'), 'Female', 'Alexandria, Egypt', '01234567892', 9620),
-(14, 'Dalia Ahmed', TO_DATE('1981-10-18', 'YYYY-MM-DD'), 'Male', 'Aswan, Egypt', '01234567893', 13925),
-(15, 'Mustafa Essam', TO_DATE('1986-05-12', 'YYYY-MM-DD'), 'Female', 'Luxor, Egypt', '01234567894', 15367),
-(16, 'Yasmin Salah', TO_DATE('1989-02-07', 'YYYY-MM-DD'), 'Male', 'Mansoura, Egypt', '01234567895', 5116),
-(17, 'Ali Reda', TO_DATE('1980-06-07', 'YYYY-MM-DD'), 'Male', 'Tanta, Egypt', '01234567896', 13796),
-(18, 'Salma Hany', TO_DATE('1985-09-07', 'YYYY-MM-DD'), 'Female', 'Suez, Egypt', '01234567897', 6773),
-(19, 'Sherif Atef', TO_DATE('1981-01-25', 'YYYY-MM-DD'), 'Male', 'Ismailia, Egypt', '01234567898', 18754),
-(20, 'Nada Hamdy', TO_DATE('1984-11-15', 'YYYY-MM-DD'), 'Male', 'Port Said, Egypt', '01234567899', 14103),
-(21, 'Khaled Osama', TO_DATE('1982-02-27', 'YYYY-MM-DD'), 'Female', 'Cairo, Egypt', '01234567890', 15385),
-(22, 'Marwa Anwar', TO_DATE('1987-07-07', 'YYYY-MM-DD'), 'Male', 'Giza, Egypt', '01234567891', 17652),
-(23, 'Ramy Bassem', TO_DATE('1984-10-01', 'YYYY-MM-DD'), 'Male', 'Alexandria, Egypt', '01234567892', 7836),
-(24, 'Samar Adel', TO_DATE('1987-01-28', 'YYYY-MM-DD'), 'Male', 'Aswan, Egypt', '01234567893', 12383),
-(25, 'Mohamed Tarek', TO_DATE('1985-07-11', 'YYYY-MM-DD'), 'Female', 'Luxor, Egypt', '01234567894', 11290),
-(26, 'Farida Khalil', TO_DATE('1986-11-25', 'YYYY-MM-DD'), 'Female', 'Mansoura, Egypt', '01234567895', 9630),
-(27, 'Mostafa Ahmed', TO_DATE('1986-12-11', 'YYYY-MM-DD'), 'Male', 'Tanta, Egypt', '01234567896', 10154),
-(28, 'Hana Sameh', TO_DATE('1985-01-03', 'YYYY-MM-DD'), 'Male', 'Suez, Egypt', '01234567897', 17578),
-(29, 'Amr Medhat', TO_DATE('1985-02-15', 'YYYY-MM-DD'), 'Male', 'Ismailia, Egypt', '01234567898', 15649),
-(30, 'Lina Sherif', TO_DATE('1982-06-26', 'YYYY-MM-DD'), 'Male', 'Port Said, Egypt', '01234567899', 5098),
-(31, 'Ayman Hossam', TO_DATE('1981-05-01', 'YYYY-MM-DD'), 'Female', 'Cairo, Egypt', '01234567890', 12124),
-(32, 'Lamis Younis', TO_DATE('1987-09-25', 'YYYY-MM-DD'), 'Male', 'Giza, Egypt', '01234567891', 5440),
-(33, 'Ehab Adel', TO_DATE('1983-04-15', 'YYYY-MM-DD'), 'Male', 'Alexandria, Egypt', '01234567892', 19879),
-(34, 'Nadine Tamer', TO_DATE('1987-01-19', 'YYYY-MM-DD'), 'Female', 'Aswan, Egypt', '01234567893', 5288),
-(35, 'Hany Emad', TO_DATE('1980-11-08', 'YYYY-MM-DD'), 'Female', 'Luxor, Egypt', '01234567894', 13624),
-(36, 'Doaa Mohamed', TO_DATE('1988-06-12', 'YYYY-MM-DD'), 'Male', 'Mansoura, Egypt', '01234567895', 7918),
-(37, 'Bassem Fady', TO_DATE('1988-10-22', 'YYYY-MM-DD'), 'Male', 'Tanta, Egypt', '01234567896', 14479),
-(38, 'Sahar Mostafa', TO_DATE('1980-09-04', 'YYYY-MM-DD'), 'Male', 'Suez, Egypt', '01234567897', 15960),
-(39, 'Walid Magdy', TO_DATE('1982-06-07', 'YYYY-MM-DD'), 'Female', 'Ismailia, Egypt', '01234567898', 8705),
-(40, 'Rasha Nabil', TO_DATE('1988-10-23', 'YYYY-MM-DD'), 'Female', 'Port Said, Egypt', '01234567899', 7966),
-(41, 'Fady Saeed', TO_DATE('1987-11-06', 'YYYY-MM-DD'), 'Female', 'Cairo, Egypt', '01234567890', 9576),
-(42, 'Rania Salah', TO_DATE('1982-02-10', 'YYYY-MM-DD'), 'Female', 'Giza, Egypt', '01234567891', 14097),
-(43, 'Tamer Mohsen', TO_DATE('1987-11-02', 'YYYY-MM-DD'), 'Female', 'Alexandria, Egypt', '01234567892', 6913),
-(44, 'Bassem Fady', TO_DATE('1988-10-22', 'YYYY-MM-DD'), 'Male', 'Tanta, Egypt', '01234567896', 14479),
-(45, 'Sahar Mostafa', TO_DATE('1980-09-04', 'YYYY-MM-DD'), 'Male', 'Suez, Egypt', '01234567897', 15960),
-(46, 'Walid Magdy', TO_DATE('1982-06-07', 'YYYY-MM-DD'), 'Female', 'Ismailia, Egypt', '01234567898', 8705),
-(47, 'Rasha Nabil', TO_DATE('1988-10-23', 'YYYY-MM-DD'), 'Female', 'Port Said, Egypt', '01234567899', 7966),
-(48, 'Fady Saeed', TO_DATE('1987-11-06', 'YYYY-MM-DD'), 'Female', 'Cairo, Egypt', '01234567890', 9576),
-(49, 'Rania Salah', TO_DATE('1982-02-10', 'YYYY-MM-DD'), 'Female', 'Giza, Egypt', '01234567891', 14097),
-(50, 'Tamer Mohsen', TO_DATE('1987-11-02', 'YYYY-MM-DD'), 'Female', 'Alexandria, Egypt', '01234567892', 6913);
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (17, 'Ali Reda', TO_DATE('1980-06-07', 'YYYY-MM-DD'), 'Male', 'Tanta, Egypt', '01234567896', 13796);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (18, 'Salma Hany', TO_DATE('1985-09-07', 'YYYY-MM-DD'), 'Female', 'Suez, Egypt', '01234567897', 6773);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (19, 'Sherif Atef', TO_DATE('1981-01-25', 'YYYY-MM-DD'), 'Male', 'Ismailia, Egypt', '01234567898', 18754);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (20, 'Nada Hamdy', TO_DATE('1984-11-15', 'YYYY-MM-DD'), 'Male', 'Port Said, Egypt', '01234567899', 14103);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (21, 'Khaled Osama', TO_DATE('1982-02-27', 'YYYY-MM-DD'), 'Female', 'Cairo, Egypt', '01234567890', 15385);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (22, 'Marwa Anwar', TO_DATE('1987-07-07', 'YYYY-MM-DD'), 'Male', 'Giza, Egypt', '01234567891', 17652);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (23, 'Ramy Bassem', TO_DATE('1984-10-01', 'YYYY-MM-DD'), 'Male', 'Alexandria, Egypt', '01234567892', 7836);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (24, 'Samar Adel', TO_DATE('1987-01-28', 'YYYY-MM-DD'), 'Male', 'Aswan, Egypt', '01234567893', 12383);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (25, 'Mohamed Tarek', TO_DATE('1985-07-11', 'YYYY-MM-DD'), 'Female', 'Luxor, Egypt', '01234567894', 11290);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (26, 'Farida Khalil', TO_DATE('1986-11-25', 'YYYY-MM-DD'), 'Female', 'Mansoura, Egypt', '01234567895', 9630);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (27, 'Mostafa Ahmed', TO_DATE('1986-12-11', 'YYYY-MM-DD'), 'Male', 'Tanta, Egypt', '01234567896', 10154);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (28, 'Hana Sameh', TO_DATE('1985-01-03', 'YYYY-MM-DD'), 'Male', 'Suez, Egypt', '01234567897', 17578);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (29, 'Amr Medhat', TO_DATE('1985-02-15', 'YYYY-MM-DD'), 'Male', 'Ismailia, Egypt', '01234567898', 15649);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (30, 'Lina Sherif', TO_DATE('1982-06-26', 'YYYY-MM-DD'), 'Male', 'Port Said, Egypt', '01234567899', 5098);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (31, 'Ayman Hossam', TO_DATE('1981-05-01', 'YYYY-MM-DD'), 'Female', 'Cairo, Egypt', '01234567890', 12124);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (32, 'Lamis Younis', TO_DATE('1987-09-25', 'YYYY-MM-DD'), 'Male', 'Giza, Egypt', '01234567891', 5440);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (33, 'Ehab Adel', TO_DATE('1983-04-15', 'YYYY-MM-DD'), 'Male', 'Alexandria, Egypt', '01234567892', 19879);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (34, 'Nadine Tamer', TO_DATE('1987-01-19', 'YYYY-MM-DD'), 'Female', 'Aswan, Egypt', '01234567893', 5288);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (35, 'Hany Emad', TO_DATE('1980-11-08', 'YYYY-MM-DD'), 'Female', 'Luxor, Egypt', '01234567894', 13624);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (36, 'Doaa Mohamed', TO_DATE('1988-06-12', 'YYYY-MM-DD'), 'Male', 'Mansoura, Egypt', '01234567895', 7918);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (37, 'Bassem Fady', TO_DATE('1988-10-22', 'YYYY-MM-DD'), 'Male', 'Tanta, Egypt', '01234567896', 14479);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (38, 'Sahar Mostafa', TO_DATE('1980-09-04', 'YYYY-MM-DD'), 'Male', 'Suez, Egypt', '01234567897', 15960);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (39, 'Walid Magdy', TO_DATE('1982-06-07', 'YYYY-MM-DD'), 'Female', 'Ismailia, Egypt', '01234567898', 8705);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (40, 'Rasha Nabil', TO_DATE('1988-10-23', 'YYYY-MM-DD'), 'Female', 'Port Said, Egypt', '01234567899', 7966);
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (41, 'Fady Saeed', TO_DATE('1987-11-06', 'YYYY-MM-DD'), 'Female', 'Cairo, Egypt', '01234567890', 9576);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (42, 'Rania Salah', TO_DATE('1982-02-10', 'YYYY-MM-DD'), 'Female', 'Giza, Egypt', '01234567891', 14097);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (43, 'Tamer Mohsen', TO_DATE('1987-11-02', 'YYYY-MM-DD'), 'Female', 'Alexandria, Egypt', '01234567892', 6913);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (44, 'Bassem Fady', TO_DATE('1988-10-22', 'YYYY-MM-DD'), 'Male', 'Tanta, Egypt', '01234567896', 14479);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (45, 'Sahar Mostafa', TO_DATE('1980-09-04', 'YYYY-MM-DD'), 'Male', 'Suez, Egypt', '01234567897', 15960);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (46, 'Walid Magdy', TO_DATE('1982-06-07', 'YYYY-MM-DD'), 'Female', 'Ismailia, Egypt', '01234567898', 8705);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (47, 'Rasha Nabil', TO_DATE('1988-10-23', 'YYYY-MM-DD'), 'Female', 'Port Said, Egypt', '01234567899', 7966);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (48, 'Fady Saeed', TO_DATE('1987-11-06', 'YYYY-MM-DD'), 'Female', 'Cairo, Egypt', '01234567890', 9576);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (49, 'Rania Salah', TO_DATE('1982-02-10', 'YYYY-MM-DD'), 'Female', 'Giza, Egypt', '01234567891', 14097);
+
+INSERT INTO employee_dim (employee_id, employee_name, employee_dateOfBirth, employee_gender, employee_address, employee_phone, salary) 
+VALUES (50, 'Tamer Mohsen', TO_DATE('1987-11-02', 'YYYY-MM-DD'), 'Female', 'Alexandria, Egypt', '01234567892', 6913);
 
 COMMIT;
 
 
 INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
-(1, 2020, 3, 8, 3, 6, 219, 32, 1),
-(2, 2024, 2, 5, 2, 22, 143, 21, 0),
-(3, 2022, 4, 10, 2, 26, 299, 43, 1),
-(4, 2022, 2, 6, 1, 28, 179, 26, 0),
-(5, 2024, 2, 6, 2, 26, 178, 26, 0),
-(6, 2023, 2, 5, 3, 25, 145, 21, 1),
-(7, 2022, 4, 11, 0, 21, 325, 47, 1),
-(8, 2021, 4, 10, 1, 19, 292, 42, 1),
-(9, 2024, 1, 1, 3, 4, 4, 1, 0),
-(10, 2024, 2, 5, 4, 10, 131, 19, 0),
-(11, 2024, 2, 4, 3, 4, 95, 14, 0),
-(12, 2020, 2, 6, 2, 10, 162, 24, 0),
-(13, 2020, 3, 9, 6, 20, 264, 38, 0),
-(14, 2020, 4, 12, 5, 5, 340, 49, 1),
-(15, 2020, 2, 4, 3, 2, 93, 14, 0),
-(16, 2023, 2, 4, 0, 10, 100, 15, 1),
-(17, 2022, 3, 9, 0, 5, 248, 36, 0),
-(18, 2023, 3, 8, 3, 10, 222, 32, 1),
-(19, 2024, 1, 1, 0, 1, 1, 1, 0),
-(20, 2023, 3, 9, 3, 14, 257, 37, 1),
-(21, 2023, 3, 8, 2, 23, 235, 34, 1),
-(22, 2021, 4, 12, 2, 22, 356, 51, 1),
-(23, 2024, 4, 11, 6, 24, 329, 47, 1),
-(24, 2021, 2, 4, 4, 9, 99, 14, 0),
-(25, 2024, 2, 6, 6, 16, 168, 24, 1),
-(26, 2020, 4, 11, 2, 4, 309, 45, 1),
-(27, 2024, 2, 6, 1, 11, 163, 24, 1),
-(28, 2020, 2, 4, 5, 25, 116, 17, 1),
-(29, 2020, 1, 2, 3, 6, 37, 6, 0),
-(30, 2020, 3, 7, 1, 21, 203, 30, 0),
-(31, 2021, 4, 10, 4, 22, 295, 42, 0),
-(32, 2023, 3, 7, 0, 10, 191, 28, 1),
-(33, 2023, 1, 3, 2, 1, 60, 9, 1),
-(34, 2023, 3, 7, 6, 2, 183, 26, 0),
-(35, 2020, 1, 3, 4, 20, 80, 12, 0),
-(36, 2020, 2, 6, 4, 26, 178, 26, 1),
-(37, 2023, 4, 11, 3, 30, 334, 48, 0),
-(38, 2020, 2, 5, 0, 25, 146, 22, 1),
-(39, 2022, 2, 4, 6, 24, 114, 16, 0),
-(40, 2024, 4, 11, 5, 9, 314, 45, 1),
-(41, 2023, 2, 4, 2, 19, 109, 16, 1),
-(42, 2023, 2, 4, 3, 27, 117, 17, 0),
-(43, 2021, 4, 12, 3, 2, 336, 48, 1),
-(44, 2022, 4, 10, 0, 17, 290, 42, 1),
-(45, 2022, 2, 4, 6, 24, 114, 16, 1),
-(46, 2020, 4, 10, 2, 28, 302, 44, 1),
-(47, 2023, 1, 1, 0, 9, 9, 2, 0),
-(48, 2023, 2, 4, 5, 22, 112, 16, 1),
-(49, 2020, 2, 5, 5, 9, 130, 19, 0),
-(50, 2022, 2, 6, 4, 24, 175, 25, 0),
-(51, 2022, 3, 8, 5, 20, 232, 33, 0),
-(52, 2024, 2, 5, 6, 26, 147, 21, 0),
-(53, 2021, 4, 12, 3, 2, 336, 48, 0),
-(54, 2020, 2, 4, 0, 27, 118, 18, 1),
-(55, 2022, 2, 6, 1, 21, 172, 25, 0),
-(56, 2024, 1, 2, 3, 22, 53, 8, 1),
-(57, 2022, 4, 12, 3, 29, 363, 52, 1),
-(58, 2020, 1, 1, 5, 4, 4, 1, 0),
-(59, 2021, 4, 10, 4, 8, 281, 40, 1),
-(60, 2020, 2, 5, 5, 16, 137, 20, 0),
-(61, 2024, 4, 11, 1, 19, 324, 47, 0),
-(62, 2024, 1, 1, 6, 21, 21, 3, 1),
-(63, 2024, 4, 12, 4, 6, 341, 49, 1),
-(64, 2024, 3, 9, 4, 20, 264, 38, 0),
-(65, 2022, 2, 5, 5, 21, 141, 20, 0),
-(66, 2021, 3, 9, 4, 3, 246, 35, 1),
-(67, 2024, 3, 9, 0, 2, 246, 36, 0),
-(68, 2024, 1, 2, 3, 22, 53, 8, 0),
-(69, 2020, 3, 7, 3, 30, 212, 31, 0),
-(70, 2024, 4, 12, 2, 11, 346, 50, 1),
-(71, 2023, 3, 8, 2, 2, 214, 31, 1),
-(72, 2021, 1, 1, 1, 26, 26, 4, 1),
-(73, 2023, 3, 9, 0, 4, 247, 36, 1),
-(74, 2020, 2, 4, 1, 21, 112, 17, 1),
-(75, 2021, 4, 11, 2, 17, 321, 46, 0),
-(76, 2023, 4, 12, 3, 21, 355, 51, 0),
-(77, 2021, 2, 4, 3, 22, 112, 16, 0),
-(78, 2024, 4, 10, 1, 22, 296, 43, 0),
-(79, 2024, 1, 1, 5, 20, 20, 3, 0),
-(80, 2022, 1, 1, 0, 31, 31, 5, 0),
-(81, 2022, 3, 7, 5, 9, 190, 27, 1),
-(82, 2022, 2, 5, 3, 19, 139, 20, 0),
-(83, 2024, 4, 10, 2, 2, 276, 40, 0),
-(84, 2023, 2, 5, 1, 30, 150, 22, 0),
-(85, 2020, 4, 11, 4, 13, 318, 46, 0),
-(86, 2022, 3, 8, 1, 30, 242, 35, 0),
-(87, 2022, 2, 5, 2, 18, 138, 20, 0),
-(88, 2024, 1, 1, 0, 15, 15, 3, 1),
-(89, 2020, 3, 8, 2, 26, 239, 35, 0),
-(90, 2022, 4, 12, 2, 21, 355, 51, 1),
-(91, 2022, 1, 1, 4, 7, 7, 1, 1),
-(92, 2020, 2, 5, 1, 12, 133, 20, 1),
-(93, 2022, 1, 2, 5, 26, 57, 8, 0),
-(94, 2022, 1, 3, 6, 27, 86, 12, 1),
-(95, 2024, 2, 6, 6, 16, 168, 24, 0),
-(96, 2023, 4, 11, 2, 29, 333, 48, 1),
-(97, 2023, 2, 6, 2, 28, 179, 26, 1),
-(98, 2023, 3, 7, 3, 6, 187, 27, 1),
-(99, 2023, 3, 7, 3, 20, 201, 29, 0),
-(100, 2024, 2, 4, 2, 24, 115, 17, 0),
-(101, 2023, 1, 2, 2, 1, 32, 5, 1),
-(102, 2024, 3, 7, 3, 4, 186, 27, 0),
-(103, 2021, 1, 3, 4, 19, 78, 11, 1),
-(104, 2024, 1, 3, 2, 6, 66, 10, 1),
-(105, 2023, 1, 2, 0, 6, 37, 6, 1),
-(106, 2023, 3, 9, 2, 20, 263, 38, 0),
-(107, 2023, 4, 12, 3, 7, 341, 49, 1),
-(108, 2020, 3, 7, 3, 9, 191, 28, 1),
-(109, 2022, 3, 7, 5, 30, 211, 30, 0),
-(110, 2022, 4, 11, 5, 12, 316, 45, 1),
-(111, 2022, 3, 9, 6, 25, 268, 38, 0),
-(112, 2024, 2, 5, 3, 2, 123, 18, 1),
-(113, 2024, 3, 8, 4, 30, 243, 35, 1),
-(114, 2022, 4, 11, 2, 9, 313, 45, 0),
-(115, 2023, 1, 1, 6, 8, 8, 1, 0),
-(116, 2024, 2, 5, 4, 3, 124, 18, 0),
-(117, 2020, 1, 2, 5, 15, 46, 7, 0),
-(118, 2024, 3, 9, 0, 16, 260, 38, 1),
-(119, 2021, 2, 4, 2, 21, 111, 16, 0),
-(120, 2023, 1, 3, 3, 16, 75, 11, 0),
-(121, 2021, 2, 4, 2, 21, 111, 16, 0),
-(122, 2024, 3, 7, 6, 28, 210, 30, 0),
-(123, 2024, 4, 10, 4, 11, 285, 41, 0),
-(124, 2024, 4, 10, 4, 18, 292, 42, 0),
-(125, 2023, 4, 11, 2, 1, 305, 44, 0),
-(126, 2022, 1, 2, 6, 6, 37, 5, 1),
-(127, 2023, 1, 2, 3, 23, 54, 8, 0),
-(128, 2022, 4, 10, 6, 23, 296, 42, 1),
-(129, 2022, 1, 3, 3, 31, 90, 13, 1),
-(130, 2022, 2, 4, 4, 1, 91, 13, 0),
-(131, 2024, 2, 4, 0, 15, 106, 16, 0),
-(132, 2021, 4, 10, 2, 6, 279, 40, 0),
-(133, 2020, 2, 5, 3, 7, 128, 19, 1),
-(134, 2021, 2, 6, 4, 11, 162, 23, 0),
-(135, 2022, 1, 2, 5, 26, 57, 8, 0),
-(136, 2022, 2, 5, 1, 31, 151, 22, 1),
-(137, 2022, 4, 10, 1, 11, 284, 41, 1),
-(138, 2023, 4, 10, 5, 21, 294, 42, 1),
-(139, 2020, 2, 4, 6, 5, 96, 14, 0),
-(140, 2022, 1, 1, 5, 29, 29, 4, 0),
-(141, 2021, 2, 6, 1, 1, 152, 22, 1),
-(142, 2021, 3, 9, 2, 15, 258, 37, 1),
-(143, 2023, 1, 1, 4, 13, 13, 2, 1),
-(144, 2023, 3, 8, 2, 9, 221, 32, 1),
-(145, 2020, 1, 3, 4, 13, 73, 11, 0),
-(146, 2021, 1, 1, 6, 3, 3, 53, 1),
-(147, 2020, 1, 3, 2, 25, 85, 13, 0),
-(148, 2021, 4, 11, 5, 13, 317, 45, 0),
-(149, 2023, 3, 9, 4, 8, 251, 36, 1),
-(150, 2023, 4, 11, 2, 15, 319, 46, 0),
-(151, 2020, 3, 8, 4, 7, 220, 32, 1),
-(152, 2020, 1, 2, 2, 26, 57, 9, 1),
-(153, 2024, 3, 7, 5, 20, 202, 29, 0),
-(154, 2023, 3, 7, 2, 12, 193, 28, 1),
-(155, 2024, 4, 12, 6, 1, 336, 48, 0),
-(156, 2020, 2, 4, 3, 16, 107, 16, 1),
-(157, 2021, 1, 3, 2, 10, 69, 10, 0),
-(158, 2021, 4, 10, 0, 18, 291, 42, 0),
-(159, 2020, 3, 8, 3, 13, 226, 33, 1),
-(160, 2022, 4, 10, 6, 23, 296, 42, 0),
-(161, 2023, 3, 7, 6, 2, 183, 26, 0),
-(162, 2021, 2, 5, 0, 17, 137, 20, 0),
-(163, 2023, 1, 3, 5, 18, 77, 11, 0),
-(164, 2024, 3, 8, 1, 13, 226, 33, 0),
-(165, 2024, 1, 2, 0, 19, 50, 8, 0),
-(166, 2024, 1, 3, 1, 19, 79, 12, 0),
-(167, 2021, 3, 7, 3, 1, 182, 26, 1),
-(168, 2022, 1, 3, 3, 24, 83, 12, 0),
-(169, 2024, 2, 5, 5, 11, 132, 19, 1),
-(170, 2023, 1, 1, 6, 29, 29, 4, 0),
-(171, 2023, 4, 12, 1, 5, 339, 49, 1),
-(172, 2023, 3, 7, 0, 17, 198, 29, 0),
-(173, 2024, 2, 4, 0, 22, 113, 17, 0),
-(174, 2023, 4, 10, 1, 24, 297, 43, 0),
-(175, 2023, 2, 6, 4, 9, 160, 23, 1),
-(176, 2024, 2, 6, 3, 27, 179, 26, 1),
-(177, 2020, 4, 12, 4, 4, 339, 49, 0),
-(178, 2022, 3, 9, 5, 24, 267, 38, 0),
-(179, 2021, 1, 1, 5, 16, 16, 2, 0),
-(180, 2024, 2, 5, 3, 30, 151, 22, 1),
-(181, 2021, 1, 1, 1, 26, 26, 4, 0),
-(182, 2020, 3, 8, 4, 21, 234, 34, 0),
-(183, 2023, 2, 5, 4, 19, 139, 20, 0),
-(184, 2021, 3, 7, 3, 15, 196, 28, 0),
-(185, 2024, 1, 3, 1, 5, 65, 10, 1),
-(186, 2024, 4, 12, 6, 1, 336, 48, 0),
-(187, 2022, 3, 9, 2, 7, 250, 36, 1),
-(188, 2023, 4, 12, 0, 25, 359, 52, 1),
-(189, 2023, 4, 12, 4, 1, 335, 48, 0),
-(190, 2023, 1, 2, 0, 20, 51, 8, 0),
-(191, 2024, 4, 10, 3, 3, 277, 40, 1),
-(192, 2022, 4, 12, 2, 14, 348, 50, 0),
-(193, 2021, 1, 2, 2, 10, 41, 6, 1),
-(194, 2023, 1, 1, 4, 13, 13, 2, 0),
-(195, 2020, 2, 5, 6, 24, 145, 21, 1),
-(196, 2024, 3, 9, 2, 4, 248, 36, 0),
-(197, 2020, 2, 5, 0, 4, 125, 19, 1),
-(198, 2024, 4, 11, 2, 20, 325, 47, 1),
-(199, 2021, 2, 6, 2, 23, 174, 25, 0),
+(1, 2020, 3, 8, 3, 6, 219, 32, 1);
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(2, 2024, 2, 5, 2, 22, 143, 21, 0);
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(3, 2022, 4, 10, 2, 26, 299, 43, 1);
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(4, 2022, 2, 6, 1, 28, 179, 26, 0);
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(5, 2024, 2, 6, 2, 26, 178, 26, 0);
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(6, 2023, 2, 5, 3, 25, 145, 21, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(7, 2022, 4, 11, 0, 21, 325, 47, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(8, 2021, 4, 10, 1, 19, 292, 42, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(9, 2024, 1, 1, 3, 4, 4, 1, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(10, 2024, 2, 5, 4, 10, 131, 19, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(11, 2024, 2, 4, 3, 4, 95, 14, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(12, 2020, 2, 6, 2, 10, 162, 24, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(13, 2020, 3, 9, 6, 20, 264, 38, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(14, 2020, 4, 12, 5, 5, 340, 49, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(15, 2020, 2, 4, 3, 2, 93, 14, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(16, 2023, 2, 4, 0, 10, 100, 15, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(17, 2022, 3, 9, 0, 5, 248, 36, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(18, 2023, 3, 8, 3, 10, 222, 32, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(19, 2024, 1, 1, 0, 1, 1, 1, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(20, 2023, 3, 9, 3, 14, 257, 37, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(21, 2023, 3, 8, 2, 23, 235, 34, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(22, 2021, 4, 12, 2, 22, 356, 51, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(23, 2024, 4, 11, 6, 24, 329, 47, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(24, 2021, 2, 4, 4, 9, 99, 14, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(25, 2024, 2, 6, 6, 16, 168, 24, 1);
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(26, 2020, 4, 11, 2, 4, 309, 45, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(27, 2024, 2, 6, 1, 11, 163, 24, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(28, 2020, 2, 4, 5, 25, 116, 17, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(29, 2020, 1, 2, 3, 6, 37, 6, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(30, 2020, 3, 7, 1, 21, 203, 30, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(31, 2021, 4, 10, 4, 22, 295, 42, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(32, 2023, 3, 7, 0, 10, 191, 28, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(33, 2023, 1, 3, 2, 1, 60, 9, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(34, 2023, 3, 7, 6, 2, 183, 26, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(35, 2020, 1, 3, 4, 20, 80, 12, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(36, 2020, 2, 6, 4, 26, 178, 26, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(37, 2023, 4, 11, 3, 30, 334, 48, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(38, 2020, 2, 5, 0, 25, 146, 22, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(39, 2022, 2, 4, 6, 24, 114, 16, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(40, 2024, 4, 11, 5, 9, 314, 45, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(41, 2023, 2, 4, 2, 19, 109, 16, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(42, 2023, 2, 4, 3, 27, 117, 17, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(43, 2021, 4, 12, 3, 2, 336, 48, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(44, 2022, 4, 10, 0, 17, 290, 42, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(45, 2022, 2, 4, 6, 24, 114, 16, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(46, 2020, 4, 10, 2, 28, 302, 44, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(47, 2023, 1, 1, 0, 9, 9, 2, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(48, 2023, 2, 4, 5, 22, 112, 16, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(49, 2020, 2, 5, 5, 9, 130, 19, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(50, 2022, 2, 6, 4, 24, 175, 25, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(51, 2022, 3, 8, 5, 20, 232, 33, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(52, 2024, 2, 5, 6, 26, 147, 21, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(53, 2021, 4, 12, 3, 2, 336, 48, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(54, 2020, 2, 4, 0, 27, 118, 18, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(55, 2022, 2, 6, 1, 21, 172, 25, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(56, 2024, 1, 2, 3, 22, 53, 8, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(57, 2022, 4, 12, 3, 29, 363, 52, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(58, 2020, 1, 1, 5, 4, 4, 1, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(59, 2021, 4, 10, 4, 8, 281, 40, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(60, 2020, 2, 5, 5, 16, 137, 20, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(61, 2024, 4, 11, 1, 19, 324, 47, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(62, 2024, 1, 1, 6, 21, 21, 3, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(63, 2024, 4, 12, 4, 6, 341, 49, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(64, 2024, 3, 9, 4, 20, 264, 38, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(65, 2022, 2, 5, 5, 21, 141, 20, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(66, 2021, 3, 9, 4, 3, 246, 35, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(67, 2024, 3, 9, 0, 2, 246, 36, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(68, 2024, 1, 2, 3, 22, 53, 8, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(69, 2020, 3, 7, 3, 30, 212, 31, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(70, 2024, 4, 12, 2, 11, 346, 50, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(71, 2023, 3, 8, 2, 2, 214, 31, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(72, 2021, 1, 1, 1, 26, 26, 4, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(73, 2023, 3, 9, 0, 4, 247, 36, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(74, 2020, 2, 4, 1, 21, 112, 17, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(75, 2021, 4, 11, 2, 17, 321, 46, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(76, 2023, 4, 12, 3, 21, 355, 51, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(77, 2021, 2, 4, 3, 22, 112, 16, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(78, 2024, 4, 10, 1, 22, 296, 43, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(79, 2024, 1, 1, 5, 20, 20, 3, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(80, 2022, 1, 1, 0, 31, 31, 5, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(81, 2022, 3, 7, 5, 9, 190, 27, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(82, 2022, 2, 5, 3, 19, 139, 20, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(83, 2024, 4, 10, 2, 2, 276, 40, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(84, 2023, 2, 5, 1, 30, 150, 22, 0);
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(85, 2020, 4, 11, 4, 13, 318, 46, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(86, 2022, 3, 8, 1, 30, 242, 35, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(87, 2022, 2, 5, 2, 18, 138, 20, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(88, 2024, 1, 1, 0, 15, 15, 3, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(89, 2020, 3, 8, 2, 26, 239, 35, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(90, 2022, 4, 12, 2, 21, 355, 51, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(91, 2022, 1, 1, 4, 7, 7, 1, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(92, 2020, 2, 5, 1, 12, 133, 20, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(93, 2022, 1, 2, 5, 26, 57, 8, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(94, 2022, 1, 3, 6, 27, 86, 12, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(95, 2024, 2, 6, 6, 16, 168, 24, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(96, 2023, 4, 11, 2, 29, 333, 48, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(97, 2023, 2, 6, 2, 28, 179, 26, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(98, 2023, 3, 7, 3, 6, 187, 27, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(99, 2023, 3, 7, 3, 20, 201, 29, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(100, 2024, 2, 4, 2, 24, 115, 17, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(101, 2023, 1, 2, 2, 1, 32, 5, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(102, 2024, 3, 7, 3, 4, 186, 27, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(103, 2021, 1, 3, 4, 19, 78, 11, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(104, 2024, 1, 3, 2, 6, 66, 10, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(105, 2023, 1, 2, 0, 6, 37, 6, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(106, 2023, 3, 9, 2, 20, 263, 38, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(107, 2023, 4, 12, 3, 7, 341, 49, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(108, 2020, 3, 7, 3, 9, 191, 28, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(109, 2022, 3, 7, 5, 30, 211, 30, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(110, 2022, 4, 11, 5, 12, 316, 45, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(111, 2022, 3, 9, 6, 25, 268, 38, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(112, 2024, 2, 5, 3, 2, 123, 18, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(113, 2024, 3, 8, 4, 30, 243, 35, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(114, 2022, 4, 11, 2, 9, 313, 45, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(115, 2023, 1, 1, 6, 8, 8, 1, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(116, 2024, 2, 5, 4, 3, 124, 18, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(117, 2020, 1, 2, 5, 15, 46, 7, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(118, 2024, 3, 9, 0, 16, 260, 38, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(119, 2021, 2, 4, 2, 21, 111, 16, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(120, 2023, 1, 3, 3, 16, 75, 11, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(121, 2021, 2, 4, 2, 21, 111, 16, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(122, 2024, 3, 7, 6, 28, 210, 30, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(123, 2024, 4, 10, 4, 11, 285, 41, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(124, 2024, 4, 10, 4, 18, 292, 42, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(125, 2023, 4, 11, 2, 1, 305, 44, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(126, 2022, 1, 2, 6, 6, 37, 5, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(127, 2023, 1, 2, 3, 23, 54, 8, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(128, 2022, 4, 10, 6, 23, 296, 42, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(129, 2022, 1, 3, 3, 31, 90, 13, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(130, 2022, 2, 4, 4, 1, 91, 13, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(131, 2024, 2, 4, 0, 15, 106, 16, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(132, 2021, 4, 10, 2, 6, 279, 40, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(133, 2020, 2, 5, 3, 7, 128, 19, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(134, 2021, 2, 6, 4, 11, 162, 23, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(135, 2022, 1, 2, 5, 26, 57, 8, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(136, 2022, 2, 5, 1, 31, 151, 22, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(137, 2022, 4, 10, 1, 11, 284, 41, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(138, 2023, 4, 10, 5, 21, 294, 42, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(139, 2020, 2, 4, 6, 5, 96, 14, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(140, 2022, 1, 1, 5, 29, 29, 4, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(141, 2021, 2, 6, 1, 1, 152, 22, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(142, 2021, 3, 9, 2, 15, 258, 37, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(143, 2023, 1, 1, 4, 13, 13, 2, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(144, 2023, 3, 8, 2, 9, 221, 32, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(145, 2020, 1, 3, 4, 13, 73, 11, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(146, 2021, 1, 1, 6, 3, 3, 53, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(147, 2020, 1, 3, 2, 25, 85, 13, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(148, 2021, 4, 11, 5, 13, 317, 45, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(149, 2023, 3, 9, 4, 8, 251, 36, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(150, 2023, 4, 11, 2, 15, 319, 46, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(151, 2020, 3, 8, 4, 7, 220, 32, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(152, 2020, 1, 2, 2, 26, 57, 9, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(153, 2024, 3, 7, 5, 20, 202, 29, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(154, 2023, 3, 7, 2, 12, 193, 28, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(155, 2024, 4, 12, 6, 1, 336, 48, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(156, 2020, 2, 4, 3, 16, 107, 16, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(157, 2021, 1, 3, 2, 10, 69, 10, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(158, 2021, 4, 10, 0, 18, 291, 42, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(159, 2020, 3, 8, 3, 13, 226, 33, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(160, 2022, 4, 10, 6, 23, 296, 42, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(161, 2023, 3, 7, 6, 2, 183, 26, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(162, 2021, 2, 5, 0, 17, 137, 20, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(163, 2023, 1, 3, 5, 18, 77, 11, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(164, 2024, 3, 8, 1, 13, 226, 33, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(165, 2024, 1, 2, 0, 19, 50, 8, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(166, 2024, 1, 3, 1, 19, 79, 12, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(167, 2021, 3, 7, 3, 1, 182, 26, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(168, 2022, 1, 3, 3, 24, 83, 12, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(169, 2024, 2, 5, 5, 11, 132, 19, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(170, 2023, 1, 1, 6, 29, 29, 4, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(171, 2023, 4, 12, 1, 5, 339, 49, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(172, 2023, 3, 7, 0, 17, 198, 29, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(173, 2024, 2, 4, 0, 22, 113, 17, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(174, 2023, 4, 10, 1, 24, 297, 43, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(175, 2023, 2, 6, 4, 9, 160, 23, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(176, 2024, 2, 6, 3, 27, 179, 26, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(177, 2020, 4, 12, 4, 4, 339, 49, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(178, 2022, 3, 9, 5, 24, 267, 38, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(179, 2021, 1, 1, 5, 16, 16, 2, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(180, 2024, 2, 5, 3, 30, 151, 22, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(181, 2021, 1, 1, 1, 26, 26, 4, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(182, 2020, 3, 8, 4, 21, 234, 34, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(183, 2023, 2, 5, 4, 19, 139, 20, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(184, 2021, 3, 7, 3, 15, 196, 28, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(185, 2024, 1, 3, 1, 5, 65, 10, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(186, 2024, 4, 12, 6, 1, 336, 48, 0);
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(187, 2022, 3, 9, 2, 7, 250, 36, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(188, 2023, 4, 12, 0, 25, 359, 52, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(189, 2023, 4, 12, 4, 1, 335, 48, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(190, 2023, 1, 2, 0, 20, 51, 8, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(191, 2024, 4, 10, 3, 3, 277, 40, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(192, 2022, 4, 12, 2, 14, 348, 50, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(193, 2021, 1, 2, 2, 10, 41, 6, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(194, 2023, 1, 1, 4, 13, 13, 2, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(195, 2020, 2, 5, 6, 24, 145, 21, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(196, 2024, 3, 9, 2, 4, 248, 36, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(197, 2020, 2, 5, 0, 4, 125, 19, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(198, 2024, 4, 11, 2, 20, 325, 47, 1);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
+(199, 2021, 2, 6, 2, 23, 174, 25, 0);
+
+INSERT INTO date_dim (date_id, year, quarter, month, day_of_week, day_of_month, day_of_year, week_of_year, is_holiday) VALUES
 (200, 2024, 2, 6, 0, 3, 155, 23, 1);
 commit ;
-
 
 INSERT INTO CustomerCareFact (customer_id, date_id, feedback_id,
 employee_id, interaction_type, satisfaction_rate, duration)
