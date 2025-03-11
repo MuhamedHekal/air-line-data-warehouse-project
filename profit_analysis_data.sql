@@ -1,5 +1,4 @@
--- Populate time_dim table with time records and meaningful hour descriptions
-INSERT INTO time_dim (time_id, hour, minutes, month, hour_description)
+INSERT INTO time_dim (time_id, hour, minutes, hour_description)
 SELECT 
     ROWNUM AS time_id,
     MOD(TRUNC((LEVEL - 1) / 2), 24) AS hour,  -- Cycles through 0-23 hours

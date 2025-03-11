@@ -2,7 +2,6 @@ CREATE TABLE time_dim (
     time_id INT PRIMARY KEY,
     hour INT NOT NULL,
     minutes INT NOT NULL,
-    month INT NOT NULL,
     hour_description VARCHAR(255)
 );
 
