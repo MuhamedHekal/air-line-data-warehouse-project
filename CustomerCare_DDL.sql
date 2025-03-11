@@ -4,7 +4,6 @@ CREATE TABLE feedback_dim (
     description VARCHAR2(500)
 );
 
-
 CREATE TABLE employee_dim (
     employee_id NUMBER PRIMARY KEY, 
     employee_name VARCHAR2(35),
