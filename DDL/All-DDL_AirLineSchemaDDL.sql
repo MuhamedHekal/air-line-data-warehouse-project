@@ -192,6 +192,7 @@ CREATE TABLE CustomerCareFact (
     interaction_type VARCHAR2(50),
     satisfaction_rate NUMBER(5,2),
     duration NUMBER,
+    CONSTRAINT pk_customer_care PRIMARY KEY (customer_id, date_id, feedback_id, employee_id), 
     CONSTRAINT fk_care_date FOREIGN KEY (date_id) REFERENCES date_dim(date_id),
     CONSTRAINT fk_care_feedback FOREIGN KEY (feedback_id) REFERENCES feedback_dim(feedback_id),
     CONSTRAINT fk_care_employee FOREIGN KEY (employee_id) REFERENCES employee_dim(employee_id)
