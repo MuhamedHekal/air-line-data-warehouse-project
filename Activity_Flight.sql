@@ -48,47 +48,45 @@ CREATE TABLE customer_dim (
     passenger_address VARCHAR2(200),
     passenger_phone VARCHAR2(15),
     passenger_points NUMBER,
-    passenger_status VARCHAR2(50)
+    passenger_status VARCHAR2(50),
+    start_date DATE DEFAULT TO_DATE('2000-01-01', 'YYYY-MM-DD'), -- Default start date
+    end_date DATE DEFAULT TO_DATE('9999-12-31', 'YYYY-MM-DD'), -- Open-ended for current records
+    is_current CHAR(1) DEFAULT 'Y' CHECK (is_current IN ('Y', 'N')) -- 'Y' for current, 'N' for history
 );
+
 INSERT ALL
-    INTO customer_dim (passenger_id, passenger_name, passenger_dateOfBirth, passenger_gender, passenger_address, passenger_phone, passenger_points, passenger_status) 
-    VALUES (1, 'Ahmed Mohamed', TO_DATE('1985-06-15', 'YYYY-MM-DD'), 'Male', 'Cairo, Egypt', '01001234567', 1200, 'Gold')
-
-    INTO customer_dim VALUES (2, 'Sara Ahmed', TO_DATE('1990-12-20', 'YYYY-MM-DD'), 'Female', 'Alexandria, Egypt', '01009876543', 800, 'Silver')
-    INTO customer_dim VALUES (3, 'Mohamed Hassan', TO_DATE('1978-08-05', 'YYYY-MM-DD'), 'Male', 'Giza, Egypt', '01102345678', 1500, 'Platinum')
-    INTO customer_dim VALUES (4, 'Nour Amr', TO_DATE('1995-04-22', 'YYYY-MM-DD'), 'Female', 'Aswan, Egypt', '01205678901', 400, 'Bronze')
-    INTO customer_dim VALUES (5, 'Khaled Ibrahim', TO_DATE('1983-09-30', 'YYYY-MM-DD'), 'Male', 'Mansoura, Egypt', '01501112233', 1300, 'Gold')
-    INTO customer_dim VALUES (6, 'Yasmine Tamer', TO_DATE('1992-02-10', 'YYYY-MM-DD'), 'Female', 'Cairo, Egypt', '01003456789', 1100, 'Gold')
-    INTO customer_dim VALUES (7, 'Omar Mostafa', TO_DATE('1987-07-14', 'YYYY-MM-DD'), 'Male', 'Sharm El-Sheikh, Egypt', '01007894561', 500, 'Silver')
-    INTO customer_dim VALUES (8, 'Fatma Khaled', TO_DATE('1998-03-05', 'YYYY-MM-DD'), 'Female', 'Luxor, Egypt', '01102543678', 300, 'Bronze')
-    INTO customer_dim VALUES (9, 'Ali Mahmoud', TO_DATE('1980-11-11', 'YYYY-MM-DD'), 'Male', 'Cairo, Egypt', '01507896542', 2000, 'Platinum')
-    INTO customer_dim VALUES (10, 'Huda Saeed', TO_DATE('1993-06-25', 'YYYY-MM-DD'), 'Female', 'Alexandria, Egypt', '01207894561', 600, 'Silver')
-
-    INTO customer_dim VALUES (11, 'Karim Nabil', TO_DATE('1989-10-10', 'YYYY-MM-DD'), 'Male', 'Cairo, Egypt', '01011223344', 750, 'Silver')
-    INTO customer_dim VALUES (12, 'Rania Sameh', TO_DATE('1996-08-08', 'YYYY-MM-DD'), 'Female', 'Giza, Egypt', '01105677899', 450, 'Bronze')
-    INTO customer_dim VALUES (13, 'Mostafa Galal', TO_DATE('1984-04-04', 'YYYY-MM-DD'), 'Male', 'Fayoum, Egypt', '01503456578', 1600, 'Gold')
-    INTO customer_dim VALUES (14, 'Salma Hossam', TO_DATE('1997-01-17', 'YYYY-MM-DD'), 'Female', 'Tanta, Egypt', '01002349876', 350, 'Bronze')
-    INTO customer_dim VALUES (15, 'Hassan Adel', TO_DATE('1991-05-25', 'YYYY-MM-DD'), 'Male', 'Cairo, Egypt', '01105679834', 980, 'Silver')
-    INTO customer_dim VALUES (16, 'Nadia Mostafa', TO_DATE('1994-09-19', 'YYYY-MM-DD'), 'Female', 'Alexandria, Egypt', '01207894321', 870, 'Silver')
-    INTO customer_dim VALUES (17, 'Samir Ahmed', TO_DATE('1982-03-30', 'YYYY-MM-DD'), 'Male', 'Port Said, Egypt', '01501234567', 1200, 'Gold')
-    INTO customer_dim VALUES (18, 'Dina Youssef', TO_DATE('1999-07-07', 'YYYY-MM-DD'), 'Female', 'Cairo, Egypt', '01007865432', 300, 'Bronze')
-    INTO customer_dim VALUES (19, 'Ibrahim Galal', TO_DATE('1986-02-28', 'YYYY-MM-DD'), 'Male', 'Sharm El-Sheikh, Egypt', '01103455678', 1400, 'Gold')
-    INTO customer_dim VALUES (20, 'Lina Khaled', TO_DATE('2000-12-01', 'YYYY-MM-DD'), 'Female', 'Aswan, Egypt', '01005677889', 150, 'Bronze')
-
-    -- Additional 40 rows (modify names, dates, and data)
-    INTO customer_dim VALUES (21, 'Omar Mahmoud', TO_DATE('1985-06-21', 'YYYY-MM-DD'), 'Male', 'Cairo, Egypt', '01009998877', 1700, 'Gold')
-    INTO customer_dim VALUES (22, 'Hana Mostafa', TO_DATE('1991-09-15', 'YYYY-MM-DD'), 'Female', 'Luxor, Egypt', '01201112233', 900, 'Silver')
-    INTO customer_dim VALUES (23, 'Ahmed Nabil', TO_DATE('1980-07-07', 'YYYY-MM-DD'), 'Male', 'Alexandria, Egypt', '01103456789', 2200, 'Platinum')
-    INTO customer_dim VALUES (24, 'Salma Tamer', TO_DATE('1995-03-03', 'YYYY-MM-DD'), 'Female', 'Tanta, Egypt', '01007894321', 500, 'Silver')
-    INTO customer_dim VALUES (25, 'Hussein Tarek', TO_DATE('1989-11-29', 'YYYY-MM-DD'), 'Male', 'Giza, Egypt', '01105678912', 1250, 'Gold')
-    INTO customer_dim VALUES (26, 'Farida Khaled', TO_DATE('1998-06-14', 'YYYY-MM-DD'), 'Female', 'Cairo, Egypt', '01207894567', 700, 'Silver')
-    INTO customer_dim VALUES (27, 'Kareem Youssef', TO_DATE('1983-04-22', 'YYYY-MM-DD'), 'Male', 'Fayoum, Egypt', '01501112345', 1650, 'Gold')
-    INTO customer_dim VALUES (28, 'Aya Amr', TO_DATE('1996-12-10', 'YYYY-MM-DD'), 'Female', 'Sharm El-Sheikh, Egypt', '01003456543', 400, 'Bronze')
-    INTO customer_dim VALUES (29, 'Hassan Adel', TO_DATE('1981-09-18', 'YYYY-MM-DD'), 'Male', 'Cairo, Egypt', '01107894321', 1550, 'Gold')
-    INTO customer_dim VALUES (30, 'Layla Mostafa', TO_DATE('1993-05-08', 'YYYY-MM-DD'), 'Female', 'Mansoura, Egypt', '01205677890', 650, 'Silver')
+    INTO customer_dim VALUES (1, 'Ahmed Mohamed', TO_DATE('1985-06-15', 'YYYY-MM-DD'), 'Male', 'Cairo, Egypt', '01001234567', 1200, 'Gold', TO_DATE('2024-01-01', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
+    INTO customer_dim VALUES (2, 'Sara Ahmed', TO_DATE('1990-12-20', 'YYYY-MM-DD'), 'Female', 'Alexandria, Egypt', '01009876543', 800, 'Silver', TO_DATE('2023-07-15', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
+    INTO customer_dim VALUES (3, 'Mohamed Hassan', TO_DATE('1978-08-05', 'YYYY-MM-DD'), 'Male', 'Giza, Egypt', '01102345678', 1500, 'Platinum', TO_DATE('2022-06-10', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
+    INTO customer_dim VALUES (4, 'Nour Amr', TO_DATE('1995-04-22', 'YYYY-MM-DD'), 'Female', 'Aswan, Egypt', '01205678901', 400, 'Bronze', TO_DATE('2021-05-20', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
+    INTO customer_dim VALUES (5, 'Khaled Ibrahim', TO_DATE('1983-09-30', 'YYYY-MM-DD'), 'Male', 'Mansoura, Egypt', '01501112233', 1300, 'Gold', TO_DATE('2020-03-12', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
+    INTO customer_dim VALUES (6, 'Mariam Saleh', TO_DATE('1992-11-10', 'YYYY-MM-DD'), 'Female', 'Suez, Egypt', '01007654321', 900, 'Silver', TO_DATE('2019-08-25', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
+    INTO customer_dim VALUES (7, 'Omar Tarek', TO_DATE('1989-03-05', 'YYYY-MM-DD'), 'Male', 'Luxor, Egypt', '01106543210', 1600, 'Platinum', TO_DATE('2018-04-10', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
+    INTO customer_dim VALUES (8, 'Layla Adel', TO_DATE('1997-07-18', 'YYYY-MM-DD'), 'Female', 'Port Said, Egypt', '01203456789', 500, 'Bronze', TO_DATE('2017-09-30', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
+    INTO customer_dim VALUES (9, 'Youssef Nabil', TO_DATE('1980-12-02', 'YYYY-MM-DD'), 'Male', 'Zagazig, Egypt', '01507654321', 1100, 'Gold', TO_DATE('2016-06-20', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
+    INTO customer_dim VALUES (10, 'Hana Sameh', TO_DATE('1994-05-14', 'YYYY-MM-DD'), 'Female', 'Tanta, Egypt', '01005432176', 750, 'Silver', TO_DATE('2015-02-18', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
+    INTO customer_dim VALUES (11, 'Hassan Youssef', TO_DATE('1987-10-25', 'YYYY-MM-DD'), 'Male', 'Fayoum, Egypt', '01003456789', 950, 'Silver', TO_DATE('2014-08-12', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
+    INTO customer_dim VALUES (12, 'Amina Khaled', TO_DATE('1996-03-30', 'YYYY-MM-DD'), 'Female', 'Ismailia, Egypt', '01107896543', 600, 'Bronze', TO_DATE('2013-11-05', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
+    INTO customer_dim VALUES (13, 'Walid Mahmoud', TO_DATE('1982-07-18', 'YYYY-MM-DD'), 'Male', 'Damietta, Egypt', '01204567891', 1400, 'Gold', TO_DATE('2012-09-22', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
+    INTO customer_dim VALUES (14, 'Rania Hatem', TO_DATE('1991-12-10', 'YYYY-MM-DD'), 'Female', 'Minya, Egypt', '01506543219', 700, 'Silver', TO_DATE('2011-06-15', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
+    INTO customer_dim VALUES (15, 'Tarek Salah', TO_DATE('1979-05-05', 'YYYY-MM-DD'), 'Male', 'Beni Suef, Egypt', '01007654320', 1700, 'Platinum', TO_DATE('2010-04-30', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
+    INTO customer_dim VALUES (16, 'Mona Nader', TO_DATE('1998-08-21', 'YYYY-MM-DD'), 'Female', 'Sohag, Egypt', '01104356782', 450, 'Bronze', TO_DATE('2009-07-18', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
+    INTO customer_dim VALUES (17, 'Mostafa Adel', TO_DATE('1986-02-14', 'YYYY-MM-DD'), 'Male', 'Qena, Egypt', '01203456780', 1250, 'Gold', TO_DATE('2008-03-25', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
+    INTO customer_dim VALUES (18, 'Salma Tamer', TO_DATE('1993-09-11', 'YYYY-MM-DD'), 'Female', 'Hurghada, Egypt', '01502345678', 850, 'Silver', TO_DATE('2007-12-05', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
+    INTO customer_dim VALUES (19, 'Yasser Fathy', TO_DATE('1984-06-07', 'YYYY-MM-DD'), 'Male', 'Sharm El Sheikh, Egypt', '01001234568', 1550, 'Platinum', TO_DATE('2006-10-10', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
+    INTO customer_dim VALUES (20, 'Heba Magdy', TO_DATE('1999-01-29', 'YYYY-MM-DD'), 'Female', 'Matrouh, Egypt', '01107895432', 500, 'Bronze', TO_DATE('2005-05-15', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
+    INTO customer_dim VALUES (21, 'Ahmed Shokry', TO_DATE('1988-11-12', 'YYYY-MM-DD'), 'Male', 'Alexandria, Egypt', '01005678912', 1100, 'Gold', TO_DATE('2014-02-20', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
+    INTO customer_dim VALUES (22, 'Nourhan Saeed', TO_DATE('1995-07-28', 'YYYY-MM-DD'), 'Female', 'Giza, Egypt', '01109876543', 750, 'Silver', TO_DATE('2013-05-15', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
+    INTO customer_dim VALUES (23, 'Ibrahim Khalil', TO_DATE('1980-04-03', 'YYYY-MM-DD'), 'Male', 'Aswan, Egypt', '01206789012', 1600, 'Platinum', TO_DATE('2012-10-10', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
+    INTO customer_dim VALUES (24, 'Heba El-Sayed', TO_DATE('1992-09-17', 'YYYY-MM-DD'), 'Female', 'Mansoura, Egypt', '01507896532', 900, 'Silver', TO_DATE('2011-08-08', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
+    INTO customer_dim VALUES (25, 'Khaled Fathy', TO_DATE('1985-01-22', 'YYYY-MM-DD'), 'Male', 'Zagazig, Egypt', '01003456721', 1300, 'Gold', TO_DATE('2010-07-05', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
+    INTO customer_dim VALUES (26, 'Mai Tamer', TO_DATE('1997-06-14', 'YYYY-MM-DD'), 'Female', 'Qena, Egypt', '01108765432', 550, 'Bronze', TO_DATE('2009-03-25', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
+    INTO customer_dim VALUES (27, 'Mohamed Galal', TO_DATE('1978-12-05', 'YYYY-MM-DD'), 'Male', 'Ismailia, Egypt', '01203456123', 1800, 'Platinum', TO_DATE('2008-11-12', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
+    INTO customer_dim VALUES (28, 'Laila Hossam', TO_DATE('1994-03-19', 'YYYY-MM-DD'), 'Female', 'Tanta, Egypt', '01502345671', 800, 'Silver', TO_DATE('2007-06-18', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
+    INTO customer_dim VALUES (29, 'Youssef Nabil', TO_DATE('1983-08-07', 'YYYY-MM-DD'), 'Male', 'Minya, Egypt', '01001234529', 1450, 'Gold', TO_DATE('2006-09-22', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
+    INTO customer_dim VALUES (30, 'Sara Adel', TO_DATE('2000-02-01', 'YYYY-MM-DD'), 'Female', 'Damietta, Egypt', '01107895421', 480, 'Bronze', TO_DATE('2005-04-30', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
 
 SELECT 1 FROM DUAL;
-
 -----------------------------------------------------------------------
 
 
