@@ -26,9 +26,9 @@ CREATE TABLE customer_dim (
     passenger_phone VARCHAR2(15),
     passenger_points NUMBER,
     passenger_status VARCHAR2(50),
-    start_date DATE DEFAULT TO_DATE('2000-01-01', 'YYYY-MM-DD'), -- Default start date
-    end_date DATE DEFAULT TO_DATE('9999-12-31', 'YYYY-MM-DD'), -- Open-ended for current records
-    is_current CHAR(1) DEFAULT 'Y' CHECK (is_current IN ('Y', 'N')) -- 'Y' for current, 'N' for history
+    start_date DATE DEFAULT TO_DATE('2000-01-01', 'YYYY-MM-DD'),
+    end_date DATE DEFAULT TO_DATE('9999-12-31', 'YYYY-MM-DD'),
+    is_current CHAR(1) DEFAULT 'Y' CHECK (is_current IN ('Y', 'N'))
 );
 
 -- Create booking_channel_dim table
@@ -46,7 +46,7 @@ CREATE TABLE trip_status_dim (
     cancellation_reason VARCHAR2(100)
 );
 
--- Create class_services_dim table with updated class_change_indicator values
+-- Create class_services_dim table
 CREATE TABLE class_services_dim (
     class_of_services_id NUMBER PRIMARY KEY,
     class_purchased VARCHAR2(50),
@@ -64,38 +64,35 @@ CREATE TABLE promotion_dim (
     category VARCHAR2(50)
 );
 
--- Create time_dim table
 CREATE TABLE time_dim (
-    time_id NUMBER PRIMARY KEY,
-    hour NUMBER NOT NULL,
-    minutes NUMBER NOT NULL,
-    month NUMBER NOT NULL,
-    hour_description VARCHAR2(255)
+    time_id TIMESTAMP PRIMARY KEY,
+    hour NUMBER(2,0) NOT NULL,      -- Stores only the hour (0-23)
+    minute NUMBER(2,0) NOT NULL,    -- Stores only the minutes (0-59)
+    hour_description VARCHAR2(255)  -- Descriptive text about the hour
 );
 
 -- Create date_dim table
 CREATE TABLE date_dim (
-    date_id NUMBER PRIMARY KEY,
-    year NUMBER(4),
-    quarter NUMBER(1),
-    month NUMBER(2),
-    day_of_week NUMBER(1),
-    day_of_month NUMBER(2),
-    day_of_year NUMBER(3),
-    week_of_year NUMBER(2),
-    is_holiday NUMBER(1) CHECK (is_holiday IN (0,1))
+    date_id DATE PRIMARY KEY,
+    year NUMBER(4,0),
+    quarter NUMBER(1,0),
+    month NUMBER(2,0),
+    day_of_week NUMBER(1,0),
+    day_of_month NUMBER(2,0),
+    day_of_year NUMBER(3,0),
+    week_of_year NUMBER(2,0),
+    is_holiday NUMBER(1,0) CHECK (is_holiday IN (0,1))
 );
-
 
 -- Create flight_dim table
 CREATE TABLE flight_dim (
     flight_id NUMBER PRIMARY KEY,
     origin_airport_id NUMBER NOT NULL,
     destination_airport_id NUMBER NOT NULL,
-    origin_date NUMBER NOT NULL,
-    origin_time NUMBER NOT NULL,
-    arrival_date NUMBER NOT NULL,
-    arrival_time NUMBER NOT NULL,
+    origin_date DATE NOT NULL,
+    origin_time TIMESTAMP NOT NULL,
+    arrival_date DATE NOT NULL,
+    arrival_time TIMESTAMP NOT NULL,
     aircraft_id NUMBER NOT NULL,
     segment_miles NUMBER(10,2),
     miles_earned NUMBER(10,2),
@@ -108,8 +105,6 @@ CREATE TABLE flight_dim (
     CONSTRAINT fk_aircraft FOREIGN KEY (aircraft_id) REFERENCES aircraft_dim(aircraft_id)
 );
 
-
-
 -- Create feedback_dim table
 CREATE TABLE feedback_dim (
     feedback_id NUMBER PRIMARY KEY,
@@ -117,9 +112,10 @@ CREATE TABLE feedback_dim (
     description VARCHAR2(500)
 );
 
+-- Create employee_dim table
 CREATE TABLE employee_dim (
     sk_employee_id NUMBER PRIMARY KEY,
-    employee_id NUMBER,           
+    employee_id NUMBER,
     employee_name VARCHAR2(35),
     employee_dateOfBirth DATE,
     employee_gender VARCHAR2(10),
@@ -127,18 +123,15 @@ CREATE TABLE employee_dim (
     employee_phone VARCHAR2(20),
     salary NUMBER(10,2),
     start_date DATE DEFAULT SYSDATE,
-    end_date DATE,  
+    end_date DATE,
     is_current CHAR(1) DEFAULT 'Y' CHECK (is_current IN ('Y', 'N'))
 );
-
-
 
 -- Create SegmentActivityFact table
 CREATE TABLE SegmentActivityFact (
     passenger_id NUMBER,
     class_services_id NUMBER,
     promotion_id NUMBER,
-    booking_channel_id NUMBER,
     flight_id NUMBER,
     status_id NUMBER,
     ticket_number VARCHAR2(50) PRIMARY KEY,
@@ -146,21 +139,29 @@ CREATE TABLE SegmentActivityFact (
     revenue_amount NUMBER,
     cancellation_fees NUMBER,
     refund_amount NUMBER,
+    date_id DATE,
+    time_id TIMESTAMP,
     CONSTRAINT fk_passenger FOREIGN KEY (passenger_id) REFERENCES customer_dim(passenger_id),
     CONSTRAINT fk_class_services FOREIGN KEY (class_services_id) REFERENCES class_services_dim(class_of_services_id),
     CONSTRAINT fk_promotion FOREIGN KEY (promotion_id) REFERENCES promotion_dim(promotion_id),
-    CONSTRAINT fk_booking_channel FOREIGN KEY (booking_channel_id) REFERENCES booking_channel_dim(channel_id),
     CONSTRAINT fk_status FOREIGN KEY (status_id) REFERENCES trip_status_dim(status_id),
-    CONSTRAINT fk_flight FOREIGN KEY (flight_id) REFERENCES flight_dim(flight_id)
+    CONSTRAINT fk_flight FOREIGN KEY (flight_id) REFERENCES flight_dim(flight_id),
+    CONSTRAINT fk_origin_date FOREIGN KEY (date_id) REFERENCES date_dim(date_id),
+    CONSTRAINT fk_origin_time FOREIGN KEY (time_id) REFERENCES time_dim(time_id)
 );
 
 -- Create RevenueFact table
 CREATE TABLE RevenueFact (
     passenger_id NUMBER NOT NULL,
-    date_id NUMBER NOT NULL,
+    date_id DATE NOT NULL,
     flight_id NUMBER NOT NULL,
+    promotion_id NUMBER,
+    booking_channel_id NUMBER,
     revenue_type VARCHAR2(255),
     revenue_amount NUMBER(15,2),
+    CONSTRAINT pk_revenue PRIMARY KEY (passenger_id, date_id, flight_id, revenue_type),
+    CONSTRAINT fk_promotion FOREIGN KEY (promotion_id) REFERENCES promotion_dim(promotion_id),
+    CONSTRAINT fk_booking_channel FOREIGN KEY (booking_channel_id) REFERENCES booking_channel_dim(channel_id),
     CONSTRAINT fk_rev_passenger FOREIGN KEY (passenger_id) REFERENCES customer_dim(passenger_id),
     CONSTRAINT fk_rev_date FOREIGN KEY (date_id) REFERENCES date_dim(date_id),
     CONSTRAINT fk_rev_flight FOREIGN KEY (flight_id) REFERENCES flight_dim(flight_id)
@@ -168,10 +169,11 @@ CREATE TABLE RevenueFact (
 
 -- Create ExpensesFact table
 CREATE TABLE ExpensesFact (
-    date_id NUMBER NOT NULL,
+    date_id DATE NOT NULL,
     flight_id NUMBER NOT NULL,
     expenses_type VARCHAR2(255),
     expense_amount NUMBER(15,2),
+    CONSTRAINT pk_expenses PRIMARY KEY (date_id, flight_id, expenses_type),
     CONSTRAINT fk_exp_date FOREIGN KEY (date_id) REFERENCES date_dim(date_id),
     CONSTRAINT fk_exp_flight FOREIGN KEY (flight_id) REFERENCES flight_dim(flight_id)
 );
@@ -179,10 +181,15 @@ CREATE TABLE ExpensesFact (
 -- Create ProfitFact table
 CREATE TABLE ProfitFact (
     flight_id NUMBER NOT NULL,
-    date_id NUMBER NOT NULL,
+    date_id DATE NOT NULL,
+    promotion_id NUMBER,
+    booking_channel_id NUMBER,
     revenue_amount NUMBER(15,2),
     expense_amount NUMBER(15,2),
     profit_amount NUMBER(15,2),
+    CONSTRAINT pk_profit PRIMARY KEY (flight_id, date_id),
+    CONSTRAINT fk_promotion FOREIGN KEY (promotion_id) REFERENCES promotion_dim(promotion_id),
+    CONSTRAINT fk_booking_channel FOREIGN KEY (booking_channel_id) REFERENCES booking_channel_dim(channel_id),
     CONSTRAINT fk_profit_flight FOREIGN KEY (flight_id) REFERENCES flight_dim(flight_id),
     CONSTRAINT fk_profit_date FOREIGN KEY (date_id) REFERENCES date_dim(date_id)
 );
@@ -190,15 +197,14 @@ CREATE TABLE ProfitFact (
 -- Create CustomerCareFact table
 CREATE TABLE CustomerCareFact (
     customer_id NUMBER,
-    date_id NUMBER,
+    date_id DATE,
     feedback_id NUMBER,
     employee_id NUMBER,
     interaction_type VARCHAR2(50),
     satisfaction_rate NUMBER(5,2),
     duration NUMBER,
-    CONSTRAINT pk_customer_care PRIMARY KEY (customer_id, date_id, feedback_id, employee_id), 
+    CONSTRAINT pk_customer_care PRIMARY KEY (customer_id, date_id, feedback_id, employee_id),
     CONSTRAINT fk_care_date FOREIGN KEY (date_id) REFERENCES date_dim(date_id),
     CONSTRAINT fk_care_feedback FOREIGN KEY (feedback_id) REFERENCES feedback_dim(feedback_id),
     CONSTRAINT fk_care_employee FOREIGN KEY (employee_id) REFERENCES employee_dim(employee_id)
 );
-
