@@ -28,32 +28,35 @@ CREATE TABLE flight_dim (
 );
 
 CREATE TABLE RevenueFact (
-    passenger_id INT NOT NULL,
-    date_id INT NOT NULL,
-    flight_id INT NOT NULL,
-    revenue_type VARCHAR(255),
-    revenue_amount DECIMAL(15,2),
-    FOREIGN KEY (passenger_id) REFERENCES customer_dim(passenger_id),
-    FOREIGN KEY (date_id) REFERENCES date_dim(date_id),
-    FOREIGN KEY (flight_id) REFERENCES flight_dim(flight_id)
+    passenger_id NUMBER NOT NULL,
+    date_id NUMBER NOT NULL,
+    flight_id NUMBER NOT NULL,
+    revenue_type VARCHAR2(255),
+    revenue_amount NUMBER(15,2),
+    CONSTRAINT pk_revenue_fact PRIMARY KEY (passenger_id, date_id, flight_id),
+    CONSTRAINT fk_revenue_passenger FOREIGN KEY (passenger_id) REFERENCES customer_dim(passenger_id),
+    CONSTRAINT fk_revenue_date FOREIGN KEY (date_id) REFERENCES date_dim(date_id),
+    CONSTRAINT fk_revenue_flight FOREIGN KEY (flight_id) REFERENCES flight_dim(flight_id)
 );
 
 CREATE TABLE ExpensesFact (
-    date_id INT NOT NULL,
-    flight_id INT NOT NULL,
-    expenses_type VARCHAR(255),
-    expense_amount DECIMAL(15,2),
-    FOREIGN KEY (date_id) REFERENCES date_dim(date_id),
-    FOREIGN KEY (flight_id) REFERENCES flight_dim(flight_id)
+    date_id NUMBER NOT NULL,
+    flight_id NUMBER NOT NULL,
+    expenses_type VARCHAR2(255),
+    expense_amount NUMBER(15,2),
+    CONSTRAINT pk_expenses_fact PRIMARY KEY (date_id, flight_id, expenses_type),
+    CONSTRAINT fk_expenses_date FOREIGN KEY (date_id) REFERENCES date_dim(date_id),
+    CONSTRAINT fk_expenses_flight FOREIGN KEY (flight_id) REFERENCES flight_dim(flight_id)
 );
 
 CREATE TABLE ProfitFact (
-    flight_id INT NOT NULL,
-    date_id INT NOT NULL,
-    revenue_amount DECIMAL(15,2),
-    expense_amount DECIMAL(15,2), 
-    profit_amount DECIMAL(15,2),
-    FOREIGN KEY (flight_id) REFERENCES flight_dim(flight_id),
-    FOREIGN KEY (date_id) REFERENCES date_dim(date_id)
+    flight_id NUMBER NOT NULL,
+    date_id NUMBER NOT NULL,
+    revenue_amount NUMBER(15,2),
+    expense_amount NUMBER(15,2), 
+    profit_amount NUMBER(15,2),
+    CONSTRAINT pk_profit_fact PRIMARY KEY (flight_id, date_id),
+    CONSTRAINT fk_profit_flight FOREIGN KEY (flight_id) REFERENCES flight_dim(flight_id),
+    CONSTRAINT fk_profit_date FOREIGN KEY (date_id) REFERENCES date_dim(date_id)
 );
 
