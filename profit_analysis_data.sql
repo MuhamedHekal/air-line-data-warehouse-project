@@ -1,8 +1,10 @@
-INSERT INTO time_dim (time_id, hour, minutes, hour_description)
+-- Insert data into time_dim
+INSERT INTO time_dim (time_id, hour, minute, hour_description)
 SELECT 
-    ROWNUM AS time_id,
+    -- Generate a timestamp for each row (starting from a specific date, e.g., '1970-01-01 00:00:00')
+    TO_TIMESTAMP('1970-01-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS') + NUMTODSINTERVAL((LEVEL - 1) * 30, 'MINUTE') AS time_id,
     MOD(TRUNC((LEVEL - 1) / 2), 24) AS hour,  -- Cycles through 0-23 hours
-    CASE MOD(LEVEL - 1, 2) WHEN 0 THEN 0 ELSE 30 END AS minutes,  -- Alternates 00 and 30
+    CASE MOD(LEVEL - 1, 2) WHEN 0 THEN 0 ELSE 30 END AS minute,  -- Alternates 00 and 30
     CASE 
         WHEN MOD(TRUNC((LEVEL - 1) / 2), 24) = 0 THEN 'Midnight'
         WHEN MOD(TRUNC((LEVEL - 1) / 2), 24) BETWEEN 1 AND 5 THEN 'Early Morning'
@@ -12,7 +14,7 @@ SELECT
         WHEN MOD(TRUNC((LEVEL - 1) / 2), 24) BETWEEN 21 AND 23 THEN 'Night'
     END AS hour_description
 FROM DUAL
-CONNECT BY LEVEL <= 24 * 2;  --  24 hours * 2 (for 00 and 30 minutes)
+CONNECT BY LEVEL <= 24 * 2;  -- 24 hours * 2 (for 00 and 30 minutes)
 
 COMMIT;
 
@@ -80,6 +82,51 @@ BEGIN
 
         -- Increment flight_id
         v_flight_id := v_flight_id + 1;
+    END LOOP;
+
+    COMMIT;
+END;
+/
+
+
+
+
+-------------------------
+--insert into expenses fact 
+DECLARE
+    v_date_id DATE;  -- Declare v_date_id as DATE
+    v_flight_id NUMBER;
+    v_expenses_type VARCHAR2(255);
+    v_expense_amount NUMBER(15, 2);
+    -- This list can be changed 
+    v_expense_types SYS.ODCIVARCHAR2LIST := SYS.ODCIVARCHAR2LIST('Fuel', 'Maintenance', 'Catering', 'Staff', 'Other');
+BEGIN
+    FOR i IN 1..1000 LOOP  -- Generate 1000 expense records
+        -- Randomly select a date_id from date_dim (ensure it's a DATE)
+        SELECT date_id INTO v_date_id
+        FROM (SELECT date_id FROM date_dim ORDER BY DBMS_RANDOM.VALUE)
+        WHERE ROWNUM = 1;
+
+        -- Randomly select a flight_id from flight_dim
+        SELECT flight_id INTO v_flight_id
+        FROM (SELECT flight_id FROM flight_dim ORDER BY DBMS_RANDOM.VALUE)
+        WHERE ROWNUM = 1;
+
+        -- Randomly select an expense type from the predefined list
+        v_expenses_type := v_expense_types(TRUNC(DBMS_RANDOM.VALUE(1, v_expense_types.COUNT + 1)));
+
+        -- Generate a random expense amount between 100 and 10000
+        v_expense_amount := ROUND(DBMS_RANDOM.VALUE(100, 10000), 2);
+
+        -- Insert the record into ExpensesFact
+        BEGIN
+            INSERT INTO ExpensesFact (date_id, flight_id, expenses_type, expense_amount)
+            VALUES (v_date_id, v_flight_id, v_expenses_type, v_expense_amount);
+        EXCEPTION
+            WHEN DUP_VAL_ON_INDEX THEN
+                -- Handle duplicate primary key errors by skipping the record
+                CONTINUE;
+        END;
     END LOOP;
 
     COMMIT;
