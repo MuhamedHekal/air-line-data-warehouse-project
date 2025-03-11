@@ -1,4 +1,3 @@
-
 DECLARE
     TYPE Date_Table IS TABLE OF date_dim%ROWTYPE INDEX BY PLS_INTEGER;
     v_dates Date_Table;
@@ -6,10 +5,10 @@ DECLARE
     v_start_date DATE := DATE '2020-01-01';  
     v_end_date   DATE := DATE '2020-12-31';  
     v_current_date DATE := v_start_date;
-    v_date_id NUMBER := 1;  
+    v_date_id DATE := v_start_date;  -- Change to DATE type
 BEGIN
     WHILE v_current_date <= v_end_date LOOP
-        v_dates(v_index).date_id := v_date_id;
+        v_dates(v_index).date_id := v_date_id;  -- Assign DATE value
         v_dates(v_index).year := EXTRACT(YEAR FROM v_current_date);
         v_dates(v_index).quarter := CEIL(EXTRACT(MONTH FROM v_current_date) / 3);
         v_dates(v_index).month := EXTRACT(MONTH FROM v_current_date);
@@ -20,7 +19,7 @@ BEGIN
         v_dates(v_index).is_holiday := CASE WHEN TO_CHAR(v_current_date, 'MM-DD') IN ('01-01', '12-25') THEN 1 ELSE 0 END;
 
         v_current_date := v_current_date + 1;
-        v_date_id := v_date_id + 1;
+        v_date_id := v_date_id + 1;  -- Increment DATE by 1 day
         v_index := v_index + 1;
     END LOOP;
 
