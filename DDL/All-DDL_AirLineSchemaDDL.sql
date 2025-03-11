@@ -159,6 +159,7 @@ CREATE TABLE RevenueFact (
     booking_channel_id NUMBER,
     revenue_type VARCHAR2(255),
     revenue_amount NUMBER(15,2),
+    CONSTRAINT pk_revenue PRIMARY KEY (passenger_id, date_id, flight_id, revenue_type),
     CONSTRAINT fk_promotion2 FOREIGN KEY (promotion_id) REFERENCES promotion_dim(promotion_id),
     CONSTRAINT fk_booking_channel FOREIGN KEY (booking_channel_id) REFERENCES booking_channel_dim(channel_id),
     CONSTRAINT fk_rev_passenger FOREIGN KEY (passenger_id) REFERENCES customer_dim(passenger_id),
@@ -172,6 +173,7 @@ CREATE TABLE ExpensesFact (
     flight_id NUMBER NOT NULL,
     expenses_type VARCHAR2(255),
     expense_amount NUMBER(15,2),
+    CONSTRAINT pk_expenses PRIMARY KEY (date_id, flight_id, expenses_type),
     CONSTRAINT fk_exp_date FOREIGN KEY (date_id) REFERENCES date_dim(date_id),
     CONSTRAINT fk_exp_flight FOREIGN KEY (flight_id) REFERENCES flight_dim(flight_id)
 );
@@ -185,6 +187,7 @@ CREATE TABLE ProfitFact (
     revenue_amount NUMBER(15,2),
     expense_amount NUMBER(15,2),
     profit_amount NUMBER(15,2),
+    CONSTRAINT pk_profit PRIMARY KEY (flight_id, date_id),
     CONSTRAINT fk_promotion3 FOREIGN KEY (promotion_id) REFERENCES promotion_dim(promotion_id),
     CONSTRAINT fk_booking_channel2 FOREIGN KEY (booking_channel_id) REFERENCES booking_channel_dim(channel_id),
     CONSTRAINT fk_profit_flight FOREIGN KEY (flight_id) REFERENCES flight_dim(flight_id),
