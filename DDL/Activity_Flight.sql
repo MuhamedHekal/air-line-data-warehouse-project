@@ -276,6 +276,7 @@ INSERT ALL
 SELECT * FROM dual;
 
 COMMIT;
+------------------------------------------------------------
 
 -- Create SegmentActivityFact table
 CREATE TABLE SegmentActivityFact (

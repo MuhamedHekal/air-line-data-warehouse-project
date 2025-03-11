@@ -17,8 +17,3 @@ FROM DUAL
 CONNECT BY LEVEL <= 12 * 24 * 2;  -- 12 months * 24 hours * 2 (for 00 and 30 minutes)
 
 COMMIT;
-
-
-
-
-
