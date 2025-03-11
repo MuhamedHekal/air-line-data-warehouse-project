@@ -157,10 +157,37 @@ INSERT INTO employee_dim VALUES (18, 53, 'Mariam Khaled', TO_DATE('1993-09-30', 
 INSERT INTO employee_dim VALUES (19, 54, 'Yousef Samir', TO_DATE('1991-03-25', 'YYYY-MM-DD'), 'Male', 'Giza, Egypt', '01234567954', 11000, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
 INSERT INTO employee_dim VALUES (20, 55, 'Khaled Tamer', TO_DATE('1989-07-18', 'YYYY-MM-DD'), 'Male', 'Tanta, Egypt', '01234567955', 13000, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
 INSERT INTO employee_dim VALUES (21, 56, 'Nour Hany', TO_DATE('1990-11-02', 'YYYY-MM-DD'), 'Female', 'Luxor, Egypt', '01234567956', 11850, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
-INSERT INTO employee_dim VALUES (22, 57, 'Sameh Adel', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (22, 58, 'Sameh Adel', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (23, 59, 'Ahmed Adel', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (24, 60, 'Abdelrahman Sayed', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (25, 61, 'Seif Khalil', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (26, 62, 'Mohmed Hekal', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (27, 63, 'Mohamed Moaaz', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (28, 64, 'Omar Mustafa', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (29, 65, 'Bassel Walid', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (30, 66, 'Ahmed Nasr', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (31, 67, 'Mohamed Nasr', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (32, 68, 'Hussein Mohamed', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (33, 69, 'Huss', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (34, 70, 'Mohamed Makbool', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (35, 71, 'Ahmed El Sheikh', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (36, 72, 'Ahmed El Adawy', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (37, 73, 'Ahmed Otifi', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (38, 74, 'Mohamed Walid', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (39, 75, 'Ziad Essam', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (40, 76, 'Omar Hany', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (41, 77, 'Mohamed Ramy', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (42, 78, 'Ahmed Sayed', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (43, 79, 'Khaled Essam', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (44, 80, 'Youssef Galal', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (45, 81, 'Amr Ibrahim', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (46, 82, 'Amr Khalid', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (47, 83, 'Diaa Essam', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (48, 84, 'Kareem Walid', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (49, 85, 'Sameh Adel', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
+INSERT INTO employee_dim VALUES (50, 86, 'Sameh Adel', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
 
 COMMIT;
-
 INSERT INTO CustomerCareFact (customer_id, date_id, feedback_id, employee_id, interaction_type, satisfaction_rate, duration)
 VALUES (1, 24, 5, 40, 'Chat', 4.51, 27);
 
