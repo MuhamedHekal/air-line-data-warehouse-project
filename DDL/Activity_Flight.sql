@@ -38,6 +38,19 @@ CREATE TABLE airport_dim (
     airport_city VARCHAR2(100),
     airport_location VARCHAR2(100)
 );
+INSERT INTO airport_dim (airport_id, airport_code, airport_name, airport_city, airport_location) VALUES (1, 'CAI', 'Cairo International Airport', 'Cairo', 'Egypt');
+INSERT INTO airport_dim (airport_id, airport_code, airport_name, airport_city, airport_location) VALUES (2, 'HRG', 'Hurghada International Airport', 'Hurghada', 'Egypt');
+INSERT INTO airport_dim (airport_id, airport_code, airport_name, airport_city, airport_location) VALUES (3, 'SSH', 'Sharm El Sheikh International Airport', 'Sharm El Sheikh', 'Egypt');
+INSERT INTO airport_dim (airport_id, airport_code, airport_name, airport_city, airport_location) VALUES (4, 'LXR', 'Luxor International Airport', 'Luxor', 'Egypt');
+INSERT INTO airport_dim (airport_id, airport_code, airport_name, airport_city, airport_location) VALUES (5, 'ASW', 'Aswan International Airport', 'Aswan', 'Egypt');
+INSERT INTO airport_dim (airport_id, airport_code, airport_name, airport_city, airport_location) VALUES (6, 'ALY', 'Alexandria International Airport', 'Alexandria', 'Egypt');
+INSERT INTO airport_dim (airport_id, airport_code, airport_name, airport_city, airport_location) VALUES (7, 'SPX', 'Sphinx International Airport', 'Giza', 'Egypt');
+INSERT INTO airport_dim (airport_id, airport_code, airport_name, airport_city, airport_location) VALUES (8, 'HBE', 'Borg El Arab International Airport', 'Alexandria', 'Egypt');
+INSERT INTO airport_dim (airport_id, airport_code, airport_name, airport_city, airport_location) VALUES (9, 'DBB', 'Al Alamain International Airport', 'El Alamein', 'Egypt');
+INSERT INTO airport_dim (airport_id, airport_code, airport_name, airport_city, airport_location) VALUES (10, 'TCP', 'Taba International Airport', 'Taba', 'Egypt');
+
+COMMIT;
+----------------------------------------------------------------------------
 
 -- Create customer_dim table
 CREATE TABLE customer_dim (
