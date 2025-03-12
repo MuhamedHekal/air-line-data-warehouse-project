@@ -20,25 +20,29 @@ COMMIT;
 
 ----------------
 --insert into flight
-
+commit;
 
 DECLARE
     v_flight_id NUMBER;
     v_origin_airport_id NUMBER;
     v_destination_airport_id NUMBER;
-    v_origin_date_id NUMBER;
-    v_arrival_date_id NUMBER;
-    v_origin_time_id NUMBER;
-    v_arrival_time_id NUMBER;
+    v_origin_date DATE;
+    v_arrival_date DATE;
+    v_origin_time TIMESTAMP;
+    v_arrival_time TIMESTAMP;
     v_aircraft_id NUMBER;
     v_segment_miles NUMBER(10, 2);
     v_miles_earned NUMBER(10, 2);
+    v_time_diff INTERVAL DAY TO SECOND;
+    v_arrival_time_rounded TIMESTAMP;
+    v_valid_time_id TIMESTAMP; -- To ensure a valid arrival time
+
 BEGIN
     -- Get the next available flight_id
     SELECT NVL(MAX(flight_id), 0) + 1 INTO v_flight_id FROM flight_dim;
 
     FOR i IN 1..200 LOOP  -- Generate 200 flights
-        -- Select random origin and destination airports (different)
+        -- Select random origin and destination airports
         SELECT airport_id INTO v_origin_airport_id
         FROM (SELECT airport_id FROM airport_dim ORDER BY DBMS_RANDOM.VALUE)
         WHERE ROWNUM = 1;
@@ -48,24 +52,62 @@ BEGIN
         WHERE ROWNUM = 1;
 
         -- Select random origin date
-        SELECT date_id INTO v_origin_date_id
+        SELECT date_id INTO v_origin_date
         FROM (SELECT date_id FROM date_dim ORDER BY DBMS_RANDOM.VALUE)
         WHERE ROWNUM = 1;
 
         -- Select random arrival date within 2 days of origin date
-        SELECT date_id INTO v_arrival_date_id
-        FROM (SELECT date_id FROM date_dim WHERE date_id BETWEEN v_origin_date_id AND v_origin_date_id + 2 ORDER BY DBMS_RANDOM.VALUE)
+        SELECT date_id INTO v_arrival_date
+        FROM (SELECT date_id FROM date_dim WHERE date_id BETWEEN v_origin_date AND v_origin_date + 2 ORDER BY DBMS_RANDOM.VALUE)
         WHERE ROWNUM = 1;
 
         -- Select random origin time
-        SELECT time_id INTO v_origin_time_id
+        SELECT time_id INTO v_origin_time
         FROM (SELECT time_id FROM time_dim ORDER BY DBMS_RANDOM.VALUE)
         WHERE ROWNUM = 1;
 
-        -- Select random arrival time after origin time
-        SELECT time_id INTO v_arrival_time_id
-        FROM (SELECT time_id FROM time_dim WHERE time_id > v_origin_time_id ORDER BY DBMS_RANDOM.VALUE)
-        WHERE ROWNUM = 1;
+        -- Calculate a random time difference for arrival time (between 1 and 12 hours)
+        v_time_diff := NUMTODSINTERVAL(DBMS_RANDOM.VALUE(1, 12), 'HOUR');
+
+        -- Calculate arrival time
+        v_arrival_time := v_origin_time + v_time_diff;
+
+        -- Round arrival time to the nearest 30-minute interval
+        v_arrival_time_rounded := TO_TIMESTAMP(
+            TO_CHAR(v_arrival_time, 'YYYY-MM-DD HH24:') ||
+            CASE
+                WHEN TO_NUMBER(TO_CHAR(v_arrival_time, 'MI')) < 30 THEN '00'
+                ELSE '30'
+            END || ':00',
+            'YYYY-MM-DD HH24:MI:SS'
+        );
+
+        -- Ensure the rounded arrival time exists in the time_dim table
+        BEGIN
+            SELECT time_id INTO v_valid_time_id
+            FROM time_dim
+            WHERE time_id = v_arrival_time_rounded;
+
+        EXCEPTION
+            WHEN NO_DATA_FOUND THEN
+                -- If the rounded time doesn't exist, get the closest available time
+                SELECT MIN(time_id) INTO v_valid_time_id
+                FROM time_dim
+                WHERE time_id > v_arrival_time_rounded;
+
+                -- If still NULL, get the earliest available time in the table
+                IF v_valid_time_id IS NULL THEN
+                    SELECT MIN(time_id) INTO v_valid_time_id FROM time_dim;
+                END IF;
+        END;
+
+        -- Ensure we have a valid arrival time before inserting
+        IF v_valid_time_id IS NOT NULL THEN
+            v_arrival_time := v_valid_time_id;
+        ELSE
+            -- Use a default fallback value (earliest time in time_dim)
+            SELECT MIN(time_id) INTO v_arrival_time FROM time_dim;
+        END IF;
 
         -- Select random aircraft
         SELECT aircraft_id INTO v_aircraft_id
@@ -76,9 +118,9 @@ BEGIN
         v_segment_miles := ROUND(DBMS_RANDOM.VALUE(100, 5000), 2);
         v_miles_earned := ROUND(DBMS_RANDOM.VALUE(100, 5000), 2);
 
-        -- Insert the flight into flight_dim
+        -- Insert the flight
         INSERT INTO flight_dim (flight_id, origin_airport_id, destination_airport_id, origin_date, origin_time, arrival_date, arrival_time, aircraft_id, segment_miles, miles_earned)
-        VALUES (v_flight_id, v_origin_airport_id, v_destination_airport_id, v_origin_date_id, v_origin_time_id, v_arrival_date_id, v_arrival_time_id, v_aircraft_id, v_segment_miles, v_miles_earned);
+        VALUES (v_flight_id, v_origin_airport_id, v_destination_airport_id, v_origin_date, v_origin_time, v_arrival_date, v_arrival_time, v_aircraft_id, v_segment_miles, v_miles_earned);
 
         -- Increment flight_id
         v_flight_id := v_flight_id + 1;
@@ -86,10 +128,6 @@ BEGIN
 
     COMMIT;
 END;
-/
-
-
-
 
 -------------------------
 --insert into expenses fact 
