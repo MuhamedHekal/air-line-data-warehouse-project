@@ -22,6 +22,7 @@ INSERT ALL
     INTO aircraft_dim (aircraft_id, aircraft_name, number_of_seats, aircraft_model, manufacture_year) VALUES (20, 'EgyptAir Airbus A350', 314, 'Airbus A350-900', 2022)
 SELECT 1 FROM DUAL;
 
+COMMIT;
 -- Create airport_dim Data
 INSERT INTO airport_dim (airport_id, airport_code, airport_name, airport_city, airport_location) VALUES (1, 'CAI', 'Cairo International Airport', 'Cairo', 'Egypt');
 INSERT INTO airport_dim (airport_id, airport_code, airport_name, airport_city, airport_location) VALUES (2, 'HRG', 'Hurghada International Airport', 'Hurghada', 'Egypt');
@@ -71,6 +72,7 @@ INSERT ALL
     INTO customer_dim VALUES (30,30, 'Sara Adel', TO_DATE('2000-02-01', 'YYYY-MM-DD'), 'Female', 'Damietta, Egypt', '01107895421', 480, 'Bronze', TO_DATE('2005-04-30', 'YYYY-MM-DD'), TO_DATE('9999-12-31', 'YYYY-MM-DD'), 'Y')
 SELECT 1 FROM DUAL;
 
+COMMIT;
 
 --Booking Channel data
 INSERT INTO booking_channel_dim (channel_id, booking_name, type, contact_detail) 
@@ -83,6 +85,7 @@ INSERT INTO booking_channel_dim (channel_id, booking_name, type, contact_detail)
 VALUES (3, 'Direct Hotel Booking', 'Direct Booking', 'contact@directhotel.com');
 
 
+Commit;
 
 --trip status dim data
 
@@ -141,6 +144,8 @@ INSERT ALL
     INTO trip_status_dim (status_id, reservation_status, cancellation_reason) VALUES (52, 'Cancelled', 'Security Clearance Delay')
 SELECT * FROM dual;
 
+Commit;
+
 --class of service dim data
 
 -- Insert data with "Upgrade", "Downgrade", or "No Change"
@@ -176,6 +181,8 @@ INSERT ALL
     INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (29, 'Economy', 'Economy', 'No Change')
     INTO class_services_dim (class_of_services_id, class_purchased, class_flown, class_change_indicator) VALUES (30, 'First Class', 'Business', 'Downgrade')
 SELECT * FROM dual;
+
+Commit;
 
 --promotion dim data
 
@@ -228,6 +235,8 @@ INSERT ALL
 
 SELECT * FROM dual;
 
+Commit;
+
 --time dim data
 -- Insert data into time_dim
 INSERT INTO time_dim (time_id, hour, minute, hour_description)
@@ -247,6 +256,7 @@ SELECT
 FROM DUAL
 CONNECT BY LEVEL <= 24 * 2;  -- 24 hours * 2 (for 00 and 30 minutes)
 
+Commit;
 
 --date dim data
 DECLARE
@@ -281,6 +291,8 @@ BEGIN
 END;
 /
 --insert into flight
+Commit;
+
 
 DECLARE
     v_flight_id NUMBER;
@@ -389,6 +401,8 @@ BEGIN
     COMMIT;
 END;
 
+Commit;
+
 --feedback dim data
 
 INSERT INTO feedback_dim (feedback_id, type, description) VALUES (1, 'Negative', 'Staff ignored my request for assistance');
@@ -492,6 +506,8 @@ INSERT INTO feedback_dim (feedback_id, type, description) VALUES (98, 'Positive'
 INSERT INTO feedback_dim (feedback_id, type, description) VALUES (99, 'Negative', 'Overpriced tickets for the service provided.');
 INSERT INTO feedback_dim (feedback_id, type, description) VALUES (100, 'Positive', 'The airline made up for the delay by offering a meal voucher.');
 
+Commit;
+
 --employee dim data
 INSERT INTO employee_dim VALUES (1, 1, 'Ahmed Hassan', TO_DATE('1986-04-28', 'YYYY-MM-DD'), 'Male', 'Cairo, Egypt', '01234567890', 12105, TO_DATE('2023-01-01', 'YYYY-MM-DD'), NULL, 'Y');
 INSERT INTO employee_dim VALUES (2, 2, 'Mona Ali', TO_DATE('1984-06-04', 'YYYY-MM-DD'), 'Female', 'Giza, Egypt', '01234567891', 12521, TO_DATE('2023-01-01', 'YYYY-MM-DD'), NULL, 'Y');
@@ -545,6 +561,8 @@ INSERT INTO employee_dim VALUES (48, 84, 'Kareem Walid', TO_DATE('1993-05-27', '
 INSERT INTO employee_dim VALUES (49, 85, 'Sameh Adel', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
 INSERT INTO employee_dim VALUES (50, 86, 'Sameh Adel', TO_DATE('1993-05-27', 'YYYY-MM-DD'), 'Male', 'Hurghada, Egypt', '01234567957', 12250, TO_DATE('2024-02-15', 'YYYY-MM-DD'), NULL, 'Y');
 
+Commit;
+
 --segment activity fact data
 INSERT ALL
     INTO SegmentActivityFact (passenger_id, class_services_id, promotion_id, flight_id, status_id, ticket_number, overnight_stay, revenue_amount, cancellation_fees, refund_amount) 
@@ -569,6 +587,8 @@ INSERT ALL
     VALUES (10, 1, 1, 110, 1, 'TKT10010', 1, 550.00, 0.00, 0.00)
 SELECT 1 FROM DUAL;
 
+Commit;
+
 --insert into expenses fact 
 DECLARE
     v_date_id DATE;  -- Declare v_date_id as DATE
@@ -589,13 +609,10 @@ BEGIN
         FROM (SELECT flight_id FROM flight_dim ORDER BY DBMS_RANDOM.VALUE)
         WHERE ROWNUM = 1;
 
-        -- Randomly select an expense type from the predefined list
         v_expenses_type := v_expense_types(TRUNC(DBMS_RANDOM.VALUE(1, v_expense_types.COUNT + 1)));
 
-        -- Generate a random expense amount between 100 and 10000
         v_expense_amount := ROUND(DBMS_RANDOM.VALUE(100, 10000), 2);
 
-        -- Insert the record into ExpensesFact
         BEGIN
             INSERT INTO ExpensesFact (date_id, flight_id, expenses_type, expense_amount)
             VALUES (v_date_id, v_flight_id, v_expenses_type, v_expense_amount);
@@ -608,6 +625,8 @@ BEGIN
     COMMIT;
 END;
 /
+
+Commit;
 
 --customer care fact data
 INSERT INTO CustomerCareFact VALUES (1, TO_DATE('2020-03-01', 'YYYY-MM-DD'), TO_TIMESTAMP('2020-01-01 08:30:00', 'YYYY-MM-DD HH24:MI:SS'), 5, 40, 'Chat', 4.51, 27);
