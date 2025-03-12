@@ -14,7 +14,7 @@ GRANT CREATE MATERIALIZED VIEW,
 
 ALTER USER airline QUOTA UNLIMITED ON USERS;
 
---drop user airline CASCADE;
+drop user airline CASCADE;
 
 
 
