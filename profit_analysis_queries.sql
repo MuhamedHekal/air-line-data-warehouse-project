@@ -32,6 +32,20 @@ FROM (
 ) 
 WHERE rn = 1;
 
+
+SELECT revenue_type, total_revenue
+FROM (
+    SELECT 
+        rf.revenue_type,
+        SUM(rf.revenue_amount) AS total_revenue,
+        RANK() OVER (ORDER BY SUM(rf.revenue_amount) DESC) AS rnk
+    FROM RevenueFact rf
+    WHERE rf.revenue_amount IS NOT NULL
+    GROUP BY rf.revenue_type
+) 
+WHERE rnk = 1;
+
+
 --- top category of promotions 
 SELECT category, total_revenue
 FROM (
