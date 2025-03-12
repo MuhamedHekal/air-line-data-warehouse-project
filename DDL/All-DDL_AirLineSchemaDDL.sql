@@ -199,14 +199,16 @@ CREATE TABLE ProfitFact (
 CREATE TABLE CustomerCareFact (
     customer_id NUMBER,
     date_id DATE,
+    time_id TIMESTAMP,
     feedback_id NUMBER,
     employee_id NUMBER,
     interaction_type VARCHAR2(50),
     satisfaction_rate NUMBER(5,2),
     duration NUMBER,
-    CONSTRAINT pk_customer_care PRIMARY KEY (customer_id, date_id, feedback_id, employee_id),
+    CONSTRAINT pk_customer_care PRIMARY KEY (customer_id, date_id, feedback_id, employee_id,time_id),
     cONSTRAINT fk_customer_id FOREIGN KEY (customer_id) REFERENCES customer_dim(sk_passenger_id),
     CONSTRAINT fk_care_date FOREIGN KEY (date_id) REFERENCES date_dim(date_id),
     CONSTRAINT fk_care_feedback FOREIGN KEY (feedback_id) REFERENCES feedback_dim(feedback_id),
-    CONSTRAINT fk_care_employee FOREIGN KEY (employee_id) REFERENCES employee_dim(sk_employee_id)
+    CONSTRAINT fk_care_employee FOREIGN KEY (employee_id) REFERENCES employee_dim(sk_employee_id),
+    CONSTRAINT fk_care_time FOREIGN KEY (time_id) REFERENCES time_dim(time_id)
 );

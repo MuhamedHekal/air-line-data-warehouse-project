@@ -2,7 +2,7 @@
 INSERT INTO time_dim (time_id, hour, minute, hour_description)
 SELECT 
     -- Generate a timestamp for each row (starting from a specific date, e.g., '1970-01-01 00:00:00')
-    TO_TIMESTAMP('1970-01-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS') + NUMTODSINTERVAL((LEVEL - 1) * 30, 'MINUTE') AS time_id,
+    TO_TIMESTAMP('2020-01-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS') + NUMTODSINTERVAL((LEVEL - 1) * 30, 'MINUTE') AS time_id,
     MOD(TRUNC((LEVEL - 1) / 2), 24) AS hour,  -- Cycles through 0-23 hours
     CASE MOD(LEVEL - 1, 2) WHEN 0 THEN 0 ELSE 30 END AS minute,  -- Alternates 00 and 30
     CASE 
@@ -16,6 +16,8 @@ SELECT
 FROM DUAL
 CONNECT BY LEVEL <= 24 * 2;  -- 24 hours * 2 (for 00 and 30 minutes)
 
+
+select * from TIME_DIM
 COMMIT;
 
 ----------------
