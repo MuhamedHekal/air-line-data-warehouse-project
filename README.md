@@ -74,7 +74,7 @@ To optimize query performance, indexes are implemented:
 ## 🛠 How to Use
 1. Clone the repository:
    ```sh
-   git clone https://github.com/yourusername/airline-data-warehouse.git
+   git clone https://github.com/MuhamedHekal/airline-data-warehouse.git
    ```
 2. Import the SQL schema into your database.
 3. Run analytical queries for insights.
